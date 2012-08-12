@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  campaign_id: 1
+  account_id: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  status: MyString
+  raiting: 1
+  phone: MyString
+  country: MyString
+  city: MyString
+  address: MyString
+  source: MyString
+  last_contacted: 2012-08-11 20:06:05
+  step: 1
+  automatic: false
+  messages_received_count: 1
+  messages_sent_count: 1
+
+two:
+  campaign_id: 1
+  account_id: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  status: MyString
+  raiting: 1
+  phone: MyString
+  country: MyString
+  city: MyString
+  address: MyString
+  source: MyString
+  last_contacted: 2012-08-11 20:06:05
+  step: 1
+  automatic: false
+  messages_received_count: 1
+  messages_sent_count: 1

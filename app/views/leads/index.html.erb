@@ -1,0 +1,55 @@
+<h1>Listing leads</h1>
+
+<table>
+  <tr>
+    <th>Campaign</th>
+    <th>Account</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Raiting</th>
+    <th>Phone</th>
+    <th>Country</th>
+    <th>City</th>
+    <th>Address</th>
+    <th>Source</th>
+    <th>Last contacted</th>
+    <th>Step</th>
+    <th>Automatic</th>
+    <th>Messages received count</th>
+    <th>Messages sent count</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @leads.each do |lead| %>
+  <tr>
+    <td><%= lead.campaign_id %></td>
+    <td><%= lead.account_id %></td>
+    <td><%= lead.first_name %></td>
+    <td><%= lead.last_name %></td>
+    <td><%= lead.email %></td>
+    <td><%= lead.status %></td>
+    <td><%= lead.raiting %></td>
+    <td><%= lead.phone %></td>
+    <td><%= lead.country %></td>
+    <td><%= lead.city %></td>
+    <td><%= lead.address %></td>
+    <td><%= lead.source %></td>
+    <td><%= lead.last_contacted %></td>
+    <td><%= lead.step %></td>
+    <td><%= lead.automatic %></td>
+    <td><%= lead.messages_received_count %></td>
+    <td><%= lead.messages_sent_count %></td>
+    <td><%= link_to 'Show', lead %></td>
+    <td><%= link_to 'Edit', edit_lead_path(lead) %></td>
+    <td><%= link_to 'Destroy', lead, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Lead', new_lead_path %>

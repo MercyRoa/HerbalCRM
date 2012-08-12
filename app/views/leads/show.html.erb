@@ -1,0 +1,90 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Campaign:</b>
+  <%= @lead.campaign_id %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%= @lead.account_id %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @lead.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @lead.last_name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @lead.email %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @lead.status %>
+</p>
+
+<p>
+  <b>Raiting:</b>
+  <%= @lead.raiting %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @lead.phone %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @lead.country %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @lead.city %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @lead.address %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%= @lead.source %>
+</p>
+
+<p>
+  <b>Last contacted:</b>
+  <%= @lead.last_contacted %>
+</p>
+
+<p>
+  <b>Step:</b>
+  <%= @lead.step %>
+</p>
+
+<p>
+  <b>Automatic:</b>
+  <%= @lead.automatic %>
+</p>
+
+<p>
+  <b>Messages received count:</b>
+  <%= @lead.messages_received_count %>
+</p>
+
+<p>
+  <b>Messages sent count:</b>
+  <%= @lead.messages_sent_count %>
+</p>
+
+
+<%= link_to 'Edit', edit_lead_path(@lead) %> |
+<%= link_to 'Back', leads_path %>

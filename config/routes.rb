@@ -1,4 +1,6 @@
 HerbalCRM::Application.routes.draw do
+  resources :leads
+
   resources :lead_details
 
   # The priority is based upon order of creation:

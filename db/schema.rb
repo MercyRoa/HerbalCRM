@@ -11,12 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120812005738) do
+ActiveRecord::Schema.define(:version => 20120812010605) do
 
   create_table "lead_details", :force => true do |t|
     t.integer  "lead_id"
     t.string   "key"
     t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leads", :force => true do |t|
+    t.integer  "campaign_id"
+    t.integer  "account_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "status"
+    t.integer  "raiting"
+    t.string   "phone"
+    t.string   "country"
+    t.string   "city"
+    t.string   "address"
+    t.string   "source"
+    t.datetime "last_contacted"
+    t.integer  "step"
+    t.boolean  "automatic"
+    t.integer  "messages_received_count"
+    t.integer  "messages_sent_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
