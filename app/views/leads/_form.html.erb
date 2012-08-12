@@ -1,85 +1,110 @@
-<%= form_for(@lead) do |f| %>
-  <% if @lead.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@lead.errors.count, "error") %> prohibited this lead from being saved:</h2>
-
-      <ul>
-      <% @lead.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @lead, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :campaign_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :campaign_id, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :account_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :account_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :first_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :first_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :status, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :status, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :raiting, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :raiting, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :phone, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :phone, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :country, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :country, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :city, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :city, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :address, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :address, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :source, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :source, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_contacted, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :last_contacted, :class => 'datetime_select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :step, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :step, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :automatic, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :automatic, :class => 'check_box' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :messages_received_count, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :messages_received_count, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :messages_sent_count, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :messages_sent_count, :class => 'number_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :campaign_id %><br />
-    <%= f.number_field :campaign_id %>
-  </div>
-  <div class="field">
-    <%= f.label :account_id %><br />
-    <%= f.number_field :account_id %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :raiting %><br />
-    <%= f.number_field :raiting %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :source %><br />
-    <%= f.text_field :source %>
-  </div>
-  <div class="field">
-    <%= f.label :last_contacted %><br />
-    <%= f.datetime_select :last_contacted %>
-  </div>
-  <div class="field">
-    <%= f.label :step %><br />
-    <%= f.number_field :step %>
-  </div>
-  <div class="field">
-    <%= f.label :automatic %><br />
-    <%= f.check_box :automatic %>
-  </div>
-  <div class="field">
-    <%= f.label :messages_received_count %><br />
-    <%= f.number_field :messages_received_count %>
-  </div>
-  <div class="field">
-    <%= f.label :messages_sent_count %><br />
-    <%= f.number_field :messages_sent_count %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                leads_path, :class => 'btn' %>
   </div>
 <% end %>
