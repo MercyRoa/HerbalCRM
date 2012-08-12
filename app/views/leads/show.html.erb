@@ -1,90 +1,53 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = @lead.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Campaign:</b>
-  <%= @lead.campaign_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:campaign_id) %>:</strong></dt>
+  <dd><%= @lead.campaign_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:account_id) %>:</strong></dt>
+  <dd><%= @lead.account_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
+  <dd><%= @lead.first_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
+  <dd><%= @lead.last_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @lead.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+  <dd><%= @lead.status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:raiting) %>:</strong></dt>
+  <dd><%= @lead.raiting %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
+  <dd><%= @lead.phone %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:country) %>:</strong></dt>
+  <dd><%= @lead.country %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:city) %>:</strong></dt>
+  <dd><%= @lead.city %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @lead.address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:source) %>:</strong></dt>
+  <dd><%= @lead.source %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:last_contacted) %>:</strong></dt>
+  <dd><%= @lead.last_contacted %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:step) %>:</strong></dt>
+  <dd><%= @lead.step %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:automatic) %>:</strong></dt>
+  <dd><%= @lead.automatic %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:messages_received_count) %>:</strong></dt>
+  <dd><%= @lead.messages_received_count %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:messages_sent_count) %>:</strong></dt>
+  <dd><%= @lead.messages_sent_count %></dd>
+</dl>
 
-<p>
-  <b>Account:</b>
-  <%= @lead.account_id %>
-</p>
-
-<p>
-  <b>First name:</b>
-  <%= @lead.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @lead.last_name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @lead.email %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @lead.status %>
-</p>
-
-<p>
-  <b>Raiting:</b>
-  <%= @lead.raiting %>
-</p>
-
-<p>
-  <b>Phone:</b>
-  <%= @lead.phone %>
-</p>
-
-<p>
-  <b>Country:</b>
-  <%= @lead.country %>
-</p>
-
-<p>
-  <b>City:</b>
-  <%= @lead.city %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%= @lead.address %>
-</p>
-
-<p>
-  <b>Source:</b>
-  <%= @lead.source %>
-</p>
-
-<p>
-  <b>Last contacted:</b>
-  <%= @lead.last_contacted %>
-</p>
-
-<p>
-  <b>Step:</b>
-  <%= @lead.step %>
-</p>
-
-<p>
-  <b>Automatic:</b>
-  <%= @lead.automatic %>
-</p>
-
-<p>
-  <b>Messages received count:</b>
-  <%= @lead.messages_received_count %>
-</p>
-
-<p>
-  <b>Messages sent count:</b>
-  <%= @lead.messages_sent_count %>
-</p>
-
-
-<%= link_to 'Edit', edit_lead_path(@lead) %> |
-<%= link_to 'Back', leads_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              leads_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_lead_path(@lead), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              lead_path(@lead),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

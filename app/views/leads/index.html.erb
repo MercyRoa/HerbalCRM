@@ -1,55 +1,68 @@
-<h1>Listing leads</h1>
-
-<table>
-  <tr>
-    <th>Campaign</th>
-    <th>Account</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Email</th>
-    <th>Status</th>
-    <th>Raiting</th>
-    <th>Phone</th>
-    <th>Country</th>
-    <th>City</th>
-    <th>Address</th>
-    <th>Source</th>
-    <th>Last contacted</th>
-    <th>Step</th>
-    <th>Automatic</th>
-    <th>Messages received count</th>
-    <th>Messages sent count</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @leads.each do |lead| %>
-  <tr>
-    <td><%= lead.campaign_id %></td>
-    <td><%= lead.account_id %></td>
-    <td><%= lead.first_name %></td>
-    <td><%= lead.last_name %></td>
-    <td><%= lead.email %></td>
-    <td><%= lead.status %></td>
-    <td><%= lead.raiting %></td>
-    <td><%= lead.phone %></td>
-    <td><%= lead.country %></td>
-    <td><%= lead.city %></td>
-    <td><%= lead.address %></td>
-    <td><%= lead.source %></td>
-    <td><%= lead.last_contacted %></td>
-    <td><%= lead.step %></td>
-    <td><%= lead.automatic %></td>
-    <td><%= lead.messages_received_count %></td>
-    <td><%= lead.messages_sent_count %></td>
-    <td><%= link_to 'Show', lead %></td>
-    <td><%= link_to 'Edit', edit_lead_path(lead) %></td>
-    <td><%= link_to 'Destroy', lead, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<%- model_class = Lead.new.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:campaign_id) %></th>
+      <th><%= model_class.human_attribute_name(:account_id) %></th>
+      <th><%= model_class.human_attribute_name(:first_name) %></th>
+      <th><%= model_class.human_attribute_name(:last_name) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:raiting) %></th>
+      <th><%= model_class.human_attribute_name(:phone) %></th>
+      <th><%= model_class.human_attribute_name(:country) %></th>
+      <th><%= model_class.human_attribute_name(:city) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= model_class.human_attribute_name(:source) %></th>
+      <th><%= model_class.human_attribute_name(:last_contacted) %></th>
+      <th><%= model_class.human_attribute_name(:step) %></th>
+      <th><%= model_class.human_attribute_name(:automatic) %></th>
+      <th><%= model_class.human_attribute_name(:messages_received_count) %></th>
+      <th><%= model_class.human_attribute_name(:messages_sent_count) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @leads.each do |lead| %>
+      <tr>
+        <td><%= link_to lead.id, lead_path(lead) %></td>
+        <td><%= lead.campaign_id %></td>
+        <td><%= lead.account_id %></td>
+        <td><%= lead.first_name %></td>
+        <td><%= lead.last_name %></td>
+        <td><%= lead.email %></td>
+        <td><%= lead.status %></td>
+        <td><%= lead.raiting %></td>
+        <td><%= lead.phone %></td>
+        <td><%= lead.country %></td>
+        <td><%= lead.city %></td>
+        <td><%= lead.address %></td>
+        <td><%= lead.source %></td>
+        <td><%= lead.last_contacted %></td>
+        <td><%= lead.step %></td>
+        <td><%= lead.automatic %></td>
+        <td><%= lead.messages_received_count %></td>
+        <td><%= lead.messages_sent_count %></td>
+        <td><%=l lead.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_lead_path(lead), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      lead_path(lead),
+                      :method => :delete,
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Lead', new_lead_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_lead_path,
+            :class => 'btn btn-primary' %>

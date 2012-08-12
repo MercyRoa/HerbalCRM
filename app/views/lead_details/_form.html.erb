@@ -1,29 +1,26 @@
-<%= form_for(@lead_detail) do |f| %>
-  <% if @lead_detail.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@lead_detail.errors.count, "error") %> prohibited this lead_detail from being saved:</h2>
-
-      <ul>
-      <% @lead_detail.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @lead_detail, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :lead_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :lead_id, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :key, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :key, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :value, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :value, :class => 'text_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :lead_id %><br />
-    <%= f.number_field :lead_id %>
-  </div>
-  <div class="field">
-    <%= f.label :key %><br />
-    <%= f.text_field :key %>
-  </div>
-  <div class="field">
-    <%= f.label :value %><br />
-    <%= f.text_field :value %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                lead_details_path, :class => 'btn' %>
   </div>
 <% end %>
