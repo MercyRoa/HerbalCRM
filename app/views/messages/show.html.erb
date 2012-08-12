@@ -1,45 +1,35 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = @message.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Account:</b>
-  <%= @message.account_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:account_id) %>:</strong></dt>
+  <dd><%= @message.account_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:lead_id) %>:</strong></dt>
+  <dd><%= @message.lead_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:from) %>:</strong></dt>
+  <dd><%= @message.from %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:to) %>:</strong></dt>
+  <dd><%= @message.to %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:headers) %>:</strong></dt>
+  <dd><%= @message.headers %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:body) %>:</strong></dt>
+  <dd><%= @message.body %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:body_raw) %>:</strong></dt>
+  <dd><%= @message.body_raw %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:readed) %>:</strong></dt>
+  <dd><%= @message.readed %></dd>
+</dl>
 
-<p>
-  <b>Lead:</b>
-  <%= @message.lead_id %>
-</p>
-
-<p>
-  <b>From:</b>
-  <%= @message.from %>
-</p>
-
-<p>
-  <b>To:</b>
-  <%= @message.to %>
-</p>
-
-<p>
-  <b>Headers:</b>
-  <%= @message.headers %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @message.body %>
-</p>
-
-<p>
-  <b>Body raw:</b>
-  <%= @message.body_raw %>
-</p>
-
-<p>
-  <b>Readed:</b>
-  <%= @message.readed %>
-</p>
-
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              messages_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_message_path(@message), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              message_path(@message),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

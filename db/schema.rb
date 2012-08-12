@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120812010605) do
+ActiveRecord::Schema.define(:version => 20120812013102) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "campaigns", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "lead_details", :force => true do |t|
     t.integer  "lead_id"
@@ -39,6 +53,31 @@ ActiveRecord::Schema.define(:version => 20120812010605) do
     t.boolean  "automatic"
     t.integer  "messages_received_count"
     t.integer  "messages_sent_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mail_sequences", :force => true do |t|
+    t.integer  "campaign_id"
+    t.integer  "step"
+    t.string   "subject"
+    t.text     "body_text"
+    t.text     "body_html"
+    t.string   "description"
+    t.integer  "send_after"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "lead_id"
+    t.string   "from"
+    t.string   "to"
+    t.text     "headers"
+    t.text     "body"
+    t.text     "body_raw"
+    t.boolean  "readed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
