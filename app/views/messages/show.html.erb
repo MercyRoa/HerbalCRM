@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Account:</b>
+  <%= @message.account_id %>
+</p>
+
+<p>
+  <b>Lead:</b>
+  <%= @message.lead_id %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @message.from %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%= @message.to %>
+</p>
+
+<p>
+  <b>Headers:</b>
+  <%= @message.headers %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @message.body %>
+</p>
+
+<p>
+  <b>Body raw:</b>
+  <%= @message.body_raw %>
+</p>
+
+<p>
+  <b>Readed:</b>
+  <%= @message.readed %>
+</p>
+
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

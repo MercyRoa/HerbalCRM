@@ -1,0 +1,2 @@
+module MailSequencesHelper
+end

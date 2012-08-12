@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  campaign_id: 1
+  step: 1
+  subject: MyString
+  body_text: MyText
+  body_html: MyText
+  description: MyString
+  send_after: 1
+
+two:
+  campaign_id: 1
+  step: 1
+  subject: MyString
+  body_text: MyText
+  body_html: MyText
+  description: MyString
+  send_after: 1

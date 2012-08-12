@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  account_id: 1
+  lead_id: 1
+  from: MyString
+  to: MyString
+  headers: MyText
+  body: MyText
+  body_raw: MyText
+  readed: false
+
+two:
+  account_id: 1
+  lead_id: 1
+  from: MyString
+  to: MyString
+  headers: MyText
+  body: MyText
+  body_raw: MyText
+  readed: false

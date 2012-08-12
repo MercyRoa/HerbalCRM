@@ -1,4 +1,12 @@
 HerbalCRM::Application.routes.draw do
+  resources :messages
+
+  resources :campaigns
+
+  resources :mail_sequences
+
+  resources :accounts
+
   resources :leads
 
   resources :lead_details

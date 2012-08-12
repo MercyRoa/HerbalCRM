@@ -1,0 +1,35 @@
+<h1>Listing mail_sequences</h1>
+
+<table>
+  <tr>
+    <th>Campaign</th>
+    <th>Step</th>
+    <th>Subject</th>
+    <th>Body text</th>
+    <th>Body html</th>
+    <th>Description</th>
+    <th>Send after</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mail_sequences.each do |mail_sequence| %>
+  <tr>
+    <td><%= mail_sequence.campaign_id %></td>
+    <td><%= mail_sequence.step %></td>
+    <td><%= mail_sequence.subject %></td>
+    <td><%= mail_sequence.body_text %></td>
+    <td><%= mail_sequence.body_html %></td>
+    <td><%= mail_sequence.description %></td>
+    <td><%= mail_sequence.send_after %></td>
+    <td><%= link_to 'Show', mail_sequence %></td>
+    <td><%= link_to 'Edit', edit_mail_sequence_path(mail_sequence) %></td>
+    <td><%= link_to 'Destroy', mail_sequence, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mail sequence', new_mail_sequence_path %>

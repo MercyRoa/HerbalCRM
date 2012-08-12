@@ -1,0 +1,45 @@
+<%= form_for(@mail_sequence) do |f| %>
+  <% if @mail_sequence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mail_sequence.errors.count, "error") %> prohibited this mail_sequence from being saved:</h2>
+
+      <ul>
+      <% @mail_sequence.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :campaign_id %><br />
+    <%= f.number_field :campaign_id %>
+  </div>
+  <div class="field">
+    <%= f.label :step %><br />
+    <%= f.number_field :step %>
+  </div>
+  <div class="field">
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :body_text %><br />
+    <%= f.text_area :body_text %>
+  </div>
+  <div class="field">
+    <%= f.label :body_html %><br />
+    <%= f.text_area :body_html %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :send_after %><br />
+    <%= f.number_field :send_after %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

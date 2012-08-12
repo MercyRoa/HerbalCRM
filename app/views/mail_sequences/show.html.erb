@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Campaign:</b>
+  <%= @mail_sequence.campaign_id %>
+</p>
+
+<p>
+  <b>Step:</b>
+  <%= @mail_sequence.step %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%= @mail_sequence.subject %>
+</p>
+
+<p>
+  <b>Body text:</b>
+  <%= @mail_sequence.body_text %>
+</p>
+
+<p>
+  <b>Body html:</b>
+  <%= @mail_sequence.body_html %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @mail_sequence.description %>
+</p>
+
+<p>
+  <b>Send after:</b>
+  <%= @mail_sequence.send_after %>
+</p>
+
+
+<%= link_to 'Edit', edit_mail_sequence_path(@mail_sequence) %> |
+<%= link_to 'Back', mail_sequences_path %>
