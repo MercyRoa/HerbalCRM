@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @text_model.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @text_model.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_text_model_path(@text_model) %> |
+<%= link_to 'Back', text_models_path %>
