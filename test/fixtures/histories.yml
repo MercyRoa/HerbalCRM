@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lead_id: 1
+  type: 
+  title: MyString
+  body: MyText
+  user_id: 
+  timer: 
+
+two:
+  lead_id: 1
+  type: 
+  title: MyString
+  body: MyText
+  user_id: 
+  timer: 

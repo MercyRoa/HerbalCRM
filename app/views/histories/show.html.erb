@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Lead:</b>
+  <%= @history.lead_id %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @history.type %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @history.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @history.body %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @history.user_id %>
+</p>
+
+<p>
+  <b>Timer:</b>
+  <%= @history.timer %>
+</p>
+
+
+<%= link_to 'Edit', edit_history_path(@history) %> |
+<%= link_to 'Back', histories_path %>

@@ -1,4 +1,6 @@
 HerbalCRM::Application.routes.draw do
+  resources :histories
+
   resources :messages
 
   resources :campaigns
