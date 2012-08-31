@@ -23,8 +23,6 @@ class Account < ActiveRecord::Base
         # message[:lead_id] = Lead.id
         # Otherwise create a new lead
 
-        LEES ESTO???
-
         Message.new message
         Message.save
 
