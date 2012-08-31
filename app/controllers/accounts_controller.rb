@@ -80,4 +80,10 @@ class AccountsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def fetch_all
+    Account.all.each do |a|
+      a.fetch_emails
+    end
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819014840) do
+ActiveRecord::Schema.define(:version => 20120831001558) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -95,6 +95,15 @@ ActiveRecord::Schema.define(:version => 20120819014840) do
     t.text     "body"
     t.text     "body_raw"
     t.boolean  "readed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "message_id"
+    t.datetime "date"
+  end
+
+  create_table "text_models", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

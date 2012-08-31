@@ -1,3 +1,9 @@
+@config = {
+	'server' => 'imag.google.com',
+	'port' => 995,
+	'username' => 'mercedes@yanomassobrepeso.com',
+	'password' => 'merce1957'
+}
 imap = Net::IMAP.new(@config['server'],@config['port'],true)
 imap.login(@config['username'], @config['password'])
 imap.select('INBOX')
