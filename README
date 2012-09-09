@@ -1,5 +1,4 @@
 
 @ToDo
  * UTF8 ERROR Enconding
- * Obtener el nomre del lead al crearlo, viene en el email Nombre <email@host>
  * Sale todo el historial del email, ignorar a partir del primer From: 

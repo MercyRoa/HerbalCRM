@@ -40,7 +40,7 @@ class Account < ActiveRecord::Base
           # If email exist, add the message to that lead
           # message[:lead_id] = Lead.id
           # Otherwise create a new lead
-          message[:lead_id] = Lead.get_or_create( email.from_addrs.first, self)
+          message[:lead_id] = Lead.get_or_create( email.from_addrs.first, self, email.from.first.name)
           
           m = Message.new message
           m.save
@@ -57,6 +57,7 @@ class Account < ActiveRecord::Base
         end
         
         puts errors.to_yaml
+        puts "Finalizado..."
       end
     end
   end
