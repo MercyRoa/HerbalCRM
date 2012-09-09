@@ -1,4 +1,3 @@
 
 @ToDo
- * UTF8 ERROR Enconding
- * Sale todo el historial del email, ignorar a partir del primer From: 
+ * UTF8 ERROR Enconding ( Dont see errors anymore but acents still as "?")
