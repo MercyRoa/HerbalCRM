@@ -1,3 +1,9 @@
 
 @ToDo
+ * Fetch OUR emails
+ * Counters for Lead: Step, Received & Sent
+ *
+
+
+@Bugs
  * UTF8 ERROR Enconding ( Dont see errors anymore but acents still as "?")

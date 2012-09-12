@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120831012708) do
+ActiveRecord::Schema.define(:version => 20120912015726) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120831012708) do
     t.datetime "updated_at"
     t.integer  "campaign_id"
     t.string   "label"
+    t.datetime "last_fetch_date"
   end
 
   create_table "campaigns", :force => true do |t|
@@ -97,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20120831012708) do
     t.boolean  "readed"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "message_id"
+    t.string   "message_id"
     t.datetime "date"
     t.string   "subject"
   end
