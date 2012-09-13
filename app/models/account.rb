@@ -1,8 +1,3 @@
-#encoding: UTF-8
-#require 'iconv'
-def force_utf(s)
-    #Iconv.conv('UTF-8//IGNORE', 'UTF-8', s + ' ')[0..-2]
-end
 
 class Account < ActiveRecord::Base
   def gmail
@@ -30,14 +25,15 @@ class Account < ActiveRecord::Base
         begin
           email.label! "Bip-Received"
           m.save
-          puts "\e[32m#{done.to_s.ljust(4)}\e[0m #{email.subject} <#{email.from_addrs.join(', ')}>"
+          puts "\e[32m#{done.to_s.ljust(4)}\e[0m #{m.subject} <#{email.from_addrs.join(', ')}>"
           done += 1
         rescue Exception => e
           # Display failure message
-          puts "\e[31m[!]\e[0m  #{email.subject} <#{email.from_addrs.join(', ')}>"
+          puts "\e[31m[!]\e[0m  #{m.subject} <#{email.from_addrs.join(', ')}>"
           puts "     #{e.inspect}"
           errors << email
           email.unread!
+          email.remove_label! 'Bip-Received'
         end
 
         puts "="*80
@@ -48,27 +44,29 @@ class Account < ActiveRecord::Base
       # Import Sent
       done = 0
       opts = {
-          after: (self.last_fetch_date - 1.day), # Technically, this is not needed
+          #after: (self.last_fetch_date - 1.day), # Technically, this is not needed
           query: ['X-GM-RAW', 'in:sent -label:Bip-Sent']  #in:sent isnt needed
       }
       total = gmail.mailbox('[Gmail]/Sent Mail').emails(opts).count
       puts "Importing #{total} sent messages, press Ctrl-C to abort...", '-'*80
       gmail.mailbox('[Gmail]/Sent Mail').emails(opts).each do |email| # Why .each???
-        puts "Processing message..."
+        puts "Processing message... #{email.
+            subject}"
         m = Message.convert_from_gmail email
         m.account_id = self.id
         m.lead_id    = Lead.get_or_create( email.to_addrs.first, self, email.to.first.name).id
         begin
           email.label! "Bip-Sent"
           m.save
-          puts "\e[32m#{done.to_s.ljust(4)}\e[0m #{email.subject} <#{email.from_addrs.join(', ')}>"
+          puts "\e[32m#{done.to_s.ljust(4)}\e[0m #{m.subject} <#{email.from_addrs.join(', ')}>"
           done += 1
         rescue Exception => e
           # Display failure message
-          puts "\e[31m[!]\e[0m  #{email.subject} <#{email.from_addrs.join(', ')}>"
+          puts "\e[31m[!]\e[0m  #{m.subject} <#{email.from_addrs.join(', ')}>"
           puts "     #{e.inspect}"
           errors << email
           email.unread!
+          email.remove_label! 'Bip-Sent'
         end
       end
 
