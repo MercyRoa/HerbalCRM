@@ -46,10 +46,15 @@ class Account < ActiveRecord::Base
       end
 
       # Import Sent
-      done   = 0
-      total  = 0
+      done = 0
+      opts = {
+          after: (self.last_fetch_date - 1.day), # Technically, this is not needed
+          query: ['X-GM-RAW', 'in:sent -label:Bip-Sent']  #in:sent isnt needed
+      }
+      total = gmail.mailbox('[Gmail]/Sent Mail').emails(opts).count
       puts "Importing #{total} sent messages, press Ctrl-C to abort...", '-'*80
-      gmail.mailbox('[Gmail]/Sent Mail').emails(from: (self.last_fetch_date - 1.day)) do |email|
+      gmail.mailbox('[Gmail]/Sent Mail').emails(opts).each do |email| # Why .each???
+        puts "Processing message..."
         m = Message.convert_from_gmail email
         m.account_id = self.id
         m.lead_id    = Lead.get_or_create( email.to_addrs.first, self, email.to.first.name).id
@@ -67,7 +72,7 @@ class Account < ActiveRecord::Base
         end
       end
 
-      self.update_attribute :last_fetch_date, Time.now
+      #self.update_attribute :last_fetch_date, Time.now
     end
   end
 end

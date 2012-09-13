@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
   belongs_to :lead
+  validates_uniqueness_of :message_id
 
   def self.convert_from_gmail email
     self.new({
