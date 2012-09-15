@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120912015726) do
+ActiveRecord::Schema.define(:version => 20120915131052) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -101,6 +101,9 @@ ActiveRecord::Schema.define(:version => 20120912015726) do
     t.string   "message_id"
     t.datetime "date"
     t.string   "subject"
+    t.boolean  "from_account", :default => false, :null => false
+    t.string   "from_raw"
+    t.string   "to_raw"
   end
 
   create_table "text_models", :force => true do |t|

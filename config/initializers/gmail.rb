@@ -2,10 +2,8 @@
 Net::IMAP::Address.class_eval do
   def name
     return Mail::Encodings.value_decode( self[:name] ) unless self[:name].nil?
-    self[:name]
   end
 end
-
 
 Gmail::Message.class_eval do
   def labels
@@ -31,7 +29,8 @@ end
 Gmail::Client::Base.class_eval do
   I18N_BOX_LABELS = {
       sent: ['[Gmail]/Sent Mail', '[Gmail]/Enviados'],
-      all:  ['[Gmail]/All Mail', '[Gmail]/Todos']
+      all:  ['[Gmail]/All Mail', '[Gmail]/Todos'],
+      draft: []
   }
 
   def get_right_box type
