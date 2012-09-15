@@ -1,3 +1,22 @@
+puts "todo completado"
+
+class Arnold
+  attr_accessor :nombre, :apellido
+  def email arr, &block
+    #3.times { yield }
+    block.call arr
+  end
+  def search &block
+    arr = %w{hola juanito lindo}
+    email arr, &block
+  end
+end
+a = Arnold.new
+a.search do |a|
+  puts a
+end
+
+exit
 @config = {
 	'server' => 'imag.google.com',
 	'port' => 995,

@@ -4,3 +4,4 @@
  * Check mailer daemon
 
 @Bugs
+ * While importing SENT emails the lead name is nil

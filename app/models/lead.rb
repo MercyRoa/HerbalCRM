@@ -21,12 +21,14 @@ class Lead < ActiveRecord::Base
   # Check if profile exist, and return it or create 
   # user:string email
   def self.get_or_create(email, account = nil, name = nil)
-    logger.info " Buscando Lead " + email
+    logger.info " Buscando Lead #{name} #{email}"
     
     lead = self.find_by_email email
     
     if lead.nil?
       lead = self.make_from({first_name: name, email: email}, account)
+    else
+      lead.update_attribute(:first_name, name) if lead.first_name.empty? && !name.nil?
     end
     
     lead

@@ -5,18 +5,16 @@ class Account < ActiveRecord::Base
   end
 
   def fetch_emails
-    done   = 0
-    total  = 0
-    errors = []
+    done = 0
     
-    puts "Connecting..."
-    
+    puts "Connecting to #{self.email}..."
+
     Gmail.new(self.email, self.password) do |gmail|
-      total = gmail.inbox.emails(:unread).count
-      puts "Importing #{total} messages, press Ctrl-C to abort...", '-'*80
+      emails = gmail.inbox.emails(:unread)
+      puts "Importing #{emails.count} messages, press Ctrl-C to abort...", '-'*80
 
       # Import Inbox
-      gmail.inbox.emails(:unread).each do |email|
+      emails.each do |email|
         puts "Processing message..."
         m = Message.convert_from_gmail email
         m.account_id = self.id
@@ -31,27 +29,17 @@ class Account < ActiveRecord::Base
           # Display failure message
           puts "\e[31m[!]\e[0m  #{m.subject} <#{email.from_addrs.join(', ')}>"
           puts "     #{e.inspect}"
-          errors << email
           email.unread!
           email.remove_label! 'Bip-Received'
         end
-
-        puts "="*80
-        puts errors.to_yaml
-        puts "="*80
       end
 
       # Import Sent
       done = 0
-      opts = {
-          #after: (self.last_fetch_date - 1.day), # Technically, this is not needed
-          query: ['X-GM-RAW', 'in:sent -label:Bip-Sent']  #in:sent isnt needed
-      }
-      total = gmail.mailbox('[Gmail]/Sent Mail').emails(opts).count
-      puts "Importing #{total} sent messages, press Ctrl-C to abort...", '-'*80
-      gmail.mailbox('[Gmail]/Sent Mail').emails(opts).each do |email| # Why .each???
-        puts "Processing message... #{email.
-            subject}"
+      emails = gmail.sent.search('in:sent -label:Bip-Sent')
+      puts "Importing #{emails.count} sent messages, press Ctrl-C to abort...", '-'*80
+      emails.each do |email| # Why .each???
+        puts "Processing message... #{email.subject}"
         m = Message.convert_from_gmail email
         m.account_id = self.id
         m.lead_id    = Lead.get_or_create( email.to_addrs.first, self, email.to.first.name).id
@@ -64,7 +52,6 @@ class Account < ActiveRecord::Base
           # Display failure message
           puts "\e[31m[!]\e[0m  #{m.subject} <#{email.from_addrs.join(', ')}>"
           puts "     #{e.inspect}"
-          errors << email
           email.unread!
           email.remove_label! 'Bip-Sent'
         end
