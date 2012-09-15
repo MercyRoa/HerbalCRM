@@ -4,14 +4,25 @@ class Message < ActiveRecord::Base
   belongs_to :lead
   belongs_to :account
   validates_uniqueness_of :message_id
-  before_save lambda { self.from_account? = true if self.from_account? }
+  before_save lambda { self.from_account = true if self.from_account? }
+  order :date, 'DESC'
+
+  MAILER_DAEMONS = ['mailer-daemon@googlemail.com']
 
   def from_account?
     self.from == self.account.email
   end
 
-  # Metodos estaticos
+  def is_mailer_daemon?
+    MAILER_DAEMONS.include? self.from
+  end
+
+  # Class Methods
   class << self
+    def extract_email text
+      text.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9\.-]+/).to_s
+    end
+
     def import_emails_from_gmail(emails, account, label)
       done = 0
       puts "Importing #{emails.count} messages, press Ctrl-C to abort...", '-'*80
@@ -19,7 +30,13 @@ class Message < ActiveRecord::Base
         puts "Processing message... #{email.subject}"
         m = convert_from_gmail email
         m.account = account
-        m.lead_id    = Lead.get_or_create( email.from_addrs.first, account, email.from.first.name).id
+
+        m.lead = if m.is_mailer_daemon?
+          email = extract_email m.body
+          Lead.get_or_create( email, account)
+        else
+          Lead.get_or_create( email.from_addrs.first, account, email.from.first.name)
+        end
 
         begin
           email.label! label
@@ -51,8 +68,6 @@ class Message < ActiveRecord::Base
       })
     end
 
-    def check_if_is_mailer_daemon
 
-    end
   end
 end

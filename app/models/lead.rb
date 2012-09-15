@@ -4,7 +4,7 @@ class Lead < ActiveRecord::Base
   belongs_to :account
 
   scope :to_reply, where(automatic: false).order("updated_at DESC")
-  
+
   # User can be String (with email) or hash
   def self.make_from(lead, account = nil)
     account = Account.first if account.nil?

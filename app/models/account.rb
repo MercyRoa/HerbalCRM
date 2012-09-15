@@ -1,13 +1,13 @@
 
 class Account < ActiveRecord::Base
-  def gmail
-    Gmail.new(self.email, self.password)
+  def connect_to_gmail &block
+    Gmail.new(self.email, self.password, &block)
   end
 
   def fetch_emails
     puts "Connecting to #{self.email}..."
 
-    Gmail.new(self.email, self.password) do |gmail|
+    self.connect_to_gmail do |gmail|
       # Import Unread Inbox
       emails = gmail.inbox.emails(:unread)
       Message.import_emails_from_gmail(emails, self, 'BipR')

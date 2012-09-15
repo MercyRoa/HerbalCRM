@@ -1,7 +1,5 @@
 
 @ToDo
  * Counters for Lead: Step, Received & Sent
- * Check mailer daemon
 
 @Bugs
- * While importing SENT emails the lead name is nil
