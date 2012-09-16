@@ -32,7 +32,7 @@ class Lead < ActiveRecord::Base
     if lead.nil?
       lead = self.make_from({first_name: name, email: email}, account)
     else
-      lead.update_attribute(:first_name, name) if lead.first_name.empty? && !name.nil?
+      lead.update_attribute(:first_name, name) if lead.first_name.nil? && !name.nil?
     end
     
     lead

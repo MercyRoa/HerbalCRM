@@ -30,7 +30,8 @@ Gmail::Client::Base.class_eval do
   I18N_BOX_LABELS = {
       sent: ['[Gmail]/Sent Mail', '[Gmail]/Enviados'],
       all:  ['[Gmail]/All Mail', '[Gmail]/Todos'],
-      draft: []
+      draft: [],
+      trash: []
   }
 
   def get_right_box type

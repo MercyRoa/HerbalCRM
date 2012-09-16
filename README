@@ -1,5 +1,10 @@
 
 @ToDo
  * Counters for Lead: Step, Received & Sent
+ * Send Emails
+ *
 
 @Bugs
+
+@ToReview
+ * Lead.status How to update this field? what happen if message are not retrieved in order?

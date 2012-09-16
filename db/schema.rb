@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120915131052) do
+ActiveRecord::Schema.define(:version => 20120916200849) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20120915131052) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "status"
+    t.string   "status",                  :default => "new"
     t.integer  "raiting"
     t.string   "phone"
     t.string   "country"
@@ -65,13 +65,15 @@ ActiveRecord::Schema.define(:version => 20120915131052) do
     t.string   "address"
     t.string   "source"
     t.datetime "last_contacted"
-    t.integer  "step"
-    t.boolean  "automatic"
-    t.integer  "messages_received_count"
-    t.integer  "messages_sent_count"
+    t.integer  "step",                    :default => 0
+    t.boolean  "automatic",               :default => true
+    t.integer  "messages_received_count", :default => 0
+    t.integer  "messages_sent_count",     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "resume"
+    t.integer  "bounce",                  :default => 0
+    t.string   "stage"
   end
 
   create_table "mail_sequences", :force => true do |t|
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20120915131052) do
     t.boolean  "from_account", :default => false, :null => false
     t.string   "from_raw"
     t.string   "to_raw"
+    t.boolean  "countable"
   end
 
   create_table "text_models", :force => true do |t|
