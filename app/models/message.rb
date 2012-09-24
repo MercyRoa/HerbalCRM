@@ -46,7 +46,7 @@ class Message < ActiveRecord::Base
         m = convert_from_gmail email
         m.account = account
 
-        # ToDo refactor this piece of code!
+        # ToDo refactor this ugly piece of code!
         m.lead = if m.is_mailer_daemon?
           m.countable = false
           lead = Lead.get_or_create( extract_email(m.body), account)

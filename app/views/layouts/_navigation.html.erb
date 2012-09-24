@@ -1,0 +1,49 @@
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</a>
+<%= link_to "HerbalCRM", root_path, :class => 'brand' %>
+<div class="nav-collapse">
+  <ul class="nav">
+    <li class="active">
+      <a href="/"><i class="icon-home icon-white"></i> Dashboard</a>
+    </li>
+    <li><a href="/leads"><i class="icon-user icon-white"></i>Leads</a></li>
+    <li><a href="#contact"><i class="icon-refresh icon-white"></i>Todo</a></li>
+  </ul>
+
+
+  <ul class="nav pull-right">
+    <li>
+      <form class="navbar-search pull-right">
+        <input type="text" class="search-query" placeholder="Search...">
+      </form>
+    </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="icon-cog icon-white"></i>
+        Settings<b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="/accounts"><i class="icon-user"></i> Accounts</a></li>
+        <li><a href="/campaigns"><i class="icon-file"></i> Campaigns</a></li>
+        <li><a href="/text_model"><i class="icon-wrench"></i> Text Models</a></li>
+        <li><a href="/searches"><i class="icon-zoom-in"></i> Searches</a></li>
+
+        <li class="divider"></li>
+
+        <li><a href="/countries"><i class="icon-text-width"></i> Countries</a></li>
+        <li><a href="/profiles"><i class="icon-plane"></i> Users</a></li>
+        <li><a href="/searches_results"><i class="icon-zoom-in"></i> Searches Results</a></li>
+
+      </ul>
+    </li>
+    <li>
+      <!-- <button class="btn btn-success" href="#" id="sendAll">Send All</button> -->
+    </li>
+  </ul>
+
+
+</div><!--/.nav-collapse -->
+
