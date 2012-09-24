@@ -1,6 +1,7 @@
 class Lead < ActiveRecord::Base
   has_many :messages, :order => "created_at"
   has_many :histories, :order => "created_at DESC"
+  has_many :lead_details
   belongs_to :account
 
   scope :to_reply, where(automatic: false).order("updated_at DESC")

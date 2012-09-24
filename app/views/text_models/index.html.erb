@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Title</th>
-    <th>Body</th>
+    <th>Category</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,8 +12,7 @@
 <% @text_models.each do |text_model| %>
   <tr>
     <td><%= text_model.title %></td>
-    <td><%= text_model.body %></td>
-    <td><%= link_to 'Show', text_model %></td>
+    <td><%= text_model.cotegory %></td>
     <td><%= link_to 'Edit', edit_text_model_path(text_model) %></td>
     <td><%= link_to 'Destroy', text_model, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
