@@ -14,7 +14,7 @@ class Message < ActiveRecord::Base
   MAILER_DAEMONS = ['mailer-daemon@googlemail.com']
 
   def to_s
-    body.gsub( /^From: .*@.*/m, '').strip
+    body.gsub( /^(From:.*@|>) .*/m, '').strip
   end
 
   def update_lead_counters
