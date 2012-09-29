@@ -1,0 +1,28 @@
+- model_class = Lead.new.class
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+
+%div
+  - @leads.each do |lead|
+    %div[lead, :lead_box]
+      %span.badge= lead.step
+      %strong= link_to lead.name, lead_path(lead), rel: 'tooltip', title: lead.email
+      %i.icon-chevron-right
+      %span.account= lead.account
+      %span.right= status_label lead
+      .clear
+      // %i= lead.email unless lead.first_name.nil?
+
+      = time_ago lead.last_contacted
+      .received #{t 'Messages Received'}: #{lead.messages_received_count}
+      .sent #{t 'Messages Sent'}: #{lead.messages_sent_count}
+
+
+      - message = lead.messages.last
+      - unless message.nil?
+        .message[message]
+          .subject= message.subject
+          = truncate(message.to_s, :length => 200)
+    %hr
+
+= link_to t('.new', :default => t("helpers.links.new")), new_lead_path, :class => 'btn btn-primary'

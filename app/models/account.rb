@@ -1,5 +1,8 @@
 
 class Account < ActiveRecord::Base
+  def to_s
+    email
+  end
   def connect_to_gmail &block
     Gmail.new(self.email, self.password, &block)
   end

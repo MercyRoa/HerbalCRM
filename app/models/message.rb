@@ -13,6 +13,10 @@ class Message < ActiveRecord::Base
 
   MAILER_DAEMONS = ['mailer-daemon@googlemail.com']
 
+  def to_s
+    body.gsub( /^From: .*@.*/m, '').strip
+  end
+
   def update_lead_counters
     self.lead.messages_sent_count = Message.count( :conditions => ["countable = true AND from_account = true AND lead_id = ?", self.lead.id])
     self.lead.messages_received_count = Message.count( :conditions => ["countable = true AND from_account = false AND lead_id = ?", self.lead.id])
@@ -32,12 +36,20 @@ class Message < ActiveRecord::Base
     MAILER_DAEMONS.include? self.from
   end
 
+  # Compare message date to the last received message from lead table
+  def is_more_recent?
+    self.lead.last_contacted.nil? || self.date > self.lead.last_contacted
+  end
+
   # Class Methods
   class << self
     def extract_email text
       text.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9\.-]+/).to_s
     end
 
+    # @param [Object] emails
+    # @param [Account] account
+    # @param [String] label
     def import_emails_from_gmail(emails, account, label)
       done = 0
       puts "Importing #{emails.count} messages, press Ctrl-C to abort...", '-'*80
@@ -47,22 +59,25 @@ class Message < ActiveRecord::Base
         m.account = account
 
         # ToDo refactor this ugly piece of code!
-        m.lead = if m.is_mailer_daemon?
+        if m.is_mailer_daemon?
           m.countable = false
-          lead = Lead.get_or_create( extract_email(m.body), account)
-          lead.increment :bounce
-          lead.status = 'bounced'
-          lead.automatic = false
-          lead.save
-          lead
+          m.lead = Lead.get_or_create( extract_email(m.body), account)
+          m.lead.increment :bounce
+          m.lead.status = 'bounced'
+          m.lead.automatic = false
+
+          m.lead.save
         else
           lead_name = m.from_account? ? email.to.first.name : email.from.first.name
-          lead = Lead.get_or_create( m.lead_email, account, lead_name)
-          lead.last_contacted = m.date
-          lead.increment :step unless m.from_account?
-          lead.status = 'attention_needed' unless m.from_account?
-          lead.save
-          lead
+          m.lead = Lead.get_or_create( m.lead_email, account, lead_name)
+          m.lead.increment :step unless m.from_account?
+
+          if m.is_more_recent? && m.lead.status != 'bounced'
+            m.lead.last_contacted = m.date
+            m.lead.status = (m.from_account?)? 'waiting_reply' : 'attention_needed'
+          end
+
+          m.lead.save
         end
 
         begin

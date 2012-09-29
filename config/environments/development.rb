@@ -27,4 +27,15 @@ HerbalCRM::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  unless $rails_rake_task || defined?(IRB)
+    if (Rails.env.development? || Rails.env.test?)
+      require 'debugger'
+
+      Debugger.settings[:autoeval] = true
+      Debugger.settings[:autolist] = 1
+      Debugger.settings[:reload_source_on_change] = true
+      Debugger.start_remote
+    end
+  end
 end

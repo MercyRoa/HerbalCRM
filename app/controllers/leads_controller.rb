@@ -3,6 +3,7 @@ class LeadsController < ApplicationController
   # GET /leads.json
   def index
     @leads = Lead.all
+    @campaigns = Campaign.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,10 +1,17 @@
 class Lead < ActiveRecord::Base
-  has_many :messages, :order => "created_at"
+  has_many :messages, :order => "date DESC"
   has_many :histories, :order => "created_at DESC"
   has_many :lead_details
   belongs_to :account
+  belongs_to :campaign
 
   scope :to_reply, where(automatic: false).order("updated_at DESC")
+
+  def name
+    return email if first_name.nil?
+    "#{first_name} #{last_name}"
+  end
+  alias_method :to_s, :name
 
   # User can be String (with email) or hash
   def self.make_from(lead, account = nil)

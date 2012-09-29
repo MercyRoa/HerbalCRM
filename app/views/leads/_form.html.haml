@@ -1,0 +1,84 @@
+= form_for @lead, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :campaign_id, :class => 'control-label'
+    .controls
+      = f.number_field :campaign_id, :class => 'number_field'
+  .control-group
+    = f.label :account_id, :class => 'control-label'
+    .controls
+      = f.number_field :account_id, :class => 'number_field'
+  .control-group
+    = f.label :first_name, :class => 'control-label'
+    .controls
+      = f.text_field :first_name, :class => 'text_field'
+  .control-group
+    = f.label :last_name, :class => 'control-label'
+    .controls
+      = f.text_field :last_name, :class => 'text_field'
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.text_field :email, :class => 'text_field'
+  .control-group
+    = f.label :status, :class => 'control-label'
+    .controls
+      = f.text_field :status, :class => 'text_field'
+  .control-group
+    = f.label :raiting, :class => 'control-label'
+    .controls
+      = f.number_field :raiting, :class => 'number_field'
+  .control-group
+    = f.label :phone, :class => 'control-label'
+    .controls
+      = f.text_field :phone, :class => 'text_field'
+  .control-group
+    = f.label :country, :class => 'control-label'
+    .controls
+      = f.text_field :country, :class => 'text_field'
+  .control-group
+    = f.label :city, :class => 'control-label'
+    .controls
+      = f.text_field :city, :class => 'text_field'
+  .control-group
+    = f.label :address, :class => 'control-label'
+    .controls
+      = f.text_field :address, :class => 'text_field'
+  .control-group
+    = f.label :source, :class => 'control-label'
+    .controls
+      = f.text_field :source, :class => 'text_field'
+  .control-group
+    = f.label :last_contacted, :class => 'control-label'
+    .controls
+      = f.datetime_select :last_contacted, :class => 'datetime_select'
+  .control-group
+    = f.label :step, :class => 'control-label'
+    .controls
+      = f.number_field :step, :class => 'number_field'
+  .control-group
+    = f.label :automatic, :class => 'control-label'
+    .controls
+      = f.check_box :automatic, :class => 'check_box'
+  .control-group
+    = f.label :messages_received_count, :class => 'control-label'
+    .controls
+      = f.number_field :messages_received_count, :class => 'number_field'
+  .control-group
+    = f.label :messages_sent_count, :class => 'control-label'
+    .controls
+      = f.number_field :messages_sent_count, :class => 'number_field'
+  .control-group
+    = f.label :resume, :class => 'control-label'
+    .controls
+      = f.text_area :resume, :class => 'text_area'
+  .control-group
+    = f.label :bounce, :class => 'control-label'
+    .controls
+      = f.number_field :bounce, :class => 'number_field'
+  .control-group
+    = f.label :stage, :class => 'control-label'
+    .controls
+      = f.text_field :stage, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), leads_path, :class => 'btn'

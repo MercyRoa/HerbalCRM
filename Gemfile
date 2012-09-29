@@ -8,8 +8,16 @@ gem 'rails', '3.1.3'
 gem 'sqlite3'
 gem 'mysql2'
 gem "twitter-bootstrap-rails"
+gem 'haml-rails'
+
+# Move this to development only
+# gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 
 gem 'gmail'
+
+group :development do
+  gem 'debugger', :require => 'debugger'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
