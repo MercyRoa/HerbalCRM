@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924004348) do
+ActiveRecord::Schema.define(:version => 20120930082648) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -107,6 +107,21 @@ ActiveRecord::Schema.define(:version => 20120924004348) do
     t.string   "from_raw"
     t.string   "to_raw"
     t.boolean  "countable"
+  end
+
+  create_table "scheduled_messages", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "lead_id"
+    t.string   "to"
+    t.string   "cc"
+    t.string   "bcc"
+    t.string   "subject"
+    t.text     "body"
+    t.text     "body_html"
+    t.datetime "scheduled"
+    t.boolean  "sent",       :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "text_models", :force => true do |t|

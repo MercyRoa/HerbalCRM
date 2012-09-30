@@ -16,6 +16,11 @@ class LeadsController < ApplicationController
   def show
     @lead = Lead.find(params[:id])
 
+    # This was suggested on a forum with @lead.messages.build
+    # Yaraher suggested to use build, but copy @lead.messages before
+    #@new_message = @lead.scheduled_messages.build #ScheduledMessage.new(lead_id: @lead.id,
+    @new_message = ScheduledMessage.new(lead_id: @lead.id, account_id: @lead.account_id)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @lead }

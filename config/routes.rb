@@ -1,4 +1,6 @@
 HerbalCRM::Application.routes.draw do
+  get "scheduled_messages/send_all"
+
   get "dashboard/index"
 
   resources :text_models
@@ -16,6 +18,8 @@ HerbalCRM::Application.routes.draw do
   resources :leads
 
   resources :lead_details
+
+  resources :scheduled_messages
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

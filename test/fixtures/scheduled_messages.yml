@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  account_id: 1
+  lead_id: 1
+  to: MyString
+  cc: MyString
+  bcc: MyString
+  subject: MyString
+  body: MyText
+  body_html: MyText
+  scheduled: 2012-09-30 05:26:48
+  sent: false
+
+two:
+  account_id: 1
+  lead_id: 1
+  to: MyString
+  cc: MyString
+  bcc: MyString
+  subject: MyString
+  body: MyText
+  body_html: MyText
+  scheduled: 2012-09-30 05:26:48
+  sent: false

@@ -1,75 +1,95 @@
 
 .page-header
   %h1=@lead
+  %div
+    %span.badge= @lead.step
+    = status_label @lead
+    = time_ago @lead.last_contacted
 
-%p
-  %strong #{t 'Campaign'}:
-  = @lead.campaign_id
-%p
-  %strong #{t 'Account'}:
-  = @lead.account
-%p
-  %strong #{t 'Email'}:
-  = @lead.email
-  = link_to t('Open in Gmail'), "https://mail.google.com/mail/?shva=1#search/#{@lead.email.sub('@', '%40')}/",
-  target: '_blank'
-%p
-  %strong #{t 'Status'}:
-  = status_label @lead
-%p
-  %strong #{t 'Raiting'}:
-  = @lead.raiting
-%p
-  %strong #{t 'Phone'}:
-  = @lead.phone
-%p
-  %strong #{t 'Country'}:
-  = @lead.country
-%p
-  %strong #{t 'City'}:
-  = @lead.city
-%p
-  %strong #{t 'Address'}:
-  = @lead.address
-%p
-  %strong #{t 'Source'}:
-  = @lead.source
-%p
-  %strong #{t 'Last Contacted'}:
-  = time_ago @lead.last_contacted
-%p
-  %strong #{t 'Step'}:
-  = @lead.step
-%p
-  %strong #{t 'Automatic'}:
-  = @lead.automatic
-%p
-  %strong #{t 'Messages Received'}:
-  = @lead.messages_received_count
-%p
-  %strong #{t 'Messages Sent'}:
-  = @lead.messages_sent_count
-%p
-  %strong #{t 'Resume'}:
-  = @lead.resume
-%p
-  %strong #{t 'Bounce'}:
-  = @lead.bounce
-%p
-  %strong #{t 'Stage'}:
-  = @lead.stage
+.span6
+  %p
+    %strong #{t 'Campaign'}:
+    = @lead.campaign_id
+  %p
+    %strong #{t 'Account'}:
+    = @lead.account
+  %p
+    %strong #{t 'Email'}:
+    = @lead.email
+    = link_to t('Open in Gmail'), "https://mail.google.com/mail/?shva=1#search/#{@lead.email.sub('@', '%40')}/",
+    target: '_blank'
+  %p
+    %strong #{t 'Messages Received'}:
+    = @lead.messages_received_count
+  %p
+    %strong #{t 'Messages Sent'}:
+    = @lead.messages_sent_count
+  %p
+    %strong #{t 'Raiting'}:
+    = @lead.raiting
+  %p
+    %strong #{t 'Phone'}:
+    = @lead.phone
+%span6
+  %p
+    %strong #{t 'Location'}:
+    = [@lead.country, @lead.city].join
+  %p
+    %strong #{t 'Address'}:
+    = @lead.address
+  %p
+    %strong #{t 'Source'}:
+    = @lead.source
+  %p
+    %strong #{t 'Automatic'}:
+    = @lead.automatic
+  %p
+    %strong #{t 'Resume'}:
+    = @lead.resume
+  %p
+    %strong #{t 'Bounce'}:
+    = @lead.bounce
+  %p
+    %strong #{t 'Stage'}:
+    = @lead.stage
 
 .form-actions
   = link_to t('Back'), leads_path, :class => 'btn'
   = link_to t('Edit'), edit_lead_path(@lead), :class => 'btn'
-  = link_to t('Destroy'), lead_path(@lead), :method => "delete", :confirm => t('Are you sure?'), :class => 'btn btn-danger'
+  = link_to t('Destroy'), lead_path(@lead), :method => "delete", :confirm => 'Are you sure?',
+  :class => 'btn btn-danger'
 
-#messages
-  - @lead.messages.each do |message|
+#reply
+  = form_for @new_message do |f|
+    = f.hidden_field :lead_id, value: @lead.id
+    = f.hidden_field :account_id, value: @lead.account_id
+    = f.hidden_field :to, value: @lead.email
+    = f.hidden_field :account_id, value: @lead.account_id
+    // ToDo Add support for schedule message
+    // Todo Add support for add cc / bcc
+
+    %div= f.text_field :subject, value: "Re: #{@lead.messages.last.subject}", class: 'span8'
+    = f.text_area :body, size: '150x3', placeholder: 'Reply here', class: 'span8'
+    = f.submit 'Send', class: 'btn-success'
+
+#scheduled_messages
+  - @lead.scheduled_messages.each do |message|
     %div[message]
       %h3= message.subject
-      %em= time_ago_in_words message.date
-      %small= message.date
+      - if message.sent?
+        %span.label.label-warning Message sent
+      - else
+        %span.label.label-info Scheduled
+        To send in:
+      = distance_of_time_in_words Time.new, message.scheduled
+      %pre= message.body
+    %hr
+
+#messages
+  - @lead.messages.each do |message| # next if message.id.nil?
+    %div[message]
+      %h3= message.subject
+      %em= time_ago message.date
       .from #{t 'From'}: #{message.from}
       %pre= message.to_s.html_safe
     %hr

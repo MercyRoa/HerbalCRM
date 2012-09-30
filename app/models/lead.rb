@@ -1,17 +1,25 @@
 class Lead < ActiveRecord::Base
   has_many :messages, :order => "date DESC"
+  has_many :scheduled_messages
+
   has_many :histories, :order => "created_at DESC"
-  has_many :lead_details
+  has_many :lead_details, :dependent => :destroy
   belongs_to :account
   belongs_to :campaign
 
+  accepts_nested_attributes_for :lead_details
+
   scope :to_reply, where(automatic: false).order("updated_at DESC")
 
-  def name
+  def to_s
     return email if first_name.nil?
     "#{first_name} #{last_name}"
   end
-  alias_method :to_s, :name
+  alias_method :name, :to_s
+
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
 
   # User can be String (with email) or hash
   def self.make_from(lead, account = nil)
