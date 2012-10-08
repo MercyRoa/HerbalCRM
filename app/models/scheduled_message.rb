@@ -1,9 +1,11 @@
 class ScheduledMessage < ActiveRecord::Base
   belongs_to :account
   belongs_to :lead
+  order :scheduled, 'DESC'
 
   DEFAULT_SCHEDULE_TIME = 15.minutes
   before_create :set_default_schedule
+  after_create :update_lead_details
 
   scope :to_send, where(:sent => false).where("scheduled < ?", Time.now)
 
@@ -15,10 +17,11 @@ class ScheduledMessage < ActiveRecord::Base
     self.sent
   end
 
-  def after_send
+  # Update lead details while creating the sm
+  def update_lead_details
     self.lead.update_attributes({
         :status     => 'waiting-reply',
-        :last_contacted => Time.now,
+        :last_contacted => self.scheduled, #Time.now,
         :automatic  => false
     })
   end
@@ -38,11 +41,10 @@ class ScheduledMessage < ActiveRecord::Base
       end
 
       self.update_attributes! sent: true, message_id: m.message_id
-      after_send
-      puts "\e[32m[OK]"
+      puts "\e[32m[OK]\e[0m"
     rescue Exception => e
-      puts e.message
       puts "\e[31m[!]\e[0m Error sending email"
+      puts e.message
     end
   end
 

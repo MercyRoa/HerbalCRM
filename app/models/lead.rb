@@ -1,6 +1,6 @@
 class Lead < ActiveRecord::Base
   has_many :messages, :order => "date DESC"
-  has_many :scheduled_messages
+  has_many :scheduled_messages, :order => 'id DESC'
 
   has_many :histories, :order => "created_at DESC"
   has_many :lead_details, :dependent => :destroy

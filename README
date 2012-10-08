@@ -3,6 +3,10 @@
  * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
  * Handle and show campaigns
  * Add support for html messages
+ * Search / filter contacts
+ * View Both HTML / PLAIN mails
+ * Write mails in Html format
+ * Collapse mails...
 
 @Bugs
 

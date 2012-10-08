@@ -68,7 +68,7 @@
     // ToDo Add support for schedule message
     // Todo Add support for add cc / bcc
 
-    %div= f.text_field :subject, value: "Re: #{@lead.messages.last.subject}", class: 'span8'
+    %div= f.text_field :subject, value: "Re: #{@lead.messages.first.subject}", class: 'span8'
     = f.text_area :body, size: '150x3', placeholder: 'Reply here', class: 'span8'
     = f.submit 'Send', class: 'btn-success'
 
