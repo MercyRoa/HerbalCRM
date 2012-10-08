@@ -18,7 +18,7 @@ class Account < ActiveRecord::Base
       Message.import_emails_from_gmail(emails, self, 'BipR')
 
       # Import Sent mail
-      emails = gmail.sent.search('in:sent -label:Bip-Sent')
+      emails = gmail.sent.search('in:sent -label:BipS')
       Message.import_emails_from_gmail(emails, self, 'BipS')
     end
 
@@ -30,6 +30,11 @@ class Account < ActiveRecord::Base
     # Return gmail connection from first account, just for testing
     def gmail
       Account.first.gmail
+    end
+    def fetch_all
+      Account.all.each do |a|
+        a.fetch_emails
+      end
     end
   end
 end

@@ -1,12 +1,16 @@
 
 @ToDo
- * Send Emails
  * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
  * Handle and show campaigns
+ * Add support for html messages
 
 @Bugs
- * Why leads are in attention-needed if we are waiting reply??
- * Check the date of messages is ok, and not the date of extraction
 
 @ToReview
- * Lead.status How to update this field? what happen if message are not retrieved in order?
+
+
+ == Guide ==
+  * To send all scheduled messages use:
+    ScheduledMessage.send_all
+  * To Fech emails from All accounts use:
+    Account.fetch_all

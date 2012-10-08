@@ -72,6 +72,8 @@ class Message < ActiveRecord::Base
           m.lead = Lead.get_or_create( m.lead_email, account, lead_name)
           m.lead.increment :step unless m.from_account?
 
+          ScheduledMessage.delete_all message_id: m.message_id
+
           if m.is_more_recent? && m.lead.status != 'bounced'
             m.lead.last_contacted = m.date
             m.lead.status = (m.from_account?)? 'waiting_reply' : 'attention_needed'
@@ -97,7 +99,7 @@ class Message < ActiveRecord::Base
 
     def convert_from_gmail email
       self.new({
-        message_id: email.message_id.to_s, #.tr('<>', '').tr('/', '-')
+        message_id: email.message_id.to_s.tr('<>', ''),
         subject:    email.subject,
         from_raw:   Array(email.from).map { |a| "#{a.name} <#{a.mailbox}@#{a.host}>" }.join(", "),
         to_raw:     Array(email.to).map   { |a| "#{a.name} <#{a.mailbox}@#{a.host}>" }.join(", "),
