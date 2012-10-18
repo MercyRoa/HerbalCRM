@@ -1,0 +1,21 @@
+= form_for @campaign, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .control-group
+    = f.label :accounts, :class => 'control-label'
+    .controls
+      = hidden_field_tag "campaign[account_ids][]", nil
+      - Account.all.each do |account|
+        %label.checkbox
+          = check_box_tag "campaign[account_ids][]", account.id, @campaign.account_ids.include?(account.id),
+          id: dom_id(account)
+          = "#{account.name} - #{account.email}"
+  .control-group
+    = f.label :description, :class => 'control-label'
+    .controls
+      = f.text_area :description, :class => 'text_area'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), campaigns_path, :class => 'btn'

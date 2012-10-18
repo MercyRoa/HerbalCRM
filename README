@@ -9,19 +9,19 @@
  * Write mails in Html format
  * Category for failed to convert leads?
  * Email received checker -- beacon img or link
-
  * TIme spending writing an email
+
+-Less important
+ * Clean emails whose bounced without replies
+ * Mailer daemon doesnt comes always from googlemail...
 
 @Bugs
 
 @ToReview
 
 
- == Guide ==
+ == Guide of inner usage ==
 
-  * To Fech emails from All accounts use:
-    Account.fetch_all
-  * To precess all automated messages do
-    Lead.create_messages_for_all_automated
-  * To send all scheduled messages use:
-    ScheduledMessage.send_all
+  1) Campaign.fetch_all
+  2) Lead.generate_automated_messages_for_all
+  3) ScheduledMessage.send_all

@@ -24,6 +24,8 @@ class Lead < ActiveRecord::Base
   end
 
   def process_automate
+    return false if self.campaign.nil?
+
     next_message = self.campaign.mail_sequences.where(step: self.step).first
     if next_message
       ScheduledMessage.new(
@@ -41,29 +43,32 @@ class Lead < ActiveRecord::Base
 
   class << self
     # it's okey to have this here or should be made on each message received?
-    def create_messages_for_all_automated
+    def generate_automated_messages_for_all
       Lead.automated.each do |l|
         l.process_automate
       end
     end
 
     # User can be String (with email) or hash
-    def make_from(lead, account = nil)
+    def make_from(lead, account = nil, campaign = nil)
       account = Account.find account if account.kind_of? Fixnum
       account = Account.first if account.nil?
+
+      campaign = Campaign.find campaign if campaign.kind_of? Fixnum
 
       if lead.class == String
         lead = { email: lead }
       end
 
       lead[:account_id] = account.id
+      lead[:campaign_id] = campaign.id unless campaign.nil?
 
       self.create lead
     end
 
     # Check if profile exist, and return it or create
     # user:string email
-    def get_or_create(email, account = nil, name = nil)
+    def get_or_create(email, account = nil, campaign = nil, name = nil)
       if name.is_a? Hash
         # ToDo: more info suplied... fix array
       end
@@ -71,7 +76,7 @@ class Lead < ActiveRecord::Base
       lead = self.find_by_email email
 
       if lead.nil?
-        lead = self.make_from({first_name: name, email: email}, account)
+        lead = self.make_from({first_name: name, email: email}, account, campaign)
       else
         lead.update_attribute(:first_name, name) if lead.first_name.nil? && !name.nil?
       end

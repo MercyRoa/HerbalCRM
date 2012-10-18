@@ -50,7 +50,7 @@ class Message < ActiveRecord::Base
     # @param [Object] emails
     # @param [Account] account
     # @param [String] label
-    def import_emails_from_gmail(emails, account, label)
+    def import_emails_from_gmail(emails, account, campaign, label)
       done = 0
       puts "Importing #{emails.count} messages, press Ctrl-C to abort...", '-'*80
       emails.each do |email|
@@ -61,7 +61,7 @@ class Message < ActiveRecord::Base
         # ToDo refactor this ugly piece of code!
         if m.is_mailer_daemon?
           m.countable = false
-          m.lead = Lead.get_or_create( extract_email(m.body), account)
+          m.lead = Lead.get_or_create( extract_email(m.body), account, campaign)
           m.lead.increment :bounce
           m.lead.status = 'bounced'
           m.lead.automatic = false
@@ -69,7 +69,7 @@ class Message < ActiveRecord::Base
           m.lead.save
         else
           lead_name = m.from_account? ? email.to.first.name : email.from.first.name
-          m.lead = Lead.get_or_create( m.lead_email, account, lead_name)
+          m.lead = Lead.get_or_create( m.lead_email, account, campaign, lead_name)
           m.lead.increment :step unless m.from_account?
 
           ScheduledMessage.delete_all message_id: m.message_id
@@ -83,8 +83,8 @@ class Message < ActiveRecord::Base
         end
 
         begin
-          email.label! label
           m.save
+          email.label! label
           done += 1
           puts "\e[32m#{done.to_s.ljust(4)}\e[0m #{m.subject} <#{email.from_addrs.join(', ')}> <#{email.to_addrs.join(', ')}>"
         rescue Exception => e

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008164933) do
+ActiveRecord::Schema.define(:version => 20121018161531) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -19,16 +19,24 @@ ActiveRecord::Schema.define(:version => 20121008164933) do
     t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "campaign_id"
-    t.string   "label"
     t.datetime "last_fetch_date"
   end
+
+  create_table "accounts_campaigns", :id => false, :force => true do |t|
+    t.integer "account_id",  :null => false
+    t.integer "campaign_id", :null => false
+  end
+
+  add_index "accounts_campaigns", ["account_id", "campaign_id"], :name => "index_accounts_campaigns_on_account_id_and_campaign_id", :unique => true
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.string   "search_query",    :default => "is:unread"
+    t.datetime "last_fetch_date"
+    t.string   "label"
   end
 
   create_table "histories", :force => true do |t|
