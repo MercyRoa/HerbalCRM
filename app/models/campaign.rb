@@ -1,3 +1,3 @@
 class Campaign < ActiveRecord::Base
-  has_many :mail_sequences
+  has_many :mail_sequences, order: 'step'
 end

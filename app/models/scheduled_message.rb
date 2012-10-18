@@ -4,7 +4,7 @@ class ScheduledMessage < ActiveRecord::Base
   order :scheduled, 'DESC'
 
   DEFAULT_SCHEDULE_TIME = 15.minutes
-  before_create :set_default_schedule
+  before_create :set_default_data
   after_create :update_lead_details
 
   scope :to_send, where(:sent => false).where("scheduled < ?", Time.now)
@@ -20,9 +20,8 @@ class ScheduledMessage < ActiveRecord::Base
   # Update lead details while creating the sm
   def update_lead_details
     self.lead.update_attributes({
-        :status     => 'waiting-reply',
+        :status         => :waiting_reply,
         :last_contacted => self.scheduled, #Time.now,
-        :automatic  => false
     })
   end
 
@@ -49,7 +48,7 @@ class ScheduledMessage < ActiveRecord::Base
   end
 
   private
-  def set_default_schedule
-    self.scheduled = DEFAULT_SCHEDULE_TIME.from_now
+  def set_default_data
+    self.scheduled = DEFAULT_SCHEDULE_TIME.from_now if self.scheduled.nil?
   end
 end

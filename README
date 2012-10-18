@@ -1,12 +1,16 @@
 
 @ToDo
- * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
  * Handle and show campaigns
+ * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
  * Add support for html messages
  * Search / filter contacts
  * View Both HTML / PLAIN mails
+ * AutoCollapse mails...
  * Write mails in Html format
- * Collapse mails...
+ * Category for failed to convert leads?
+ * Email received checker -- beacon img or link
+
+ * TIme spending writing an email
 
 @Bugs
 
@@ -14,7 +18,10 @@
 
 
  == Guide ==
-  * To send all scheduled messages use:
-    ScheduledMessage.send_all
+
   * To Fech emails from All accounts use:
     Account.fetch_all
+  * To precess all automated messages do
+    Lead.create_messages_for_all_automated
+  * To send all scheduled messages use:
+    ScheduledMessage.send_all

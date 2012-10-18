@@ -25,6 +25,7 @@ class MailSequencesController < ApplicationController
   # GET /mail_sequences/new.json
   def new
     @mail_sequence = MailSequence.new
+    @campaigns = Campaign.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class MailSequencesController < ApplicationController
 
     respond_to do |format|
       if @mail_sequence.save
-        format.html { redirect_to @mail_sequence, notice: 'Mail sequence was successfully created.' }
+        format.html { redirect_to @mail_sequence.campaign, notice: 'Mail sequence was successfully created.' }
         format.json { render json: @mail_sequence, status: :created, location: @mail_sequence }
       else
         format.html { render action: "new" }
