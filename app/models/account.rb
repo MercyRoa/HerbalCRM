@@ -1,6 +1,5 @@
 
 class Account < ActiveRecord::Base
-  has_and_belongs_to_many :campaigns
 
   def to_s
     email

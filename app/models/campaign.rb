@@ -1,4 +1,6 @@
 class Campaign < ActiveRecord::Base
+  validates_presence_of :label
+
   has_many :mail_sequences, order: 'step'
   has_and_belongs_to_many :accounts
   accepts_nested_attributes_for :accounts

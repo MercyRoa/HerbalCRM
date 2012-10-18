@@ -1,6 +1,5 @@
 
 @ToDo
- * Handle and show campaigns
  * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
  * Add support for html messages
  * Search / filter contacts
@@ -10,6 +9,8 @@
  * Category for failed to convert leads?
  * Email received checker -- beacon img or link
  * TIme spending writing an email
+ * Assign message to other lead (facebook invitation)... should be deleted? processor?
+ * Replace NAME and other vars for scheduled messages
 
 -Less important
  * Clean emails whose bounced without replies

@@ -85,14 +85,18 @@ class Message < ActiveRecord::Base
         begin
           m.save
           email.label! label
+          email.label! Campaign::CONTROL_LABEL
           done += 1
           puts "\e[32m#{done.to_s.ljust(4)}\e[0m #{m.subject} <#{email.from_addrs.join(', ')}> <#{email.to_addrs.join(', ')}>"
         rescue Exception => e
           # Display failure message
-          puts "\e[31m[!]\e[0m  #{m.subject} <#{email.from_addrs.join(', ')}> <#{email.to_addrs.join(', ')}>"
+          puts "\e[31m[!!]\e[0m  #{m.subject} <#{email.from_addrs.join(', ')}> <#{email.to_addrs.join(', ')}>"
           puts "     #{e.inspect}"
+          puts e.backtrace
+
           email.unread!
           email.remove_label! label
+          email.remove_label! Campaign::CONTROL_LABEL
         end
       end
     end

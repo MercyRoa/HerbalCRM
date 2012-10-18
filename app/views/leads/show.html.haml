@@ -9,7 +9,7 @@
 .span6
   %p
     %strong #{t 'Campaign'}:
-    = @lead.campaign_id
+    = @lead.campaign.name
   %p
     %strong #{t 'Account'}:
     = @lead.account
@@ -65,8 +65,10 @@
     = f.hidden_field :account_id, value: @lead.account_id
     = f.hidden_field :to, value: @lead.email
     = f.hidden_field :account_id, value: @lead.account_id
-    // ToDo Add support for schedule message
-    // Todo Add support for add cc / bcc
+    %b Schedule:
+    = f.text_field :scheduled, value: Time.now
+    %b Bcc:
+    = f.text_field :bcc
 
     %div= f.text_field :subject, value: "Re: #{@lead.messages.first.subject}", class: 'span8'
     = f.text_area :body, size: '150x3', placeholder: 'Reply here', class: 'span8'
