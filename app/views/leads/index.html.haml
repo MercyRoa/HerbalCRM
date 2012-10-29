@@ -3,6 +3,9 @@
   %h1=t '.title', :default => model_class.model_name.human.pluralize
   %em #{t 'We have found'} #{pluralize @leads.count, 'record'}
 
+%div= will_filter_tag(@leads)
+//%div= will_filter_table_tag(@leads, columns: [])
+
 %div
   - @leads.each do |lead|
     %div[lead, :lead_box]

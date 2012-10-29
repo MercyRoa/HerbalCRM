@@ -1,4 +1,6 @@
 HerbalCRM::Application.routes.draw do
+  mount WillFilter::Engine => "/will_filter"
+
   get "scheduled_messages/send_all"
 
   get "dashboard/index"

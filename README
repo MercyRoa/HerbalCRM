@@ -1,16 +1,24 @@
 
-@ToDo
+@ToDo (Please mantain this in order of importance)
+ * Search / filter / categorize contacts
  * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
- * Add support for html messages
- * Search / filter contacts
- * View Both HTML / PLAIN mails
- * AutoCollapse mails...
- * Write mails in Html format
- * Category for failed to convert leads?
- * Email received checker -- beacon img or link
- * TIme spending writing an email
- * Assign message to other lead (facebook invitation)... should be deleted? processor?
+ * Add notes to contacts
+ * Add tasks
  * Replace NAME and other vars for scheduled messages
+ * Add support for html messages
+    * View Both HTML / PLAIN mails
+    * Write mails in Html format
+ * AutoCollapse mails...
+ * Categories for leads
+    * failed to convert?
+    * Ready to buy
+ * Email received checker -- beacon img or link
+ * Time spending writing an email
+ * Assign message to other lead (facebook invitation)... should be deleted? processor?
+ * FWD an old mail to someone
+ * Handle Attachments
+ * Text Models
+ * Activity log
 
 -Less important
  * Clean emails whose bounced without replies
