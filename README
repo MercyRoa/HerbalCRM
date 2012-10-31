@@ -1,7 +1,7 @@
 
 @ToDo (Please mantain this in order of importance)
- * Search / filter / categorize contacts
  * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
+ * Text Models
  * Add notes to contacts
  * Add tasks
  * Replace NAME and other vars for scheduled messages
@@ -17,12 +17,17 @@
  * Assign message to other lead (facebook invitation)... should be deleted? processor?
  * FWD an old mail to someone
  * Handle Attachments
- * Text Models
  * Activity log
+ * Search contact from top bar
 
 -Less important
  * Clean emails whose bounced without replies
  * Mailer daemon doesnt comes always from googlemail...
+ * Append Account signature to message
+
+-to improve a litle
+ * Search / filter / categorize contacts
+
 
 @Bugs
 

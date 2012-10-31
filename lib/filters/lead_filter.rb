@@ -8,14 +8,25 @@ module Filters
       defs = super
       defs[:status][:is] = :list
       defs[:status][:is_not] = :list
+      defs[:account_id][:is] = :list
+      defs[:account_id][:is_not] = :list
       defs
     end
 
     def value_options_for(condition_key)
-      if condition_key == :status
-        return %W{new attention_needed waiting_reply posponed discarted}
+      case condition_key
+        when :status
+          %W{new attention_needed waiting_reply posponed discarted}
+        when :account_id
+          {1 => "Mercedes", 2 => "Patico"}
+        else
+          []
       end
-      return []
+    end
+
+    def condition_title_for(key)
+      return 'Account' if key == :account_id
+      super
     end
 
     # What if we don’t want to allow users to have empty filters, which by default return all results.

@@ -116,7 +116,5 @@ class Message < ActiveRecord::Base
         countable:  true
       })
     end
-
-
   end
 end

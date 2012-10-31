@@ -1,3 +1,5 @@
+- content_for :head do
+  - aloha!
 
 .page-header
   %h1=@lead
@@ -71,8 +73,14 @@
     = f.text_field :bcc
 
     %div= f.text_field :subject, value: "Re: #{@lead.messages.first.subject}", class: 'span8'
-    = f.text_area :body, size: '150x3', placeholder: 'Reply here', class: 'span8'
+    = f.text_area :body, size: '150x3', placeholder: 'Reply here', class: 'span8 editable-long-text'
     = f.submit 'Send', class: 'btn-success'
+
+  .navbar
+    .navbar-inner
+      %form.navbar-search.pull-left
+        %input.search-query{ :type => :text, :placeholder => 'Search...'}
+
 
 #scheduled_messages
   - @lead.scheduled_messages.each do |message|
@@ -95,3 +103,7 @@
       .from #{t 'From'}: #{message.from}
       %pre= message.to_s.html_safe
     %hr
+
+
+:javascript
+  $(".chzn-select").chosen();

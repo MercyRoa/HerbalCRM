@@ -6,5 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require aloha-config
 //= require twitter/bootstrap
 //= require_tree .
+//= require chosen-jquery
