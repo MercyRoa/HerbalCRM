@@ -11,7 +11,7 @@ Aloha.settings =
     deprecated: false
   errorhandling: false
   sidebar:
-    disabled: false
+    disabled: true
   ribbon: false
   locale: 'en'
   plugins:
