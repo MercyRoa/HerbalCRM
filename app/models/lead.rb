@@ -20,7 +20,7 @@ class Lead < ActiveRecord::Base
 
   # this creates the friendly url
   def to_param
-    "#{id}-#{name.parameterize}"
+    "#{id}-#{email.parameterize}"
   end
 
   def process_automate

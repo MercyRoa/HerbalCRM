@@ -18,9 +18,9 @@
 # extra/hints               extra/linkchecker         extra/metaview          
 # extra/toc
 
-# Aloha::Rails.default_plugins = %w(common/format common/list common/link common/block common/undo
-#common/contenthandler common/paste)
+#Aloha::Rails.default_plugins = %w(common/format common/list common/link common/block common/undo
+#  common/contenthandler common/paste)
 
 Aloha::Rails.default_plugins = %w(common/format common/list common/link common/block common/undo
-  common/contenthandler common/paste common/image common/commands common/table extra/browser
-  extra/draganddropfiles extra/linkbrowser extra/sourceview)
+  common/contenthandler common/paste common/image common/commands common/table common/align)
+  #extra/browser extra/draganddropfiles extra/linkbrowser)

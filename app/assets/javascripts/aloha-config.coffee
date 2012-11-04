@@ -24,6 +24,10 @@ Aloha.settings =
       config: [ 'ul', 'ol' ]
       editables: '.editables-short-text': []
 
+    alignment:
+      config: [ 'right', 'left', 'center', 'justify' ]
+      editables: '.editables-short-text': []
+
     abbr:
       config: [ 'abbr' ]
       editables: '.editable-short-text': []
@@ -85,4 +89,11 @@ Aloha.settings =
       'numerated-headers':
         numeratedactive: false
 
-Aloha.onReady = -> # console.log "Aloha is ready!"
+Aloha.onReady = ->
+  # console.log "Aloha is ready!"
+  Aloha.bind 'aloha-editable-deactivated', (event, myeditable) ->
+    myeditable.editable.obj.animate( height: 60 )
+
+  Aloha.bind 'aloha-editable-activated', (event, myeditable) ->
+    myeditable.editable.obj.animate( height: 280 )
+
