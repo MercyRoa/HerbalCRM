@@ -93,6 +93,7 @@
         %span.label.label-info Scheduled
         To send in:
       = distance_of_time_in_words Time.new, message.scheduled
+      = link_to "Edit", edit_scheduled_message_path(message)
       %pre= message.body
     %hr
 
