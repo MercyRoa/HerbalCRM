@@ -24,6 +24,7 @@
  * Clean emails whose bounced without replies
  * Mailer daemon doesnt comes always from googlemail...
  * Append Account signature to message
+ * Button to delete / edit a scheduled message
 
 -to improve a litle
  * Search / filter / categorize contacts

@@ -58,10 +58,11 @@
 .form-actions
   = link_to t('Back'), leads_path, :class => 'btn'
   = link_to t('Edit'), edit_lead_path(@lead), :class => 'btn'
-  = link_to t('Destroy'), lead_path(@lead), :method => "delete", :confirm => 'Are you sure?',
+  = link_to t('Delete'), lead_path(@lead), :method => "delete", :confirm => 'Are you sure?',
   :class => 'btn btn-danger'
 
 #reply
+
   = form_for @new_message do |f|
     = f.hidden_field :lead_id, value: @lead.id
     = f.hidden_field :account_id, value: @lead.account_id
@@ -74,13 +75,13 @@
 
     %div= f.text_field :subject, value: "Re: #{@lead.messages.first.subject}", class: 'span8'
     = f.text_area :body, size: '150x3', placeholder: 'Reply here', class: 'span8 editable-long-text'
-    = f.submit 'Send', class: 'btn-success'
+    = f.submit 'Send', class: 'btn btn-success'
 
   .navbar
     .navbar-inner
-      %form.navbar-search.pull-left
-        %input.search-query{ :type => :text, :placeholder => 'Search...'}
-
+      %form.navbar-form
+        %input.span3{ id: 'search-models', type: :text, placeholder: 'Search...' }
+        %button{ type: "submit", class: "btn"} Insert
 
 #scheduled_messages
   - @lead.scheduled_messages.each do |message|

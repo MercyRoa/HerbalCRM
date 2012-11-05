@@ -6,4 +6,6 @@
  *= require aloha
  *= require_tree .
  *= require chosen
+ * Alternative is: bootstrap-ui/jquery-ui-1.9.0.custom
+ *= require bootstrap-ui/jquery-ui-1.8.16.custom
 */
