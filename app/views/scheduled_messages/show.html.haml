@@ -1,0 +1,53 @@
+- model_class = ScheduledMessage
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
+
+%p
+  %strong= model_class.human_attribute_name(:account_id) + ':'
+  %br
+  = @scheduled_message.account_id
+%p
+  %strong= model_class.human_attribute_name(:lead_id) + ':'
+  %br
+  = @scheduled_message.lead_id
+%p
+  %strong= model_class.human_attribute_name(:to) + ':'
+  %br
+  = @scheduled_message.to
+%p
+  %strong= model_class.human_attribute_name(:cc) + ':'
+  %br
+  = @scheduled_message.cc
+%p
+  %strong= model_class.human_attribute_name(:bcc) + ':'
+  %br
+  = @scheduled_message.bcc
+%p
+  %strong= model_class.human_attribute_name(:subject) + ':'
+  %br
+  = @scheduled_message.subject
+%p
+  %strong= model_class.human_attribute_name(:body) + ':'
+  %br
+  = @scheduled_message.body
+%p
+  %strong= model_class.human_attribute_name(:body_html) + ':'
+  %br
+  = @scheduled_message.body_html
+%p
+  %strong= model_class.human_attribute_name(:scheduled) + ':'
+  %br
+  = @scheduled_message.scheduled
+%p
+  %strong= model_class.human_attribute_name(:sent) + ':'
+  %br
+  = @scheduled_message.sent
+%p
+  %strong= model_class.human_attribute_name(:message_id) + ':'
+  %br
+  = @scheduled_message.message_id
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), scheduled_messages_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_scheduled_message_path(@scheduled_message), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), scheduled_message_path(@scheduled_message), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
