@@ -5,3 +5,5 @@
 $ ->
   $('#search-models').autocomplete
     source: ['arnold', 'animal', 'abeja', 'antilope']
+
+  $("#text_model_title").chosen()

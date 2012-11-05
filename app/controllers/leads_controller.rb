@@ -22,6 +22,8 @@ class LeadsController < ApplicationController
     #@new_message = @lead.scheduled_messages.build #ScheduledMessage.new(lead_id: @lead.id,
     @new_message = ScheduledMessage.new(lead_id: @lead.id, account_id: @lead.account_id)
 
+    @text_models = TextModel.all
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @lead }
