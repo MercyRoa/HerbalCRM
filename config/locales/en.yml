@@ -5,3 +5,10 @@ en:
   hello: "Hello world"
   Delete: "Delete"
 
+  helpers:
+    links:
+      edit: 'Edit'
+      destroy: 'Delete'
+      back: 'Back'
+      new: 'New'
+
