@@ -31,6 +31,7 @@ group :development, :test do
 end
 group :production do
   gem 'pg'
+  gem 'thin' #for heroku, its a robust web server
 end
 
 # Gems used only for assets and not required
