@@ -38,11 +38,13 @@ updated.' }
 
   def destroy
     @scheduled_message = ScheduledMessage.find(params[:id])
+    lead = @scheduled_message.lead
     @scheduled_message.destroy
 
     respond_to do |format|
-      format.html { redirect_to scheduled_messages_url }
+      format.html { redirect_to lead_url(lead) }
       format.json { head :ok }
+      format.js
     end
   end
 

@@ -92,8 +92,15 @@ Aloha.settings =
 Aloha.onReady = ->
   # console.log "Aloha is ready!"
   Aloha.bind 'aloha-editable-deactivated', (event, myeditable) ->
-    myeditable.editable.obj.animate( height: 60 )
+    # Hide in 6 seconds
+    window._alohaTC = window.setTimeout ( ->
+      myeditable.editable.obj.animate( height: 60 )
+    ), 6000
+
 
   Aloha.bind 'aloha-editable-activated', (event, myeditable) ->
+    if(window._alohaTC?)
+      window.clearTimeout window._alohaTC
     myeditable.editable.obj.animate( height: 280 )
+
 

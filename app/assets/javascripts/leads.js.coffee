@@ -6,4 +6,16 @@ $ ->
   $('#search-models').autocomplete
     source: ['arnold', 'animal', 'abeja', 'antilope']
 
-  $("#text_model_title").chosen()
+  $("#text_model_title").chosen().change () ->
+    console.log "new value is + " + $(this).val()
+
+  $('#insert_text_model').click (event) ->
+    event.preventDefault
+    $.ajax
+      url: '/text_models/' + $("#text_model_title").val()
+      dataType: 'json'
+      success: (json) ->
+        insertHtmlAtCursor json.body
+      error: ->
+        console.log 'error'
+    return false
