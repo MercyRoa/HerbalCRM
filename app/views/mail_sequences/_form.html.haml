@@ -1,3 +1,6 @@
+- content_for :head do
+  - aloha!
+
 = form_for @mail_sequence, :html => { :class => 'form-horizontal' } do |f|
   .control-group
     = f.label :campaign_id, :class => 'control-label'
@@ -12,13 +15,9 @@
     .controls
       = f.text_field :subject, :class => 'text_field'
   .control-group
-    = f.label :body_text, :class => 'control-label'
-    .controls
-      = f.text_area :body_text, :class => 'text_area'
-  .control-group
     = f.label :body_html, :class => 'control-label'
     .controls
-      = f.text_area :body_html, :class => 'text_area'
+      = f.text_area :body_html, :class => 'text_area editable-long-text span8'
   .control-group
     = f.label :description, :class => 'control-label'
     .controls

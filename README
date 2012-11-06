@@ -1,8 +1,6 @@
 
 @ToDo (Please mantain this in order of importance)
- * Text Models
  * Send mail in html / text format (strip_tags for text)
- * Make sure all forms for html content have aloha editor
  * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
  * show preview of text model in a div... before insert
  * Add notes to contacts

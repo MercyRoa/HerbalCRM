@@ -89,7 +89,9 @@ Aloha.settings =
       'numerated-headers':
         numeratedactive: false
 
-$ ->
+
+Aloha.onReady = ->
+  #console.log "Aloha is ready!"
   $('.editable-long-text, .editable-short-text').each () ->
     fnc = "window.Aloha.jQuery('#"+$(this).attr('id')+"')."
     a = $('<a href="#" class="btn btn-mini" style="display: block; width: 60px;">Source</a>').click (event) ->
@@ -98,10 +100,6 @@ $ ->
       eval fnc + (if active then 'mahalo' else 'aloha') + '()'
       $(this).text if active then 'Editor' else 'Source'
     $(this).before(a)
-
-Aloha.onReady = ->
-  console.log "Aloha is ready!"
-  #window.Aloha.jQuery('#scheduled_message_body').mahalo();
 
   Aloha.bind 'aloha-editable-deactivated', (event, myeditable) ->
     # Hide in 6 seconds
