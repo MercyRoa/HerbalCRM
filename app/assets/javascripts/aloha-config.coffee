@@ -90,7 +90,7 @@ Aloha.settings =
         numeratedactive: false
 
 $ ->
-  $('.editable-long-text').each () ->
+  $('.editable-long-text, .editable-short-text').each () ->
     fnc = "window.Aloha.jQuery('#"+$(this).attr('id')+"')."
     a = $('<a href="#" class="btn btn-mini" style="display: block; width: 60px;">Source</a>').click (event) ->
       event.preventDefault()

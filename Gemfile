@@ -16,7 +16,7 @@ gem 'will_filter'
 gem 'kaminari'
 
 gem 'chosen-rails'
-gem 'aloha-rails', :git => 'https://github.com/neohunter/aloha-rails.git'
+gem 'aloha-rails', :github => 'neohunter/aloha-rails', :submodules => true
 
 # Move this to development only
 # gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
