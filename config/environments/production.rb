@@ -15,6 +15,7 @@ HerbalCRM::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
+  # was false, moved to true for heroku, maybe not needed
   config.assets.compile = true
 
   # Generate digests for assets URLs
@@ -47,6 +48,8 @@ HerbalCRM::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.default_url_options = { :host => 'evening-oasis-6724.herokuapp.com' }
 
   # Enable threaded mode
   # config.threadsafe!

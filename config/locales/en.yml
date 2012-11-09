@@ -6,6 +6,7 @@ en:
   Delete: "Delete"
 
   helpers:
+    actions: 'Actions'
     links:
       edit: 'Edit'
       destroy: 'Delete'

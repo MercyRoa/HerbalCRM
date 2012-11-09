@@ -1,4 +1,6 @@
 HerbalCRM::Application.routes.draw do
+  devise_for :users
+
   mount WillFilter::Engine => "/will_filter"
 
   get "scheduled_messages/send_all"
@@ -74,7 +76,8 @@ HerbalCRM::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'dashboard#index'
 
-
+  devise_for :users, :skip => [:registrations]
+  resources :users, :except => [:show]
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

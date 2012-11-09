@@ -16,6 +16,8 @@ gem 'kaminari'
 gem 'chosen-rails'
 gem 'aloha-rails', :github => 'neohunter/aloha-rails', :submodules => true
 
+gem 'devise'
+
 # Move this to development only
 # gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 
