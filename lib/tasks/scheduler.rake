@@ -16,3 +16,9 @@ task :send_scheduled_emails => :environment do
   ScheduledMessage.send_all
   puts "done."
 end
+
+task :all => :environment do
+  Rake::Task["fetch_all_emails"].execute
+  Rake::Task["generate_messages_for_leads"].execute
+  Rake::Task["send_scheduled_emails"].execute
+end

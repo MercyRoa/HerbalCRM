@@ -7,14 +7,23 @@ class ScheduledMessage < ActiveRecord::Base
   before_create :set_default_data
   after_create :update_lead_details
 
+  before_save :set_html_and_plain
+
   scope :to_send, where(:sent => false).where("scheduled < ?", Time.now)
 
   def to_s
-    self.subject
+    "#{self.subject} to: #{self.to}"
   end
 
   def sent?
     self.sent
+  end
+
+  def set_html_and_plain
+    unless self.body_html
+      self.body_html = body
+      self.body = html_to_text(body_html)
+    end
   end
 
   # Update lead details while creating the sm
@@ -36,7 +45,13 @@ class ScheduledMessage < ActiveRecord::Base
       m = self.account.gmail.deliver! do
         to message.to
         subject message.subject
-        body message.body
+        text_part do
+          body message.body
+        end
+        html_part do
+          content_type 'text/html; charset=UTF-8'
+          body message.body_html
+        end
       end
 
       self.update_attributes! sent: true, message_id: m.message_id

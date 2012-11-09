@@ -1,6 +1,5 @@
 
 @ToDo (Please mantain this in order of importance)
- * Send mail in html / text format (strip_tags for text)
  * Parse mails with proccesors: ex. contact-me, mailer-daemon, unbounce, etc
  * show preview of text model in a div... before insert
  * Add notes to contacts
@@ -21,6 +20,7 @@
  * Activity log
  * Search contact from top bar
  * Make editable the propoerties of a lead with ajax
+ * add a lead (manually)
 
 -Less important
  * Clean emails whose bounced without replies

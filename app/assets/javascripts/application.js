@@ -19,6 +19,11 @@ $(function(){
     $("#global-search").autocomplete({
         source: availableTags
     });
+
+    //fix to bootstrap menu on ipad
+    $('body')
+        .on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); })
+        .on('touchstart.dropdown', '.dropdown-submenu', function (e) { e.preventDefault(); });
 });
 
 function insertTextAtCursor(text) {
