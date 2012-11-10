@@ -77,7 +77,7 @@ class MailSequencesController < ApplicationController
     @mail_sequence.destroy
 
     respond_to do |format|
-      format.html { redirect_to mail_sequences_url }
+      format.html { redirect_to @mail_sequence.campaign }
       format.json { head :ok }
     end
   end
