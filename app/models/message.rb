@@ -56,7 +56,7 @@ class Message < ActiveRecord::Base
       done = 0
       puts "Importing #{emails.count} messages, press Ctrl-C to abort...", '-'*80
       emails.each do |email|
-        puts "Processing message... #{email.subject}"
+        puts "Processing message... #{email.subject}, #{email.from}"
         m = convert_from_gmail email
         m.account = account
 

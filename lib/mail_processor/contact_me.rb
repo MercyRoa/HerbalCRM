@@ -4,6 +4,7 @@ module MailProcessor
 
     def self.identify message, email
       if ADDRESS.include? message.from then
+        puts '-- ContactMe ---'
         email.from.first.name = message.body.match(/Nombre: (.*)/)[1]
         message.from = message.body.match(/Email: (.*)/)[1]
       end

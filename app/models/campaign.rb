@@ -22,7 +22,7 @@ class Campaign < ActiveRecord::Base
         Message.import_emails_from_gmail(emails, account, self, label)
 
         # Import Sent mail
-        emails = gmail.sent.search("in:sent -label:#{CONTROL_LABEL}")
+        emails = gmail.sent.search("in:sent #{search_query} -label:#{CONTROL_LABEL}")
         Message.import_emails_from_gmail(emails, account, self, label)
       end
     end
