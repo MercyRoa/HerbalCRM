@@ -56,9 +56,10 @@ class Message < ActiveRecord::Base
       done = 0
       puts "Importing #{emails.count} messages, press Ctrl-C to abort...", '-'*80
       emails.each do |email|
-        puts "Processing message... #{email.subject}, #{email.from}"
+        puts "Processing message... #{email.subject}, #{email.from_addrs.first}"
         m = convert_from_gmail email
         m.account = account
+        puts "done converting..."
 
         # ToDo refactor this ugly piece of code!
         if m.is_mailer_daemon?
