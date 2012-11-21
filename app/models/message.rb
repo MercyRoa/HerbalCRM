@@ -113,18 +113,18 @@ class Message < ActiveRecord::Base
 
     def convert_from_gmail email
       self.new({
-        message_id: email.message_id.to_s.tr('<>', ''),
-        subject:    email.subject,
-        from_raw:   Array(email.from).map { |a| "#{a.name} <#{a.mailbox}@#{a.host}>" }.join(", "),
-        to_raw:     Array(email.to).map   { |a| "#{a.name} <#{a.mailbox}@#{a.host}>" }.join(", "),
-        from:       email.from_addrs.first,
-        to:         email.to_addrs.first,
-        date:       (Time.parse(email.date).strftime('%Y-%m-%dT%H:%M:%S%z') rescue nil),
-        #body:       (email.body.parts.first.body.to_s rescue email.body.to_s).gsub( /^From: .*@.*/m, '').strip.force_encoding('UTF-8'),
-        body:       ((email.multipart?)? email.text_part : email.body).decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip,
-        body_raw:   (email.multipart?)? email.html_part.body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : '',
-        countable:  true
-      })
+           message_id: email.message_id.to_s.tr('<>', ''),
+           subject:    email.subject,
+           from_raw:   Array(email.from).map { |a| "#{a.name} <#{a.mailbox}@#{a.host}>" }.join(", "),
+           to_raw:     Array(email.to).map   { |a| "#{a.name} <#{a.mailbox}@#{a.host}>" }.join(", "),
+           from:       email.from_addrs.first,
+           to:         email.to_addrs.first,
+           date:       (Time.parse(email.date).strftime('%Y-%m-%dT%H:%M:%S%z') rescue nil),
+           #body:       (email.body.parts.first.body.to_s rescue email.body.to_s).gsub( /^From: .*@.*/m, '').strip.force_encoding('UTF-8'),
+           body:       ((email.multipart?)? email.text_part : email.body).decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip,
+           body_raw:   (email.multipart? && !email.html_part.nil?)? email.html_part.body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : '',
+           countable:  true
+       })
     end
   end
 end
