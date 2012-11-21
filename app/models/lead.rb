@@ -37,7 +37,7 @@ class Lead < ActiveRecord::Base
           body_html: next_message.body_html
       ).save
     else
-      self.update_attribute :automated, false
+      self.update_attribute :automatic, false
     end
   end
 
