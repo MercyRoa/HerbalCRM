@@ -25,6 +25,10 @@
     = f.label :description, :class => 'control-label'
     .controls
       = f.text_area :description, :class => 'text_area'
+  .control-group
+    = f.label :status, :class => 'control-label'
+    .controls
+      = f.check_box :status
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), campaigns_path, :class => 'btn'

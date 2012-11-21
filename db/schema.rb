@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109132449) do
+ActiveRecord::Schema.define(:version => 20121121034316) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20121109132449) do
     t.string   "search_query",    :default => "is:unread"
     t.datetime "last_fetch_date"
     t.string   "label"
+    t.boolean  "status",          :default => true,        :null => false
   end
 
   create_table "histories", :force => true do |t|

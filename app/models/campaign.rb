@@ -1,6 +1,8 @@
 class Campaign < ActiveRecord::Base
   validates_presence_of :label
 
+  scope :active, where(status: true)
+
   has_many :mail_sequences, order: 'step'
   has_and_belongs_to_many :accounts
   accepts_nested_attributes_for :accounts
@@ -32,7 +34,7 @@ class Campaign < ActiveRecord::Base
   # metodos estaticos
   class << self
     def fetch_all
-      Campaign.all.each do |c|
+      Campaign.active.each do |c|
         c.fetch_emails
       end
     end

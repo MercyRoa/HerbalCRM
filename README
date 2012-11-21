@@ -27,6 +27,7 @@
  * Mailer daemon doesnt comes always from googlemail...
  * Append Account signature to message
  * View HTML of messages
+ * Show list of accounts for each campaign
 
 -to improve a litle
  * Search / filter / categorize contacts
@@ -35,7 +36,7 @@
 @Bugs
 
 @ToReview
-
+ * What happen if a mail come from a account used in multipled campaigns, and the lead is new??
 
  == Guide of inner usage ==
 

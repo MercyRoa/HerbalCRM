@@ -51,6 +51,8 @@ class Message < ActiveRecord::Base
     # @param [Account] account
     # @param [String] label
     def import_emails_from_gmail(emails, account, campaign, label)
+      Dir[Rails.root.to_s + '/lib/mail_processor/*.rb'].each {|file| require file }
+
       done = 0
       puts "Importing #{emails.count} messages, press Ctrl-C to abort...", '-'*80
       emails.each do |email|
@@ -68,7 +70,14 @@ class Message < ActiveRecord::Base
 
           m.lead.save
         else
+
+          #parse MailProcessors (this is IMPLEMENTATION SUCKS!)
+          MailProcessor.constants.each do |mp|
+            m, email = ('MailProcessor::'+mp.to_s).classify.constantize.identify(m, email)
+          end
+
           lead_name = m.from_account? ? email.to.first.name : email.from.first.name
+
           m.lead = Lead.get_or_create( m.lead_email, account, campaign, lead_name)
           m.lead.increment :step unless m.from_account?
 
