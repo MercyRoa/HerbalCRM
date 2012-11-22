@@ -42,7 +42,7 @@ class ScheduledMessage < ActiveRecord::Base
     puts " * Sending: #{self}"
     begin
       message = self
-      m = self.account.gmail.deliver! do
+      m = self.account.gmail.compose do
         to message.to
         bcc message.bcc unless message.bcc.nil?
         subject message.subject
@@ -57,6 +57,7 @@ class ScheduledMessage < ActiveRecord::Base
           body message.body_html + "<br/><br/>" + message.account.signature
         end
       end
+      m = m.deliver!
 
       self.update_attributes! sent: true, message_id: m.message_id
       puts "\e[32m[OK]\e[0m"
