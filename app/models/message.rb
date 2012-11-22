@@ -77,7 +77,7 @@ class Message < ActiveRecord::Base
           #@ToDo Break on first
           MailProcessor.constants.each do |mp|
             m, email = ('MailProcessor::'+mp.to_s).classify.constantize.identify(m, email)
-          end
+          end unless m.from_account?
 
           lead_name = m.from_account? ? email.to.first.name : email.from.first.name
 
@@ -126,6 +126,10 @@ class Message < ActiveRecord::Base
       }
 
       #body:       (email.body.parts.first.body.to_s rescue email.body.to_s).gsub( /^From: .*@.*/m, '').strip.force_encoding('UTF-8'),
+      puts "Multipart: #{email.multipart?}"
+      puts "Text Part: #{email.text_part}"
+      puts "Html Part: #{email.html_part}"
+      puts "Body: #{email.body}"
       body = (email.multipart?)? email.text_part : email.body
 
       # this sux...
@@ -133,6 +137,8 @@ class Message < ActiveRecord::Base
           (body.respond_to? :decoded) ? body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : email.body
       message[:body_raw] =
           (email.multipart? && !email.html_part.blank?)? email.html_part.body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : ''
+
+      puts message.to_yaml
 
       self.new message
     end
