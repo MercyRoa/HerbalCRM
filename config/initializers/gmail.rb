@@ -1,4 +1,6 @@
 # Fix encoding problem
+Net::IMAP.debug = true
+
 Net::IMAP::Address.class_eval do
   def name
     return Mail::Encodings.value_decode( self[:name] ) unless self[:name].nil?
