@@ -44,6 +44,7 @@ class ScheduledMessage < ActiveRecord::Base
       message = self
       m = self.account.gmail.deliver! do
         to message.to
+        bcc message.bcc unless message.bcc.nil?
         subject message.subject
         text_part do
           content_type "text/plain; charset=utf-8"
@@ -60,6 +61,7 @@ class ScheduledMessage < ActiveRecord::Base
     rescue Exception => e
       puts "\e[31m[!]\e[0m Error sending email"
       puts e.message
+      puts e.backtrace
     end
   end
 
