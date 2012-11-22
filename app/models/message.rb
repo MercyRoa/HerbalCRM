@@ -8,6 +8,7 @@ class Message < ActiveRecord::Base
 
   validates_uniqueness_of :message_id
   before_save lambda { self.from_account = true if self.from_account? }
+  before_save lambda { self.from.downcase! }
   after_save :update_lead_counters
   after_destroy :update_lead_counters
 

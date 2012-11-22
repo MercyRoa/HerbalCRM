@@ -77,7 +77,7 @@ class Lead < ActiveRecord::Base
       params = {}
 
       if name
-        name = name.humanize.split(' ', 2)
+        name = name.titleize.split(' ', 2)
         params[:first_name] = name.first
         params[:last_name] = name.last if (name.size == 2)
       end

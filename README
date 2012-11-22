@@ -8,6 +8,7 @@ Importante
  * Agregar boton de borrar texto del mail.. confirmar!?
  * Firma de correo
  * Importar los de YNMSP.com
+ * Problem with lead with multiple emails (Juan Guerrero)?
 
 @ToDo (Please mantain this in order of importance)
  * Quick link to create text model
@@ -69,6 +70,8 @@ Importante
 
 @ToReview
  * What happen if a mail come from a account used in multipled campaigns, and the lead is new??
+ * gente insistente que envia varios correos pero en realidad siguen en el mismo paso,
+ al contar el paso es necesario sopesarlo con el número de emails enviados...
 
  == Guide of inner usage ==
 
