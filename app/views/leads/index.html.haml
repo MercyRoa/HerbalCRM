@@ -14,8 +14,10 @@
       %i.icon-chevron-right
       %span.account= lead.account
       %span.right= status_label lead
+      = unless lead.user.nil?
+        %b Assigned to:
+        %span.label.label-info= lead.user.name
       .clear
-      // %i= lead.email unless lead.first_name.nil?
 
       = time_ago lead.last_contacted
       .received #{t 'Messages Received'}: #{lead.messages_received_count}

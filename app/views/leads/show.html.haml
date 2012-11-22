@@ -105,7 +105,8 @@
       - else
         %span.label.label-info Scheduled
         To send in:
-      = distance_of_time_in_words Time.new, message.scheduled
+      = distance_of_time_in_words(Time.now, message.scheduled)
+      = " ago" if (Time.now > message.scheduled)
       - unless message.sent?
         = link_to "Edit", edit_scheduled_message_path(message)
         = link_to t('.destroy', :default => t("Delete")), scheduled_message_path(message), :method => :delete,

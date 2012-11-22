@@ -28,6 +28,7 @@ class Lead < ActiveRecord::Base
 
   #### Before Save
   def send_mail_if_assigned
+    return true
     if assigned_to_changed?
       lead = self
       url = Rails.application.routes.url_helpers.lead_url(self,
