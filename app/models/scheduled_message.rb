@@ -48,10 +48,10 @@ class ScheduledMessage < ActiveRecord::Base
         subject message.subject
 
         #maybe this is throwing an error?
-        text_part do
-          content_type "text/plain; charset=utf-8"
-          body message.body
-        end
+        #text_part do
+        #  content_type "text/plain; charset=utf-8"
+        #  body message.body
+        #end
         html_part do
           content_type 'text/html; charset=UTF-8'
           body message.body_html + "<br/><br/>" + message.account.signature
