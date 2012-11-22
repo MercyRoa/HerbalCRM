@@ -46,7 +46,7 @@ class ScheduledMessage < ActiveRecord::Base
         to message.to
         bcc message.bcc unless message.bcc.nil?
         subject message.subject
-        body message.body_html + "<br/><br/>" + account.signature
+        body message.body_html + "<br/><br/>" + message.account.signature
 =begin
         #maybe this is throwing an error?
         text_part do
