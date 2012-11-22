@@ -7,6 +7,7 @@ module MailProcessor
         puts '-- ContactMe ---'
         email.from.first.name = message.body.match(/Nombre: (.*)/)[1]
         message.from = message.body.match(/Email: (.*)/)[1]
+        message.subject = "Hola #{email.from.first.name}"
       end
       return message, email
     end

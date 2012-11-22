@@ -46,6 +46,7 @@ class ScheduledMessage < ActiveRecord::Base
         to message.to
         subject message.subject
         text_part do
+          content_type "text/plain; charset=utf-8"
           body message.body
         end
         html_part do
