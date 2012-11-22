@@ -35,14 +35,6 @@
     = f.label :scheduled, :class => 'control-label'
     .controls
       = f.datetime_select :scheduled, :class => 'datetime_select'
-  .control-group
-    = f.label :sent, :class => 'control-label'
-    .controls
-      = f.check_box :sent, :class => 'check_box'
-  .control-group
-    = f.label :message_id, :class => 'control-label'
-    .controls
-      = f.text_field :message_id, :class => 'text_field'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("Cancel")), scheduled_messages_path, :class => 'btn'
