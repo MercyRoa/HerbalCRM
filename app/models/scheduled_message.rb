@@ -46,6 +46,9 @@ class ScheduledMessage < ActiveRecord::Base
         to message.to
         bcc message.bcc unless message.bcc.nil?
         subject message.subject
+        body message.body_html
+=begin
+        #maybe this is throwing an error?
         text_part do
           content_type "text/plain; charset=utf-8"
           body message.body
@@ -54,6 +57,8 @@ class ScheduledMessage < ActiveRecord::Base
           content_type 'text/html; charset=UTF-8'
           body message.body_html
         end
+
+=end
       end
 
       self.update_attributes! sent: true, message_id: m.message_id

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122141111) do
+ActiveRecord::Schema.define(:version => 20121122150700) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20121122141111) do
     t.text     "resume"
     t.integer  "bounce",                  :default => 0
     t.string   "stage"
+    t.integer  "assigned_to"
   end
 
   create_table "mail_sequences", :force => true do |t|
@@ -157,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20121122141111) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

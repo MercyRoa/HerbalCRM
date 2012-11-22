@@ -6,6 +6,9 @@ class Lead < ActiveRecord::Base
   has_many :lead_details, :dependent => :destroy
   belongs_to :account
   belongs_to :campaign
+  belongs_to :user, :foreign_key => "assigned_to"
+
+  before_save :send_mail_if_assigned
 
   accepts_nested_attributes_for :lead_details
 
@@ -21,6 +24,20 @@ class Lead < ActiveRecord::Base
   # this creates the friendly url
   def to_param
     "#{id}-#{(email.sub('@','-at-')).parameterize}"
+  end
+
+  #### Before Save
+  def send_mail_if_assigned
+    if assigned_to_changed?
+      lead = self
+      url = Rails.application.routes.url_helpers.lead_url(self,
+              host: HerbalCRM::Application.config.action_mailer.default_url_options[:host])
+      self.account.gmail.deliver! do
+        to lead.user.email
+        subject "HerbalCRM lead #{lead} has been assigned to you"
+        body "Please go to #{url}"
+      end
+    end
   end
 
   def process_automate

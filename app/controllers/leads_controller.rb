@@ -75,6 +75,7 @@ class LeadsController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @lead.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 

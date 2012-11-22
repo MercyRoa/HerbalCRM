@@ -60,6 +60,11 @@
   = link_to t('Edit'), edit_lead_path(@lead), :class => 'btn'
   = link_to t('Delete'), lead_path(@lead), :method => "delete", :confirm => 'Are you sure?',
   :class => 'btn btn-danger'
+  %div{style: 'float: right;'}
+    = form_for(@lead, remote: true) do |f|
+      %b Assign to:
+      = f.collection_select(:assigned_to, User.all, :id, :name, { :prompt => 'Please assign to a user'})
+      %button{ type: "submit", class: "btn"} Assign
 
 #reply
 
@@ -73,7 +78,8 @@
     %b Bcc:
     = f.text_field :bcc
 
-    %div= f.text_field :subject, value: "Re: #{@lead.messages.first.subject}", class: 'span8'
+    %div= f.text_field :subject, value: ("Re: #{@lead.messages.first.subject}" unless @lead.messages.empty?),
+    class: 'span8'
     = f.text_area :body, size: '150x3', placeholder: 'Reply here', class: 'span8 editable-long-text'
     = f.submit 'Send', class: 'btn btn-success', style: 'display: block'
 

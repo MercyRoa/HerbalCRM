@@ -74,6 +74,7 @@ class Message < ActiveRecord::Base
         else
 
           #parse MailProcessors (this is IMPLEMENTATION SUCKS!)
+          #@ToDo Break on first
           MailProcessor.constants.each do |mp|
             m, email = ('MailProcessor::'+mp.to_s).classify.constantize.identify(m, email)
           end
