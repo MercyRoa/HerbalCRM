@@ -42,29 +42,28 @@ class ScheduledMessage < ActiveRecord::Base
     puts " * Sending: #{self}"
     begin
       message = self
-      m = self.account.gmail.compose do
+      m = self.account.gmail.delivery! do
         to message.to
-        bcc message.bcc unless message.bcc.nil?
+        bcc message.bcc unless message.bcc.blank?
         subject message.subject
 
         #maybe this is throwing an error?
-        #text_part do
-        #  content_type "text/plain; charset=utf-8"
-        #  body message.body
-        #end
+        text_part do
+          content_type "text/plain; charset=utf-8"
+          body message.body
+        end
         html_part do
           content_type 'text/html; charset=UTF-8'
           body message.body_html + "<br/><br/>" + message.account.signature
         end
       end
-      m = m.deliver!
 
       self.update_attributes! sent: true, message_id: m.message_id
       puts "\e[32m[OK]\e[0m"
     rescue Exception => e
       puts "\e[31m[!]\e[0m Error sending email"
       puts e.message
-      puts e.backtrace
+      #puts e.backtrace
     end
   end
 

@@ -94,13 +94,13 @@ class Lead < ActiveRecord::Base
       params = {}
 
       if name
-        name = name.titleize.split(' ', 2)
+        name = name.strip.titleize.split(' ', 2)
         params[:first_name] = name.first
         params[:last_name] = name.last if (name.size == 2)
       end
 
       if lead.nil?
-        lead = self.make_from(params.merge({email: email}), account, campaign)
+        lead = self.make_from(params.merge({email: email.strip}), account, campaign)
       else
         lead.update_attributes(params) if lead.first_name.nil? && !name.nil?
       end
