@@ -8,7 +8,7 @@ class Lead < ActiveRecord::Base
   belongs_to :campaign
   belongs_to :user, :foreign_key => "assigned_to"
 
-  before_save :send_mail_if_assigned
+  after_save :send_mail_if_assigned
 
   accepts_nested_attributes_for :lead_details
 
@@ -26,7 +26,7 @@ class Lead < ActiveRecord::Base
     "#{id}-#{(email.sub('@','-at-')).parameterize}"
   end
 
-  #### Before Save
+  #### After Save
   def send_mail_if_assigned
     if assigned_to_changed?
       lead = self
