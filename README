@@ -15,14 +15,12 @@ Importante
  * After send email go to next lead
  * Ajax edition of lead details
  * Lead tags
- * When creating leads Humanize Names ROSA QUIJONES -> Rosa Quijones
  * Add basic data to lead (phone, country, tags, etc)
  * Category select box on create text model
  * Default search for lead: Attention Needed
  * WHEN REPLY SCHEDULED TIME IS SET TO 5 MINUTES, SHOULD BE NOW! (Really? how to fix errors?)
  * Set default text on email.. to reply.. step 1?
  * Show also buttons for most used quick responses
- * ContactME save only the inner part of the message (important)
  * Collapse messages sent by us.
  * Add signature to ougoing messages
  * show preview of text model in a div... before insert

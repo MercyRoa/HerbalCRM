@@ -74,11 +74,18 @@ class Lead < ActiveRecord::Base
       end
       logger.info " Buscando Lead #{name} #{email}"
       lead = self.find_by_email email
+      params = {}
+
+      if name
+        name = name.humanize.split(' ', 2)
+        params[:first_name] = name.first
+        params[:last_name] = name.last if (name.size == 2)
+      end
 
       if lead.nil?
-        lead = self.make_from({first_name: name, email: email}, account, campaign)
+        lead = self.make_from(params.merge({email: email}), account, campaign)
       else
-        lead.update_attribute(:first_name, name) if lead.first_name.nil? && !name.nil?
+        lead.update_attributes(params) if lead.first_name.nil? && !name.nil?
       end
 
       lead
