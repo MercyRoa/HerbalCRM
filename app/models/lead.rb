@@ -89,8 +89,9 @@ class Lead < ActiveRecord::Base
       if name.is_a? Hash
         # ToDo: more info suplied... fix array
       end
+
       logger.info " Buscando Lead #{name} #{email}"
-      lead = self.find_by_email email
+      lead = self.find_by_email email.downcase!
       params = {}
 
       if name
