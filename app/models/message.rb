@@ -130,15 +130,13 @@ class Message < ActiveRecord::Base
       puts "Text Part: #{email.text_part}"
       puts "Html Part: #{email.html_part}"
       puts "Body: #{email.body}"
-      body = (email.multipart?)? email.text_part : email.body
+      e_body = (email.multipart? && !email.tex && !email.html_part.blank?t_part.blank?)? email.text_part : email.body
 
       # this sux...
       message[:body] =
-          (body.respond_to? :decoded) ? body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : email.body
+          (e_body.respond_to? :decoded) ? e_body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : email.body
       message[:body_raw] =
           (email.multipart? && !email.html_part.blank?)? email.html_part.body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : ''
-
-      puts message.to_yaml
 
       self.new message
     end
