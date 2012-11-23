@@ -24,6 +24,7 @@ Importante
  * Show also buttons for most used quick responses
  * Collapse messages sent by us.
  * Add signature to ougoing messages
+ * Send Message to a user regarding some lead (Add note with CC, send email)
  * show preview of text model in a div... before insert
  * lowercase emails before save
  * Assign lead to...

@@ -14,8 +14,8 @@
       %i.icon-chevron-right
       %span.account= lead.account
       %span.right= status_label lead
-      = unless lead.user.nil?
-        %b Assigned to:
+      - unless lead.user.nil?
+        %strong Assigned to:
         %span.label.label-info= lead.user.name
       .clear
 
