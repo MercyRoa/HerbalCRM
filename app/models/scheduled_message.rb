@@ -42,7 +42,7 @@ class ScheduledMessage < ActiveRecord::Base
     puts " * Sending: #{self}"
     begin
       message = self
-      m = self.account.gmail.delivery! do
+      m = self.account.gmail.deliver! do
         to message.to
         bcc message.bcc unless message.bcc.blank?
         subject message.subject
