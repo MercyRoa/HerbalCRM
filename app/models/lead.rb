@@ -91,7 +91,8 @@ class Lead < ActiveRecord::Base
       end
 
       logger.info " Buscando Lead #{name} <#{email}>"
-      lead = self.find_by_email email.strip!.downcase!
+      email = email.strip.downcase
+      lead = self.find_by_email email
 
       params = {}
       if name
