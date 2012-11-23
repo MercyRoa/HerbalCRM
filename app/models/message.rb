@@ -84,7 +84,7 @@ class Message < ActiveRecord::Base
           m.lead = Lead.get_or_create( m.lead_email, account, campaign, lead_name)
           m.lead.increment :step unless m.from_account?
 
-          ScheduledMessage.delete_all message_id: m.message_id
+          ScheduledMessage.delete_all message_id: m.message_id if m.from_account?
 
           if m.is_more_recent? && m.lead.status != 'bounced'
             m.lead.last_contacted = m.date
@@ -99,7 +99,7 @@ class Message < ActiveRecord::Base
           email.label! label
           email.label! Campaign::CONTROL_LABEL
           done += 1
-          puts "\e[32m#{done.to_s.ljust(4)}\e[0m"
+          puts "\e[32m#{done.to_s.ljust(4)}\e[0m OK #{m.id}"
         rescue Exception => e
           # Display failure message
           puts "\e[31m[!!]\e[0m  #{m.subject} <#{email.from_addrs.join(', ')}> <#{email.to_addrs.join(', ')}>"
