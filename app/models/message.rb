@@ -130,7 +130,7 @@ class Message < ActiveRecord::Base
       puts "Text Part: #{email.text_part}"
       puts "Html Part: #{email.html_part}"
       puts "Body: #{email.body}"
-      e_body = (email.multipart? && !email.tex && !email.html_part.blank?t_part.blank?)? email.text_part : email.body
+      e_body = (email.multipart? && !email.text_part.blank?)? email.text_part : email.body
 
       # this sux...
       message[:body] =
