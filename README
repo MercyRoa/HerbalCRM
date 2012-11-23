@@ -9,6 +9,7 @@ Importante
  * Problem with lead with multiple emails (Juan Guerrero)?
 
 @ToDo (Please mantain this in order of importance)
+ * Search contact in google, linkedin, facebook... etc
  * Quick link to create text model
  * FIX INSERT BUTTON
  * After send email go to next lead
@@ -58,7 +59,7 @@ Importante
  * Add quote option per country... right sidebar .. select countries > products > price
  * Count time writing emails
  * show hours worked by user
- * Store full body native mail (all parts .body) in raw, and html appart... 
+ * Store full body native mail (all parts .body) in raw, and html appart...
 
 -to improve a litle
  * Search / filter / categorize contacts
