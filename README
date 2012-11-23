@@ -49,6 +49,7 @@ Importante
  * add a lead (manually)
 
 -Less important
+ * this lead is currently viewed/locked by...
  * Clean emails whose bounced without replies
  * Mailer daemon doesnt comes always from googlemail...
  * Append Account signature to message
@@ -57,13 +58,13 @@ Importante
  * Add quote option per country... right sidebar .. select countries > products > price
  * Count time writing emails
  * show hours worked by user
+ * Store full body native mail (all parts .body) in raw, and html appart... 
 
 -to improve a litle
  * Search / filter / categorize contacts
 
-
 @Bugs
- * BCC (and maybe cc) arent working
+ * Assets precompile error
 
 
 @ToReview
