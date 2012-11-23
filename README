@@ -28,7 +28,7 @@ Importante
  * Save first name as first name and rest  as last name
  * Add notes to contacts
  * Add tasks
- * Add signature at the end of messages
+ * Save the user who send the email
  * save to draft
  * Replace NAME and other vars for scheduled messages
  * Add support for html messages

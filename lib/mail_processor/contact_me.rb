@@ -8,7 +8,7 @@ module MailProcessor
         email.from.first.name = message.body.match(/Nombre: (.*)/)[1].strip
         message.from = message.body.match(/Email: (.*)/)[1].strip
         message.subject = "Hola #{email.from.first.name}"
-        message.body = message.body.match(/(-{10,})(.*?)\1/m)[2].strip
+        message.body = message.body.match(/(-{10,})(.*?)\1/m)[2].squish + " --CM"
       end
       return message, email
     end
