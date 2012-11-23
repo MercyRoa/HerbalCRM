@@ -90,10 +90,10 @@ class Lead < ActiveRecord::Base
         # ToDo: more info suplied... fix array
       end
 
-      logger.info " Buscando Lead #{name} #{email}"
-      lead = self.find_by_email email.downcase!
-      params = {}
+      logger.info " Buscando Lead #{name} <#{email}>"
+      lead = self.find_by_email email.strip!.downcase!
 
+      params = {}
       if name
         name = name.strip.titleize.split(' ', 2)
         params[:first_name] = name.first
@@ -101,9 +101,11 @@ class Lead < ActiveRecord::Base
       end
 
       if lead.nil?
+        puts " --> Creando Lead"
         lead = self.make_from(params.merge({email: email.strip}), account, campaign)
       else
         lead.update_attributes(params) if lead.first_name.nil? && !name.nil?
+        puts " --> Lead Existente"
       end
 
       lead

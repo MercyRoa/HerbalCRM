@@ -10,6 +10,7 @@ Importante
 
 @ToDo (Please mantain this in order of importance)
  * Search contact in google, linkedin, facebook... etc
+ * If it is developement dont apply labels and dont mark as read
  * Quick link to create text model
  * FIX INSERT BUTTON
  * After send email go to next lead
@@ -66,7 +67,7 @@ Importante
 
 @Bugs
  * Assets precompile error
-
+ * Not all messages are beign retrieved : olguitajohnson@hotmail.com
 
 @ToReview
  * What happen if a mail come from a account used in multipled campaigns, and the lead is new??

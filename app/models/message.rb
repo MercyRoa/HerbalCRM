@@ -57,10 +57,10 @@ class Message < ActiveRecord::Base
       done = 0
       puts "Importing #{emails.count} messages, press Ctrl-C to abort...", '-'*80
       emails.each do |email|
-        puts "Processing message... #{email.subject}, #{email.from_addrs.first}"
+        puts '-'*20
+        puts "Processing message... #{m.subject} <#{email.from_addrs.join(', ')}> <#{email.to_addrs.join(', ')}>"
         m = convert_from_gmail email
         m.account = account
-        puts "done converting..."
 
         # ToDo refactor this ugly piece of code!
         if m.is_mailer_daemon?
@@ -99,7 +99,7 @@ class Message < ActiveRecord::Base
           email.label! label
           email.label! Campaign::CONTROL_LABEL
           done += 1
-          puts "\e[32m#{done.to_s.ljust(4)}\e[0m #{m.subject} <#{email.from_addrs.join(', ')}> <#{email.to_addrs.join(', ')}>"
+          puts "\e[32m#{done.to_s.ljust(4)}\e[0m"
         rescue Exception => e
           # Display failure message
           puts "\e[31m[!!]\e[0m  #{m.subject} <#{email.from_addrs.join(', ')}> <#{email.to_addrs.join(', ')}>"
