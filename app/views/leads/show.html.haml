@@ -120,7 +120,8 @@
       %h3= message.subject
       %em= time_ago message.date
       .from #{t 'From'}: #{message.from}
-      %pre= message.to_s.html_safe
+      %pre= message.to_s.html_safe unless message.body.blank?
+      = message.body_raw.html_safe if message.body.blank?
     %hr
 
 
