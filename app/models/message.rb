@@ -113,6 +113,8 @@ class Message < ActiveRecord::Base
       end
     end
 
+    ENCODE_CONFIG = { external_encoding: [::Encoding::UTF_8, ::Encoding::ISO_8859_1],
+                      invalid_characters: :transcode }
     def convert_from_gmail email
       message = {
           message_id: email.message_id.to_s.tr('<>', ''),
@@ -125,18 +127,16 @@ class Message < ActiveRecord::Base
           countable:  true
       }
 
-      #body:       (email.body.parts.first.body.to_s rescue email.body.to_s).gsub( /^From: .*@.*/m, '').strip.force_encoding('UTF-8'),
-      puts "Multipart: #{email.multipart?}"
-      puts "Text Part: #{email.text_part}"
-      puts "Html Part: #{email.html_part}"
-      puts "Body: #{email.body}"
-      e_body = (email.multipart? && !email.text_part.blank?)? email.text_part : email.body
+      # Its hard to get the right encoding,
+      # body:(email.body.parts.first.body.to_s rescue email.body.to_s).gsub( /^From: .*@.*/m,'').strip.force_encoding('UTF-8'),
+      # (e_body.respond_to? :decoded) ? e_body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : email.body.decoded
+      # (email.multipart? && !email.html_part.blank?)? email.html_part.body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : ''
+      #                                                                     encode('UTF-8','ISO-8859-1')
+      text_part = email.multipart? ? (email.text_part ? email.text_part.body.decoded : nil) : email.body.decoded
+      html_part = email.html_part ? email.html_part.body.decoded : nil
 
-      # this sux...
-      message[:body] =
-          (e_body.respond_to? :decoded) ? e_body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : email.body
-      message[:body_raw] =
-          (email.multipart? && !email.html_part.blank?)? email.html_part.body.decoded.force_encoding("ISO-8859-1").encode("UTF-8").strip : ''
+      message[:body]     = text_part.ensure_encoding('UTF-8', ENCODE_CONFIG).strip if text_part
+      message[:body_raw] = html_part.ensure_encoding('UTF-8', ENCODE_CONFIG).strip if html_part
 
       self.new message
     end

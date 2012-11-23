@@ -18,6 +18,8 @@ gem 'aloha-rails', :github => 'neohunter/aloha-rails', :submodules => true
 
 gem 'devise'
 
+gem 'ensure-encoding'
+
 # Move this to development only
 # gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 
