@@ -25,7 +25,7 @@
 
 
       - message = lead.messages.last
-      - unless message.blank?
+      - unless message.blank? || message.body.blank?
         .message[message]
           .subject= message.subject
           = truncate(message.to_s, :length => 200)
