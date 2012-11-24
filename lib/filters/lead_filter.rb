@@ -46,7 +46,7 @@ module Filters
     def default_filter_conditions(key)
       return [:status, :is, "attention_needed"] if (key == "attention_needed")
       return [ [:automatic, :is, "attention_needed"], [:bounce, :is, 0] ] if (key == "not_automatic")
-      return [ [:statis, :is, false],[:step, :is_greater_than, 1] ] if (key == "urgently")
+      return [ [:automatic, :is, "attention_needed"],[:step, :is_greater_than, 1] ] if (key == "urgently")
       if (key == "last_7_days")
         return [[:created, :is_in_the_range, [7.days.ago, Time.now()] ] ]
       end
