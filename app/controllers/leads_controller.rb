@@ -3,6 +3,11 @@ class LeadsController < ApplicationController
   # GET /leads.json
   def index
     #@leads = Lead.all
+
+    if params.empty? then
+      params[:wf_order] = :created_at 
+      params[:wf_per_page] = '100'
+    end
     @leads= Lead.filter(:params => params, :filter => Filters::LeadFilter)
     @campaigns = Campaign.all
 

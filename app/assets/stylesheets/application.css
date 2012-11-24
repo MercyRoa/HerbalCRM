@@ -14,3 +14,13 @@ pre{
 	font-size: 14px;
 	line-height: 1.6em;
 }
+
+.wf_form select{
+	width: auto;
+	border-radius: 0px;
+	height: auto;
+}
+
+.from_account pre{
+	background-color: #FFEDE6;
+}
