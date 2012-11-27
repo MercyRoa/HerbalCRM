@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127011030) do
+ActiveRecord::Schema.define(:version => 20121127023214) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20121127011030) do
     t.string   "from_raw"
     t.string   "to_raw"
     t.boolean  "countable"
+    t.integer  "user_id"
   end
 
   create_table "notes", :force => true do |t|

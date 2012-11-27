@@ -1,0 +1,31 @@
+- model_class = Note
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:lead_id)
+      %th= model_class.human_attribute_name(:created_by)
+      %th= model_class.human_attribute_name(:assigned_to)
+      %th= model_class.human_attribute_name(:due_date)
+      %th= model_class.human_attribute_name(:done)
+      %th= model_class.human_attribute_name(:text)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @notes.each do |note|
+      %tr
+        %td= link_to note.id, note_path(note)
+        %td= note.lead_id
+        %td= note.created_by
+        %td= note.assigned_to
+        %td= note.due_date
+        %td= note.done
+        %td= note.text
+        %td=l note.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_note_path(note), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), note_path(note), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_note_path, :class => 'btn btn-primary'

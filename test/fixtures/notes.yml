@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lead_id: 1
+  created_by: 1
+  text: MyText
+  due_date: 2012-11-26 20:03:23
+  assigned_to: 1
+
+two:
+  lead_id: 1
+  created_by: 1
+  text: MyText
+  due_date: 2012-11-26 20:03:23
+  assigned_to: 1

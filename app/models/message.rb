@@ -84,7 +84,11 @@ class Message < ActiveRecord::Base
           m.lead = Lead.get_or_create( m.lead_email, account, campaign, lead_name)
           m.lead.increment :step unless m.from_account?
 
-          ScheduledMessage.delete_all message_id: m.message_id if m.from_account?
+          if m.from_account?
+            sm = ScheduledMessage.where(message_id: m.message_id).select(:user_id).first
+            m.user_id = sm.user_id unless sm.blank?
+            ScheduledMessage.delete_all message_id: m.message_id
+          end
 
           if m.is_more_recent? && m.lead.status != 'bounced'
             m.lead.last_contacted = m.date

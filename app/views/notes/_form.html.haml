@@ -1,0 +1,28 @@
+= form_for @note, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :lead_id, :class => 'control-label'
+    .controls
+      = f.number_field :lead_id, :class => 'number_field'
+  .control-group
+    = f.label :created_by, :class => 'control-label'
+    .controls
+      = f.number_field :created_by, :class => 'number_field'
+  .control-group
+    = f.label :assigned_to, :class => 'control-label'
+    .controls
+      = f.number_field :assigned_to, :class => 'number_field'
+  .control-group
+    = f.label :due_date, :class => 'control-label'
+    .controls
+      = f.datetime_select :due_date, :class => 'datetime_select'
+  .control-group
+    = f.label :done, :class => 'control-label'
+    .controls
+      = f.check_box :done, :class => 'check_box'
+  .control-group
+    = f.label :text, :class => 'control-label'
+    .controls
+      = f.text_area :text, :class => 'text_area'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), notes_path, :class => 'btn'
