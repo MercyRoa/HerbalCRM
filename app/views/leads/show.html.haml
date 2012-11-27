@@ -131,17 +131,17 @@
     %hr
 
 #history
+  = @history.count
   - @history.each do |item|
     - if item.kind_of? Note
       %div[item]{ :class => "alert alert-block" }
         %i{:style => "float: right; display: block"}= "-- by #{item.creator.name}"
         = item.text
-        %br
 
     - if item.kind_of? Message
       - @lead.messages.each do |message|
         %div[message]{ :class => ('from_account' if message.from_account?) }
-          %h3= message.subject
+          %h3= "##{message.id}: #{message.subject}"
           %em= time_ago message.date
           .from #{t 'From'}: #{message.from}
           - unless message.user.blank?
