@@ -62,17 +62,20 @@
   :class => 'btn btn-danger'
   %div{style: 'float: right;'}
     = form_for(@lead, remote: true) do |f|
+      = f.hidden_field :draft
       %b Assign to:
       = f.collection_select(:assigned_to, User.all, :id, :name, { :prompt => 'Please assign to a user'})
       %button{ type: "submit", class: "btn"} Assign
 
 #reply
 
+  %h2 Send Email
   = form_for @new_message do |f|
     = f.hidden_field :lead_id, value: @lead.id
     = f.hidden_field :account_id, value: @lead.account_id
     = f.hidden_field :to, value: @lead.email
     = f.hidden_field :account_id, value: @lead.account_id
+    = f.hidden_field :user_id, value: current_user.id
     %b Schedule:
     = f.text_field :scheduled, value: Time.now
     %b Bcc:
@@ -80,8 +83,11 @@
 
     %div= f.text_field :subject, value: ("Re: #{@lead.messages.first.subject}" unless @lead.messages.empty?),
     class: 'span8'
-    = f.text_area :body, size: '150x3', placeholder: 'Reply here', class: 'span8 editable-long-text'
-    = f.submit 'Send', class: 'btn btn-success', style: 'display: block'
+    = f.text_area :body, value: @lead.draft ,size: '150x3', placeholder: 'Reply here',
+        class: 'span8 editable-long-text'
+    %div
+      = f.submit 'Send', class: 'btn btn-success'
+      = button_tag 'Save Draft', class: 'btn', id: 'savedraft'
 
   .navbar
     .navbar-inner
@@ -95,6 +101,14 @@
         // = select_tag :select_text_model, options_from_collection_for_select(@text_models, :id, :title)
 
         %button{ id: :insert_text_model, type: "submit", class: "btn"} Insert
+
+  %h2 New Note
+  = form_for @new_note do |f|
+    %b Due Date:
+    = f.hidden_field :lead_id, value: @lead.id
+    = f.text_field :due_date
+    = f.text_area :text, size: '150x3', class: 'span8 editable-short-text'
+    = f.submit 'Save', class: 'btn'
 
 #scheduled_messages
   - @lead.scheduled_messages.each do |message|
@@ -114,14 +128,22 @@
       %pre= message.body
     %hr
 
-#messages
-  - @lead.messages.each do |message| # next if message.id.nil?
-    %div[message]{ :class => ('from_account' if message.from_account?) }
-      %h3= message.subject
-      %em= time_ago message.date
-      .from #{t 'From'}: #{message.from}
-      %pre= message.to_s.html_safe unless message.body.blank?
-      = message.body_raw.html_safe if message.body.blank?
+#history
+  - @history.each do |item|
+    - if item.kind_of? Note
+      %div[item]{ :class => "alert alert-block" }
+        %i{:style => "float: right; display: block"}= "-- by #{item.creator.name}"
+        = item.text
+        %br
+
+    - if item.kind_of? Message
+      - @lead.messages.each do |message|
+        %div[message]{ :class => ('from_account' if message.from_account?) }
+          %h3= message.subject
+          %em= time_ago message.date
+          .from #{t 'From'}: #{message.from}
+          %pre= message.to_s.html_safe unless message.body.blank?
+          = message.body_raw.html_safe if message.body.blank?
     %hr
 
 

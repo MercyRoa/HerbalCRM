@@ -26,6 +26,9 @@ class LeadsController < ApplicationController
     # Yaraher suggested to use build, but copy @lead.messages before
     #@new_message = @lead.scheduled_messages.build #ScheduledMessage.new(lead_id: @lead.id,
     @new_message = ScheduledMessage.new(lead_id: @lead.id, account_id: @lead.account_id)
+    @new_note = Note.new(lead_id: @lead.id)
+
+    @history = (@lead.messages + @lead.notes).sort_by {|m| m.created_at}
 
     @text_models = TextModel.all
 

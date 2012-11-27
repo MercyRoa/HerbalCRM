@@ -1,4 +1,6 @@
 HerbalCRM::Application.routes.draw do
+  resources :notes
+
   devise_for :users
 
   mount WillFilter::Engine => "/will_filter"

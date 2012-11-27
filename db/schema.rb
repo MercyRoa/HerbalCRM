@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122150700) do
+ActiveRecord::Schema.define(:version => 20121127011030) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20121122150700) do
     t.integer  "bounce",                  :default => 0
     t.string   "stage"
     t.integer  "assigned_to"
+    t.text     "draft"
   end
 
   create_table "mail_sequences", :force => true do |t|
@@ -120,6 +121,17 @@ ActiveRecord::Schema.define(:version => 20121122150700) do
     t.boolean  "countable"
   end
 
+  create_table "notes", :force => true do |t|
+    t.integer  "lead_id"
+    t.integer  "created_by"
+    t.integer  "assigned_to"
+    t.datetime "due_date"
+    t.boolean  "done",        :default => false
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "scheduled_messages", :force => true do |t|
     t.integer  "account_id"
     t.integer  "lead_id"
@@ -134,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20121122150700) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "message_id"
+    t.integer  "user_id"
   end
 
   create_table "text_models", :force => true do |t|

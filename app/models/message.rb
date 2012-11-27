@@ -12,7 +12,7 @@ class Message < ActiveRecord::Base
   after_save :update_lead_counters
   after_destroy :update_lead_counters
 
-  MAILER_DAEMONS = ['mailer-daemon@googlemail.com', 'postmaster@hotmail.com']
+  MAILER_DAEMONS = ['mailer-daemon@googlemail.com', 'postmaster@hotmail.com', 'postmaster@mail.hotmail.com']
 
   def to_s
     body.gsub( /^(From:.*@|>) .*/m, '').strip

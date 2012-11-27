@@ -1,14 +1,14 @@
 
 Importante
  * Al enviar emails --> ir al siguiente lead | 20m
- * Buscador de leads mas practico... primero attention needed | 30m
- * El asunto | 15m
  * Mostrar email por defecto al redactar. | 1h
  * Agregar boton de borrar texto del mail.. confirmar!? | 10m
  * Importar los de YNMSP.com | 1h
  * Problem with lead with multiple emails (Juan Guerrero)?
+ * Convert in customers
 
-@ToDo (Please mantain this in order of importance)
+@ToDo
+ * Know WHO user send an email from system.
  * Search contact in google, linkedin, facebook... etc
  * If it is developement dont apply labels and dont mark as read
  * Quick link to create text model
@@ -19,16 +19,10 @@ Importante
  * Add basic data to lead (phone, country, tags, etc)
  * Category select box on create text model
  * Default search for lead: Attention Needed
- * WHEN REPLY SCHEDULED TIME IS SET TO 5 MINUTES, SHOULD BE NOW! (Really? how to fix errors?)
  * Set default text on email.. to reply.. step 1?
  * Show also buttons for most used quick responses
  * Collapse messages sent by us.
- * Add signature to ougoing messages
- * Send Message to a user regarding some lead (Add note with CC, send email)
  * show preview of text model in a div... before insert
- * lowercase emails before save
- * Assign lead to...
- * Save first name as first name and rest  as last name
  * Add notes to contacts
  * Add tasks
  * Save the user who send the email
@@ -50,6 +44,8 @@ Importante
  * Search contact from top bar
  * Make editable the propoerties of a lead with ajax
  * add a lead (manually)
+ * Re send email
+ * Ajax option to reply, a box with all lead information, no need to reaload, very quickly
 
 -Less important
  * this lead is currently viewed/locked by...
