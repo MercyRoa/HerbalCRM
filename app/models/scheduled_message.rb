@@ -1,6 +1,7 @@
 class ScheduledMessage < ActiveRecord::Base
   belongs_to :account
   belongs_to :lead
+  belongs_to :user
   order :scheduled, 'DESC'
 
   DEFAULT_SCHEDULE_TIME = 15.minutes

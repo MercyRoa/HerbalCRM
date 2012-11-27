@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :password, :on => :create
 
+  def to_s
+    self.name
+  end
+
   class << self
     def current_user=(user)
       Thread.current[:current_user] = user

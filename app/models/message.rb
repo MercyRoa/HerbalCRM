@@ -4,6 +4,7 @@ class Message < ActiveRecord::Base
   order :date, 'DESC'
 
   belongs_to :lead
+  belongs_to :user
   belongs_to :account
 
   validates_uniqueness_of :message_id

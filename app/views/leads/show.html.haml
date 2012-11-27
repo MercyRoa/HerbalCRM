@@ -120,6 +120,8 @@
         %span.label.label-info Scheduled
         To send in:
       = (Time.now < message.scheduled) ? distance_of_time_in_words(Time.now, message.scheduled) : 'Next send'
+      - unless message.user.blank?
+        .by #{t 'Written by'}: #{message.user}
       - unless message.sent?
         = link_to "Edit", edit_scheduled_message_path(message)
         = link_to t('.destroy', :default => t("Delete")), scheduled_message_path(message), :method => :delete,
@@ -142,6 +144,8 @@
           %h3= message.subject
           %em= time_ago message.date
           .from #{t 'From'}: #{message.from}
+          - unless message.user.blank?
+            .by #{t 'Written by'}: #{message.user}
           %pre= message.to_s.html_safe unless message.body.blank?
           = message.body_raw.html_safe if message.body.blank?
     %hr
