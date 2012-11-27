@@ -28,7 +28,7 @@ class LeadsController < ApplicationController
     @new_message = ScheduledMessage.new(lead_id: @lead.id, account_id: @lead.account_id)
     @new_note = Note.new(lead_id: @lead.id)
 
-    @history = (@lead.messages + @lead.notes).sort_by {|m| m.created_at}
+    @history = (@lead.messages + @lead.notes).sort_by(&:created_at).reverse
 
     @text_models = TextModel.all
 

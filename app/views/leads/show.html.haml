@@ -108,7 +108,7 @@
     = f.hidden_field :lead_id, value: @lead.id
     = f.text_field :due_date
     = f.text_area :text, size: '150x3', class: 'span8 editable-short-text'
-    = f.submit 'Save', class: 'btn'
+    = f.submit 'Add note', class: 'btn'
 
 #scheduled_messages
   - @lead.scheduled_messages.each do |message|
@@ -131,7 +131,6 @@
     %hr
 
 #history
-  = @history.count
   - @history.each do |item|
     - if item.kind_of? Note
       %div[item]{ :class => "alert alert-block" }
