@@ -37,6 +37,7 @@ module Filters
     def default_filters
       [
           ["Attention Needed", "attention_needed"],
+          ["Waiting Reply with +2 mails", "waiting_reply_gt2"],
           ["URGENTLY", "urgently"],
           ["Not Automatic", "not_automatic"],
           ["Last 7 days", "last_7_days"],
@@ -44,11 +45,17 @@ module Filters
     end
 
     def default_filter_conditions(key)
-      return [:status, :is, "attention_needed"] if (key == "attention_needed")
-      return [ [:automatic, :is, 0], [:bounce, :is, 0] ] if (key == "not_automatic")
-      return [ [:status, :is, "attention_needed"],[:step, :is_greater_than, 1] ] if (key == "urgently")
-      if (key == "last_7_days")
-        return [[:created, :is_in_the_range, [7.days.ago, Time.now()] ] ]
+      case key
+        when 'waiting_reply_gt2'
+          [ [:status, :is, "waiting_reply"],[:step, :is_greater_than, 1] ]
+        when 'attention_needed'
+          [:status, :is, "attention_needed"]
+        when 'not_automatic'
+          [ [:automatic, :is, 0], [:bounce, :is, 0] ]
+        when 'urgently'
+          [ [:status, :is, "attention_needed"],[:step, :is_greater_than, 1] ]
+        when 'last_7_days'
+          [[:created, :is_in_the_range, [7.days.ago, Time.now()] ] ]
       end
     end
   end
