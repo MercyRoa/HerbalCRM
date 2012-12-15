@@ -12,6 +12,9 @@
 //= require_tree .
 //= require chosen-jquery
 //= require jquery-ui-timepicker/timepicker
+//= require bootstrap-modalmanager
+//= require bootstrap-modal
+
 
 // Global search autocomplete...
 $(function(){
