@@ -9,15 +9,23 @@ $ ->
   $("select#text_model_title").chosen().change () ->
     console.log "new value is + " + $(this).val()
 
+  text_models = []
   $('#insert_text_model').click (event) ->
     event.preventDefault
-    $.ajax
-      url: '/text_models/' + $("#text_model_title").val()
-      dataType: 'json'
-      success: (json) ->
-        insertHtmlAtCursor json.body
-      error: ->
-        console.log 'error'
+    # show modal
+    tm = $("#text_model_title").val()
+    if (text_models[tm])
+      insertHtmlAtCursor text_models[tm]
+    else
+      $.ajax
+        url: '/text_models/' + $("#text_model_title").val()
+        dataType: 'json'
+        success: (json) ->
+          text_models[tm] = json.body
+          insertHtmlAtCursor json.body
+          #remove loading
+        error: ->
+          console.log 'error'
     return false
 
   $('#savedraft').click (event) ->

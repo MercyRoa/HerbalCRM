@@ -5,6 +5,7 @@ gem 'rails', '3.1.3'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+gem 'libv8', '~> 3.11.8'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
@@ -36,7 +37,8 @@ end
 group :production do
   gem 'pg'
   gem 'thin' #for heroku, its a robust web server
-  gem 'therubyracer-heroku'
+
+  gem 'therubyracer-heroku', :platforms => [:ruby]
 end
 
 # Gems used only for assets and not required
