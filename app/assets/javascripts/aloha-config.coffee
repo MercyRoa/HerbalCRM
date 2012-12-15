@@ -93,10 +93,11 @@ Aloha.settings =
 Aloha.onReady = ->
   #console.log "Aloha is ready!"
   $('.editable-long-text, .editable-short-text').each () ->
-    fnc = "window.Aloha.jQuery('#"+$(this).attr('id')+"')."
+    id = $(this).attr('id')
+    fnc = "window.Aloha.jQuery('#"+id+"')."
     a = $('<a href="#" class="btn btn-mini" style="display: block; width: 60px;">Source</a>').click (event) ->
       event.preventDefault()
-      active = !!window.Aloha.editables.length
+      active = !!$('#'+ id + '-aloha').size()
       eval fnc + (if active then 'mahalo' else 'aloha') + '()'
       $(this).text if active then 'Editor' else 'Source'
     $(this).before(a)

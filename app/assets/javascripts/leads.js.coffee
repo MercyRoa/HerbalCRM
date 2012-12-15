@@ -12,20 +12,24 @@ $ ->
   text_models = []
   $('#insert_text_model').click (event) ->
     event.preventDefault
-    # show modal
+    $('body').modalmanager('loading');
+
     tm = $("#text_model_title").val()
     if (text_models[tm])
-      insertHtmlAtCursor text_models[tm]
+      console.log 'already on cache'
+      insertHtmlAtCursor text_models[tm], $('#scheduled_message_body-aloha')
+      $('body').modalmanager('loading');
     else
       $.ajax
         url: '/text_models/' + $("#text_model_title").val()
         dataType: 'json'
         success: (json) ->
           text_models[tm] = json.body
-          insertHtmlAtCursor json.body
-          #remove loading
+          insertHtmlAtCursor json.body, $('#scheduled_message_body-aloha')
+          $('body').modalmanager('loading');
         error: ->
           console.log 'error'
+          $('body').modalmanager('loading');
     return false
 
   $('#savedraft').click (event) ->

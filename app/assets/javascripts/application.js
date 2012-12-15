@@ -43,7 +43,7 @@ function insertTextAtCursor(text) {
     }
 }
 //
-function insertHtmlAtCursor(html) {
+function insertHtmlAtCursor(html, $elem) {
     var sel, range;
     if (window.getSelection) {
         // IE9 and non-IE
@@ -51,7 +51,7 @@ function insertHtmlAtCursor(html) {
         node = sel.anchorNode
         if($(node).parents('.aloha-editable').length == 0){
             console.log('We are not at aloha');
-            $('.aloha-editable').focusToEnd();
+            $elem.focusToEnd();
         }
 
         if (sel.getRangeAt && sel.rangeCount) {
