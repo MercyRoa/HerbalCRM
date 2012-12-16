@@ -62,7 +62,6 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     columnize (0.3.6)
-    commonjs (0.2.6)
     daemons (1.1.9)
     debugger (1.2.2)
       columnize (>= 0.3.1)
@@ -103,11 +102,6 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    less (2.2.2)
-      commonjs (~> 0.2.6)
-    less-rails (2.2.6)
-      actionpack (>= 3.1)
-      less (~> 2.2.0)
     mail (2.3.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -147,7 +141,6 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
-    ref (1.0.2)
     sass (3.2.3)
     sass-rails (3.1.4)
       actionpack (~> 3.1.0)
@@ -160,8 +153,6 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
-    therubyracer (0.11.0)
-      ref
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -200,13 +191,11 @@ DEPENDENCIES
   htmlentities
   jquery-rails
   kaminari
-  less-rails
   mysql2
   pg
   rails (= 3.1.3)
   sass-rails (= 3.1.4)
   sqlite3
-  therubyracer
   thin
   turn (~> 0.8.3)
   twitter-bootstrap-rails!
