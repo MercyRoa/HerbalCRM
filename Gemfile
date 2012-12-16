@@ -4,7 +4,7 @@ gem 'rails', '3.2.9'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
+gem 'libv8', '~> 3.11.8'
 gem "therubyracer", :platforms => :ruby
 gem 'execjs'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
@@ -28,7 +28,6 @@ gem 'gmail'
 
 group :development do
   gem 'debugger', :require => 'debugger'
-  #gem 'libv8', '~> 3.11.8'
   # gem "therubyracer"
 end
 
