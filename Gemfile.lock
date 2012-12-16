@@ -189,6 +189,7 @@ DEPENDENCIES
   debugger
   devise
   ensure-encoding
+  execjs
   gmail
   haml-rails
   htmlentities

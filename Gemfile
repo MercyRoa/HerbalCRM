@@ -6,6 +6,7 @@ gem 'rails', '3.2.9'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 #gem "therubyracer"
+gem 'execjs'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'haml-rails'
