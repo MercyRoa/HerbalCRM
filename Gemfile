@@ -28,7 +28,7 @@ gem 'gmail'
 group :development do
   gem 'debugger', :require => 'debugger'
   #gem 'libv8', '~> 3.11.8'
-  #gem "therubyracer"
+  gem "therubyracer"
 end
 
 group :development, :test do
@@ -39,7 +39,7 @@ group :production do
   gem 'pg'
   gem 'thin' #for heroku, its a robust web server
 
-  #gem 'therubyracer-heroku', :platforms => [:ruby]
+  gem 'therubyracer-heroku'
 end
 
 # Gems used only for assets and not required
