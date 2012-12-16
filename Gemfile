@@ -38,7 +38,7 @@ group :production do
   gem 'pg'
   gem 'thin' #for heroku, its a robust web server
 
-  gem 'therubyracer-heroku', :platforms => [:ruby]
+  #gem 'therubyracer-heroku', :platforms => [:ruby]
 end
 
 # Gems used only for assets and not required
