@@ -89,14 +89,14 @@ Aloha.settings =
       'numerated-headers':
         numeratedactive: false
   floatingmenu:
-    width: 630 # with of the floating menu; auto calculated when not set
-    behaviour: 'append' # 'float' (default), 'topalign', 'append'
+    width: 610 # with of the floating menu; auto calculated when not set
+    behaviour: 'topalign' # 'float' (default), 'topalign', 'append'
     element: 'main' # use with 'append' behaviour option: HTML DOM ID of the element the FM should get the position from
     pin: false # boolean if set to true with behaviour 'append' the fm will be pinned to that position and scroll with the window
     draggable: true # boolean
-    marginTop: 10 # number in px
+    marginTop: -100 # number in px
     horizontalOffset: 0 # number in px -- used with 'topalign' behaviour
-    topalignOffset: 0 # number in px -- used with 'topalign' behaviour
+    topalignOffset: 110 # number in px -- used with 'topalign' behaviour
 
 
 Aloha.onReady = ->
@@ -111,11 +111,29 @@ Aloha.onReady = ->
       $(this).text if active then 'Editor' else 'Source'
     $(this).before(a)
 
+  ###
+  Aloha.require ["jquery", "ui/scopes", "ui/ui-plugin"], ($, Scopes, UiPlugin) ->
+    toolbar = $(".aloha-toolbar")
+    # Center and resize the toolbar
+    toolbar.css
+      position: "static"
+      margin: "auto"
+
+    $("#alohaContainer").append toolbar
+    Scopes.setScope "Aloha.continuoustext"
+    UiPlugin.showToolbar()
+
+    # The child element must also be resized, don't know why
+    toolbar.children().css width: 400
+  ###
+
   Aloha.bind 'aloha-editable-deactivated', (event, myeditable) ->
+    ###
     # Hide in 6 seconds
     window._alohaTC = window.setTimeout ( ->
       myeditable.editable.obj.animate( height: 60 )
     ), 6000
+    ###
 
 
   Aloha.bind 'aloha-editable-activated', (event, myeditable) ->
