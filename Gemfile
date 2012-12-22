@@ -4,10 +4,12 @@ gem 'rails', '3.2.9'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
-gem 'libv8', '~> 3.11.8'
-gem "therubyracer", :platforms => :ruby
-gem 'execjs'
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+#gem 'libv8', '~> 3.11.8'
+#gem "therubyracer", :platforms => :ruby
+
+#gem 'execjs'
+#gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'haml-rails'
 gem 'htmlentities'
@@ -47,8 +49,13 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'less' #need this if have less-rails?
+  gem 'therubyracer', :platforms => :ruby
+  #gem 'therubyracer', '0.11.0beta8' # with precompiled binaries... remove libv8
   gem 'uglifier', '>= 1.0.3'
-  gem 'less'
+  gem "less-rails"
+  gem 'libv8', '~> 3.11.8'
+
 end
 
 gem 'jquery-rails'
