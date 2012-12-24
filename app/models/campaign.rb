@@ -11,7 +11,7 @@ class Campaign < ActiveRecord::Base
   CONTROL_LABEL = 'CRM'
 
   def fetch_emails
-    puts "#{'='*15} Campaign #{name} #{'='*15}"
+    puts "#{'='*15} Campaign #{name}    -    Query: #{search_query} #{'='*15}"
 
     accounts.each do |account|
       puts "Connecting to #{account.email}..."
@@ -23,7 +23,7 @@ class Campaign < ActiveRecord::Base
 
         # Import Sent mail
         # is:unread shouldn't be used on send email
-        search_query = '' if search_query == 'is:unread'
+        self.search_query = '' if self.search_query == 'is:unread'
         query = "in:sent #{search_query} -label:#{CONTROL_LABEL}"
         puts "Query: #{query}"
         emails = gmail.sent.search(query)
