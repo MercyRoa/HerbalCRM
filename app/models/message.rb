@@ -83,9 +83,15 @@ class Message < ActiveRecord::Base
           lead_name = m.from_account? ? email.to.first.name : email.from.first.name
 
           m.lead = Lead.get_or_create( m.lead_email, account, campaign, lead_name)
-          m.lead.increment :step unless m.from_account?
+        end
+
+        begin
+          m.save
+          email.label! label
+          email.label! Campaign::CONTROL_LABEL
 
           if m.from_account?
+            m.countable = false
             sm = ScheduledMessage.where(message_id: m.message_id).select(:user_id).first
             m.user_id = sm.user_id unless sm.blank?
             ScheduledMessage.delete_all message_id: m.message_id
@@ -96,13 +102,11 @@ class Message < ActiveRecord::Base
             m.lead.status = (m.from_account?)? 'waiting_reply' : 'attention_needed'
           end
 
-          m.lead.save
-        end
+          # Increment if is countable and the number of received msg are less or eq than the total of sent msg
+          m.lead.increment :step if m.countable &&  (m.lead.received_count - m.lead.sent_count) == 1
 
-        begin
-          m.save
-          email.label! label
-          email.label! Campaign::CONTROL_LABEL
+          m.lead.save
+
           done += 1
           puts "\e[32m#{done.to_s.ljust(4)}\e[0m OK #{m.id}"
         rescue Exception => e
@@ -129,7 +133,8 @@ class Message < ActiveRecord::Base
           from:       email.from_addrs.first,
           to:         email.to_addrs.first,
           date:       (Time.parse(email.date).strftime('%Y-%m-%dT%H:%M:%S%z') rescue nil),
-          countable:  true
+          countable:  true,
+          created_at: (Time.parse(email.date).strftime('%Y-%m-%dT%H:%M:%S%z') rescue Time.now)
       }
 
       # Its hard to get the right encoding,
