@@ -24,7 +24,9 @@ class Campaign < ActiveRecord::Base
         # Import Sent mail
         # is:unread shouldn't be used on send email
         search_query = '' if search_query == 'is:unread'
-        emails = gmail.sent.search("in:sent #{search_query} -label:#{CONTROL_LABEL}")
+        query = "in:sent #{search_query} -label:#{CONTROL_LABEL}"
+        puts "Query: #{query}"
+        emails = gmail.sent.search(query)
         Message.import_emails_from_gmail(emails, account, self, label)
       end
     end
