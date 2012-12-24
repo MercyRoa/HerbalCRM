@@ -36,7 +36,7 @@ class ScheduledMessage < ActiveRecord::Base
   end
 
   def self.send_all
-    self.to_send.each { |sm| sm.send_msg }
+    self.to_send.limit(15).each { |sm| sm.send_msg }
   end
 
   def send_msg
