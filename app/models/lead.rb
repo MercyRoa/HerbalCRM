@@ -1,10 +1,10 @@
 class Lead < ActiveRecord::Base
-  has_many :messages, :order => "date DESC"
-  has_many :scheduled_messages, :order => 'id DESC'
-  has_many :notes, :order => 'id DESC'
+  has_many :messages, :order => "date DESC", :dependent => :destroy
+  has_many :scheduled_messages, :order => 'id DESC', :dependent => :destroy
+  has_many :notes, :order => 'id DESC', :dependent => :destroy
 
-  has_many :histories, :order => "created_at DESC"
-  has_many :lead_details, :dependent => :destroy
+  has_many :histories, :order => "created_at DESC", :dependent => :destroy
+  has_many :lead_details, :dependent => :destroy, :dependent => :destroy
   belongs_to :account
   belongs_to :campaign
   belongs_to :user, :foreign_key => "assigned_to"
