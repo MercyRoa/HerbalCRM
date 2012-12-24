@@ -31,7 +31,7 @@ class ScheduledMessage < ActiveRecord::Base
   def update_lead_details
     self.lead.update_attributes({
         :status         => :waiting_reply,
-        :last_contacted => self.scheduled, #Time.now,
+        :last_contacted => self.created_at, #Time.now,
     })
   end
 

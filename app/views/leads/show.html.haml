@@ -114,12 +114,12 @@
   - @lead.scheduled_messages.each do |message|
     %div[message]{ :class => 'from_account'}
       %h3= message.subject
-      - if message.sent?
+      -if message.sent?
         %span.label.label-warning Message sent
-      - else
+      -else
         %span.label.label-info Scheduled
         To send in:
-      = (Time.now < message.scheduled) ? distance_of_time_in_words(Time.now, message.scheduled) : 'Next send'
+        = (Time.now < message.scheduled) ? distance_of_time_in_words(Time.now, message.scheduled) : 'Next send'
       - unless message.user.blank?
         .by #{t 'Written by'}: #{message.user}
       - unless message.sent?
