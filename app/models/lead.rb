@@ -44,7 +44,7 @@ class Lead < ActiveRecord::Base
   def process_automate
     return false if self.campaign.nil?
 
-    next_message = self.campaign.mail_sequences.where(step: self.step).first
+    next_message = self.campaign.mail_sequences.where(step: self.step, automatic: true).first
     if next_message
       ScheduledMessage.new(
           account_id: self.account_id,
