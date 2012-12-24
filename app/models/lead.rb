@@ -52,7 +52,8 @@ class Lead < ActiveRecord::Base
           to: self.email,
           subject: next_message.subject,
           body: next_message.body_text,
-          body_html: next_message.body_html
+          body_html: next_message.body_html,
+          scheduled: Time.now + next_message.send_after.to_i.minutes
       ).save
     else
       self.update_attribute :automatic, false
