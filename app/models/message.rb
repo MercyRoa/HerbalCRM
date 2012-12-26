@@ -103,7 +103,9 @@ class Message < ActiveRecord::Base
           end
 
           # Increment if is countable and the number of received msg are less or eq than the total of sent msg
-          m.lead.increment :step if m.countable &&  (m.lead.received_count - m.lead.sent_count) == 1
+          if m.countable && (m.lead.messages_received_count - m.lead.messages_sent_count) == 1
+            m.lead.increment :step
+          end
 
           m.lead.save
 
