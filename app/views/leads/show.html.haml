@@ -141,7 +141,7 @@
       - message = item
       %div[message]{ :class => ('from_account' if message.from_account?) }
         %h3= message.subject
-        %em= time_ago message.date
+        %em{ alt: message.date }= time_ago message.date
         .from #{t 'From'}: #{message.from}
         - unless message.user.blank?
           .by #{t 'Written by'}: #{message.user}

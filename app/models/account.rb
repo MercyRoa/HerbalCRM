@@ -1,5 +1,11 @@
 
 class Account < ActiveRecord::Base
+  attr_accessor :password_change
+  before_save :change_password
+
+  def change_password
+    self.password = @password_change unless @password_change.blank?
+  end
 
   def to_s
     email
