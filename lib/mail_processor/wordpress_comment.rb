@@ -1,3 +1,5 @@
+#encoding: UTF-8
+
 module MailProcessor
   class WordpressComment
     ADDRESS = ['wordpress@experienciaherbalife.com']
@@ -10,7 +12,7 @@ module MailProcessor
 
         #message.body = message.body.match(/(-{10,})(.*?)\1/m)[2].gsub!(/^\s+/, ' ') + " --CM"
         email.from.first.name = message.body.match(/Autor: ([\w ]*) \(/)[1].strip
-        message.from = message.body.match(/Correo elect.*nico : (.*)/)[1].strip
+        message.from = message.body.match(/Correo electrónico : (.*)/)[1].strip
         message.subject = "Hola #{email.from.first.name}"
       end
       return message, email
