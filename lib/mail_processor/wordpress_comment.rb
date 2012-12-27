@@ -1,5 +1,5 @@
 module MailProcessor
-  class Wordpress
+  class WordpressComment
     ADDRESS = ['wordpress@experienciaherbalife.com']
 
     def self.identify message, email
