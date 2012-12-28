@@ -145,8 +145,8 @@
         .from #{t 'From'}: #{message.from}
         - unless message.user.blank?
           .by #{t 'Written by'}: #{message.user}
-        %pre= message.to_s.html_safe unless message.body.blank?
-        = message.body_raw.html_safe if message.body.blank?
+        %pre= message.to_s.html_safe unless message.body.blank? || message.nil?
+        = message.body_raw.html_safe if message.body.blank? && !message.body_raw.nil?
     %hr
 
 
