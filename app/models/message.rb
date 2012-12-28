@@ -120,6 +120,12 @@ class Message < ActiveRecord::Base
           email.unread!
           email.remove_label! label
           email.remove_label! Campaign::CONTROL_LABEL
+
+          account.gmail.gmail.deliver! do
+            to 'manolet+herbalcrm@gmail.com'
+            subject 'Error while importing message'
+            body "#{e.inspect} \r\n-----------\r\n #{e.backtrace}"
+          end
         end
       end
     end
