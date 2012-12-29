@@ -6,9 +6,6 @@ $ ->
   $('#search-models').autocomplete
     source: ['arnold', 'animal', 'abeja', 'antilope']
 
-  $("select#text_model_title").chosen().change () ->
-    console.log "new value is + " + $(this).val()
-
   text_models = []
   $('#insert_text_model').click (event) ->
     event.preventDefault

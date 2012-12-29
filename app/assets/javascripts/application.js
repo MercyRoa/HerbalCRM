@@ -50,7 +50,6 @@ function insertHtmlAtCursor(html, $elem) {
         sel = window.getSelection();
         node = sel.anchorNode
         if($(node).parents('.aloha-editable').length == 0){
-            console.log('We are not at aloha');
             $elem.focusToEnd();
         }
 
@@ -90,9 +89,11 @@ function insertHtmlAtCursor(html, $elem) {
 $.fn.focusToEnd = function() {
     return this.each(function() {
         var el = $(this).find(':last').get()[0];
+
         if(!!!el){
-            $('#scheduled_message_body-aloha').append($('<span></span>'));
+            el = $(this).append($('<span></span>')).find(':last').get()[0];
         }
+
         var range = document.createRange();
         var sel = window.getSelection();
         //range.setStart(el.childNodes[0], 1);
