@@ -74,6 +74,13 @@ class Message < ActiveRecord::Base
           m.lead.save
         else
 
+
+          if m.from_account?
+            m.countable = false
+            sm = ScheduledMessage.where(message_id: m.message_id).select(:user_id).first
+            m.user_id = sm.user_id unless sm.blank?
+          end
+
           #parse MailProcessors (this is IMPLEMENTATION SUCKS!)
           #@ToDo Break on first
           MailProcessor.constants.each do |mp|
@@ -81,6 +88,7 @@ class Message < ActiveRecord::Base
           end unless m.from_account?
 
           lead_name = m.from_account? ? email.to.first.name : email.from.first.name
+
 
           m.lead = Lead.get_or_create( m.lead_email, account, campaign, lead_name)
         end
@@ -91,9 +99,6 @@ class Message < ActiveRecord::Base
           email.label! Campaign::CONTROL_LABEL
 
           if m.from_account?
-            m.countable = false
-            sm = ScheduledMessage.where(message_id: m.message_id).select(:user_id).first
-            m.user_id = sm.user_id unless sm.blank?
             ScheduledMessage.delete_all message_id: m.message_id
           end
 
