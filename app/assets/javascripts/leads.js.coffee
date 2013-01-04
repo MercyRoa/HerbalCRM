@@ -31,6 +31,6 @@ $ ->
 
   $('#savedraft').click (event) ->
     event.preventDefault()
-    $('#lead_draft').val($('#scheduled_message_body').val())
+    $('#lead_draft').val($('#scheduled_message_body-aloha').html())
     $('form.edit_lead [type="submit"]').click();
     return false;
