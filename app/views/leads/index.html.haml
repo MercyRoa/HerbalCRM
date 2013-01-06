@@ -17,6 +17,10 @@
       - unless lead.user.nil?
         %strong Assigned to:
         %span.label.label-info= lead.user.name
+      - if lead.being_viewed_by_anyone_else
+        .label.label-important
+          %i.icon-eye-open
+          #{User.find lead.viewing_by} since #{time_ago lead.last_access_time} ago
       .clear
 
       = time_ago lead.last_contacted

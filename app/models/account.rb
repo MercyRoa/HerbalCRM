@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
   end
 
   def to_s
-    email
+    name
   end
 
   def connect_to_gmail &block

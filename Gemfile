@@ -33,6 +33,7 @@ group :development do
   # gem "therubyracer"
   gem 'pry'
   gem 'pry-rails'
+  gem 'pry-remote'
 end
 
 group :development, :test do

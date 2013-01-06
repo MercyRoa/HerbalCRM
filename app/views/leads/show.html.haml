@@ -8,6 +8,13 @@
     = status_label @lead
     = time_ago @lead.last_contacted
 
+- if @lead.being_viewed_by_anyone_else
+  .alert.alert-block
+    This lead is being viewed by
+    %b #{User.find @lead.viewing_by}
+    since #{time_ago @lead.last_access_time} ago
+
+
 .span6
   %p
     %strong #{t 'Campaign'}:

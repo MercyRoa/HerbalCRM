@@ -35,7 +35,7 @@ class Lead < ActiveRecord::Base
               host: HerbalCRM::Application.config.action_mailer.default_url_options[:host])
       self.account.gmail.deliver! do
         to lead.user.email
-        subject "HerbalCRM lead #{lead} has been assigned to you"
+        subject "HerbalCRM lead #{lead} has been assigned to you by #{User.current_user}"
         body "Please go to #{url}"
       end
     end
@@ -57,6 +57,22 @@ class Lead < ActiveRecord::Base
       ).save
     else
       self.update_attribute :automatic, false
+    end
+  end
+
+  def being_viewed_by_anyone_else
+    !viewing_by.nil? and viewing_by != User.current_user.id
+  end
+
+  def set_access_by
+    if viewing_by.nil? and (
+        last_contacted.nil? or
+        (Time.now - last_contacted) > 1.minutes or # message just sent
+        last_access_time > 1.hours # lot of time since last access
+    )
+      self.viewing_by = User.current_user.id
+      self.last_access_time = Time.now
+      save
     end
   end
 

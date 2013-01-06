@@ -55,7 +55,7 @@ updated.' }
     respond_to do |format|
       if @scheduled_message.save
         # If we manually create a scheduled message we change automated to false
-        @scheduled_message.lead.update_attribute :automatic, false
+        @scheduled_message.lead.update_attributes automatic: false
 
         format.html { redirect_to @scheduled_message.lead, notice: 'Message was successfully scheduled.' }
         format.json { render json: @scheduled_message, status: :created, location: @scheduled_message }

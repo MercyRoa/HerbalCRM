@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127023214) do
+ActiveRecord::Schema.define(:version => 20130106165746) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(:version => 20121127023214) do
     t.string   "stage"
     t.integer  "assigned_to"
     t.text     "draft"
+    t.integer  "viewing_by"
+    t.datetime "last_access_time"
   end
 
   create_table "mail_sequences", :force => true do |t|

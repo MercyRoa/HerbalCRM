@@ -30,8 +30,9 @@ class ScheduledMessage < ActiveRecord::Base
   # Update lead details while creating the sm
   def update_lead_details
     self.lead.update_attributes({
-        :status         => :waiting_reply,
-        :last_contacted => self.created_at, #Time.now,
+        :status           => :waiting_reply,
+        :last_contacted   => self.created_at, #Time.now,
+        :viewing_by       => nil
     })
   end
 
