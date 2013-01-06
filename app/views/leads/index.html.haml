@@ -12,7 +12,8 @@
       %span.badge= lead.step
       %strong= link_to lead.name, lead_path(lead), rel: 'tooltip', title: lead.email
       %i.icon-chevron-right
-      %span.account= lead.account
+      // %span.account= lead.account
+      =campaign_label lead.campaign, lead.account.email
       %span.right= status_label lead
       - unless lead.user.nil?
         %i.icon-arrow-right
@@ -28,7 +29,7 @@
       .sent #{t 'Messages Sent'}: #{lead.messages_sent_count}
 
 
-      - message = lead.messages.last
+      - message = lead.messages.first
       - unless message.blank? || message.body.blank?
         .message[message]
           .subject= message.subject

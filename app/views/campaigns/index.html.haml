@@ -13,7 +13,7 @@
   %tbody
     - @campaigns.each do |campaign|
       %tr
-        %td= link_to campaign.name, campaign_path(campaign)
+        %td= link_to campaign_label(campaign), campaign_path(campaign)
         %td= campaign.label
         %td= campaign.search_query
         %td= campaign.description

@@ -1,3 +1,9 @@
+- content_for :head do
+  = javascript_include_tag 'really-simple-color-picker/jquery.colorPicker'
+  = stylesheet_link_tag 'really-simple-color-picker/colorPicker'
+
+
+
 = form_for @campaign, :html => { :class => 'form-horizontal' } do |f|
   .control-group
     = f.label :name, :class => 'control-label'
@@ -21,6 +27,10 @@
     = f.label :search_query, :class => 'control-label'
     .controls
       = f.text_field :search_query, :class => 'text_field'
+  .control-group
+    = f.label :color, :class => 'control-label'
+    .controls
+      = f.text_field :color, :class => 'text_field'
   .control-group
     = f.label :description, :class => 'control-label'
     .controls
