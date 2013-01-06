@@ -22,5 +22,6 @@
 #  common/contenthandler common/paste)
 
 Aloha::Rails.default_plugins = %w(common/format common/list common/link common/block common/undo
-  common/contenthandler common/paste common/image common/commands common/table common/align community/colorselector)
+  common/paste common/image common/commands common/table common/align community/colorselector)
+  #common/contenthandler  #sanitaze content
   #extra/browser extra/draganddropfiles extra/linkbrowser)

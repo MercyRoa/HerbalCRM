@@ -62,7 +62,7 @@
   %div{style: 'clear: both'}
   %strong Resume:
   %a.btn.btn-mini{id: 'btn-edit-resume'} Edit
-  #leadResume= @lead.resume.html_safe
+  #leadResume= @lead.resume.to_s.html_safe
   = f.hidden_field :resume
 
   .form-actions

@@ -57,9 +57,9 @@ Aloha.settings =
 
     formatlesspaste:
       formatlessPasteOption : true
+      button: true
       strippedElements : [
         "em"
-        "strong"
         "small"
         "s"
         "cite"
@@ -84,6 +84,7 @@ Aloha.settings =
         "bdo"
         "ins"
         "del"
+        "pre"
       ]
 
       'numerated-headers':
