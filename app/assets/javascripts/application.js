@@ -18,6 +18,8 @@
 
 // Global search autocomplete...
 $(function(){
+    $(".chzn-select").chosen();
+
     var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
     $("#global-search").autocomplete({
         source: availableTags

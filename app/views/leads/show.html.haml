@@ -96,7 +96,7 @@
 
         // this is very ugly, makes many queries to db
         = grouped_collection_select(:text_model, :title, TextModel.categories, :from_category, :category, :id,
-        :title)
+        :title,{}, {class: 'chzn-select'})
         // = collection_select(:text_model, nil, @text_models, :id, :title)
         // = select_tag :select_text_model, options_from_collection_for_select(@text_models, :id, :title)
 
@@ -148,7 +148,3 @@
         %pre= message.to_s.html_safe unless message.body.blank? || message.nil?
         = message.body_raw.html_safe if message.body.blank? && !message.body_raw.nil?
     %hr
-
-
-:javascript
-  $(".chzn-select").chosen();

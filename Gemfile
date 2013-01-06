@@ -31,6 +31,8 @@ gem 'gmail'
 group :development do
   gem 'debugger', :require => 'debugger'
   # gem "therubyracer"
+  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :development, :test do
