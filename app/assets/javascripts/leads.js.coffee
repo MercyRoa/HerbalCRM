@@ -7,17 +7,20 @@ $ ->
     source: ['arnold', 'animal', 'abeja', 'antilope']
 
   # Edit Resume
-  $('#btn-edit-resume').click (event) ->
-    if ( $(this).text() == 'Edit' )
+  $('#btn-edit-resume, #leadResume').click (event) ->
+    $btn = $('#btn-edit-resume')
+    if ( $btn.text() == 'Edit' )
       event.preventDefault()
       Aloha.jQuery('#leadResume').aloha()
       $('#leadResume').focusToEnd()
-      $(this).text('Save')
+      $btn.text('Save')
     else
+      if( $(this).attr('id') == 'leadResume' )
+        return
       Aloha.jQuery('#leadResume').mahalo()
       $('#lead_resume').val($('#leadResume').html())
       $('form.edit_lead [type="submit"]').click();
-      $(this).text('Edit')
+      $btn.text('Edit')
       $('#leadResume').css(height: 'auto')
 
 

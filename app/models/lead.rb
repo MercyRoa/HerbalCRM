@@ -16,6 +16,9 @@ class Lead < ActiveRecord::Base
   scope :to_reply, where(automatic: false).order("updated_at DESC")
   scope :automated, where(automatic: true, status: :attention_needed)
 
+  STAGES = %w{lead prospect hot_lead ready_to_buy customer}
+  STATUTES = %w{new attention_needed waiting_reply posponed discarted}
+
   def to_s
     return email if first_name.nil?
     "#{first_name} #{last_name}"
