@@ -6,9 +6,25 @@ $ ->
   $('#search-models').autocomplete
     source: ['arnold', 'animal', 'abeja', 'antilope']
 
+  # Edit Resume
+  $('#btn-edit-resume').click (event) ->
+    if ( $(this).text() == 'Edit' )
+      event.preventDefault()
+      Aloha.jQuery('#leadResume').aloha()
+      $('#leadResume').focusToEnd()
+      $(this).text('Save')
+    else
+      Aloha.jQuery('#leadResume').mahalo()
+      $('#lead_resume').val($('#leadResume').html())
+      $('form.edit_lead [type="submit"]').click();
+      $(this).text('Edit')
+      $('#leadResume').css(height: 'auto')
+
+
+  #Text models cache
   text_models = []
   $('#insert_text_model').click (event) ->
-    event.preventDefault
+    event.preventDefault()
     $('body').modalmanager('loading');
 
     tm = $("#text_model_title").val()
@@ -29,8 +45,14 @@ $ ->
           $('body').modalmanager('loading');
     return false
 
+  # Save draft
   $('#savedraft').click (event) ->
     event.preventDefault()
     $('#lead_draft').val($('#scheduled_message_body-aloha').html())
     $('form.edit_lead [type="submit"]').click();
     return false;
+
+  # Auto save draft
+  window._autoSaveTC = window.setTimeout ( ->
+     $('#savedraft').click()
+  ), 60000

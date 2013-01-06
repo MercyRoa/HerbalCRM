@@ -14,61 +14,63 @@
     %b #{User.find @lead.viewing_by}
     since #{time_ago @lead.last_access_time} ago
 
+= form_for(@lead, remote: true) do |f|
+  .span6
+    %p
+      %strong #{t 'Campaign'}:
+      = @lead.campaign.name
+    %p
+      %strong #{t 'Account'}:
+      = @lead.account
+    %p
+      %strong #{t 'Email'}:
+      = @lead.email
+      = link_to t('Open in Gmail'), "https://mail.google.com/mail/?shva=1#search/#{@lead.email.sub('@', '%40')}/",
+      target: '_blank'
+    %p
+      %strong #{t 'Messages Received'}:
+      = @lead.messages_received_count
+    %p
+      %strong #{t 'Messages Sent'}:
+      = @lead.messages_sent_count
+    %p
+      %strong #{t 'Raiting'}:
+      = @lead.raiting
+    %p
+      %strong #{t 'Phone'}:
+      = @lead.phone
+  .span5
+    %p
+      %strong #{t 'Location'}:
+      = [@lead.country, @lead.city].join
+    %p
+      %strong #{t 'Address'}:
+      = @lead.address
+    %p
+      %strong #{t 'Source'}:
+      = @lead.source
+    %p
+      %strong #{t 'Automatic'}:
+      = @lead.automatic
+    %p
+      %strong #{t 'Bounce'}:
+      = @lead.bounce
+    %p
+      %strong #{t 'Stage'}:
+      = @lead.stage
 
-.span6
-  %p
-    %strong #{t 'Campaign'}:
-    = @lead.campaign.name
-  %p
-    %strong #{t 'Account'}:
-    = @lead.account
-  %p
-    %strong #{t 'Email'}:
-    = @lead.email
-    = link_to t('Open in Gmail'), "https://mail.google.com/mail/?shva=1#search/#{@lead.email.sub('@', '%40')}/",
-    target: '_blank'
-  %p
-    %strong #{t 'Messages Received'}:
-    = @lead.messages_received_count
-  %p
-    %strong #{t 'Messages Sent'}:
-    = @lead.messages_sent_count
-  %p
-    %strong #{t 'Raiting'}:
-    = @lead.raiting
-  %p
-    %strong #{t 'Phone'}:
-    = @lead.phone
-%span6
-  %p
-    %strong #{t 'Location'}:
-    = [@lead.country, @lead.city].join
-  %p
-    %strong #{t 'Address'}:
-    = @lead.address
-  %p
-    %strong #{t 'Source'}:
-    = @lead.source
-  %p
-    %strong #{t 'Automatic'}:
-    = @lead.automatic
-  %p
-    %strong #{t 'Resume'}:
-    = @lead.resume
-  %p
-    %strong #{t 'Bounce'}:
-    = @lead.bounce
-  %p
-    %strong #{t 'Stage'}:
-    = @lead.stage
+  %div{style: 'clear: both'}
+  %strong Resume:
+  %a.btn.btn-mini{id: 'btn-edit-resume'} Edit
+  #leadResume= @lead.resume.html_safe
+  = f.hidden_field :resume
 
-.form-actions
-  = link_to t('Back'), leads_path, :class => 'btn'
-  = link_to t('Edit'), edit_lead_path(@lead), :class => 'btn'
-  = link_to t('Delete'), lead_path(@lead), :method => "delete", :confirm => 'Are you sure?',
-  :class => 'btn btn-danger'
-  %div{style: 'float: right;'}
-    = form_for(@lead, remote: true) do |f|
+  .form-actions
+    = link_to t('Back'), leads_path, :class => 'btn'
+    = link_to t('Edit'), edit_lead_path(@lead), :class => 'btn'
+    = link_to t('Delete'), lead_path(@lead), :method => "delete", :confirm => 'Are you sure?',
+    :class => 'btn btn-danger'
+    %div{style: 'float: right;'}
       = f.hidden_field :draft
       %b Assign to:
       = f.collection_select(:assigned_to, User.all, :id, :name, { :prompt => 'Please assign to a user'})

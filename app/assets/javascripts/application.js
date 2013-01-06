@@ -14,6 +14,7 @@
 //= require jquery-ui-timepicker/timepicker
 //= require bootstrap-modalmanager
 //= require bootstrap-modal
+//= require jquery.bootstrap-growl
 
 
 // Global search autocomplete...

@@ -21,7 +21,9 @@ HerbalCRM::Application.routes.draw do
 
   resources :accounts
 
-  resources :leads
+  resources :leads do
+    put :assign_to, on: :member #not yet implemented
+  end
 
   resources :lead_details
 
