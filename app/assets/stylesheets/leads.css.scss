@@ -13,3 +13,11 @@
   border: 1px dashed #F4D829;
   background-color: #FFFCED;
 }
+
+.editable{
+  min-height: 23px;
+
+  a,input[type="text"] {
+    display: none;
+  }
+}

@@ -58,3 +58,22 @@ $ ->
        $('#savedraft').click()
     ), 60000
   ###
+
+  #editable options
+  $('form .editable').each ->
+    $(this).append '<a class="btn btn-mini edit" style="display: none;"><i class="icon-pencil"></i></a>'
+  .hover ((event) ->
+    $(this).find('a.edit').fadeIn()
+  ), (event) ->
+    $(this).find('a.edit').fadeOut()
+
+  $('.editable .edit, .editable .static').click ->
+    $editable = $(this).parents('.editable')
+    $static = $editable.find('.static')
+    $input = $editable.find('input')
+
+    $static.hide()
+    $input.focus().show().focusout ->
+      $static.text( $input.val() ).show()
+      $input.hide()
+      $('form.edit_lead [type="submit"]').click()
