@@ -16,7 +16,7 @@
         %li= link_to 'Google', "http://www.google.com/?q=#{u @lead.email}|#{u @lead.name}", target: '_blank'
         %li= link_to 'Gmail', "https://mail.google.com/mail/?shva=1#search/#{u @lead.email}/", target: '_blank'
 
-- if @lead.being_viewed_by_anyone_else
+- if @lead.being_viewed_by_anyone_else?
   .alert.alert-block
     This lead is being viewed by
     %b #{User.find @lead.viewing_by}

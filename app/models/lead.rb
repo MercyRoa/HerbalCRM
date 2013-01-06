@@ -60,15 +60,15 @@ class Lead < ActiveRecord::Base
     end
   end
 
-  def being_viewed_by_anyone_else
-    !viewing_by.nil? and viewing_by != User.current_user.id
+  def being_viewed_by_anyone_else?
+    !viewing_by.nil? and viewing_by != User.current_user.id and (Time.now - last_access_time) < 1.hours
   end
 
   def set_access_by
     if viewing_by.nil? and (
         last_contacted.nil? or
         (Time.now - last_contacted) > 1.minutes or # message just sent
-        last_access_time > 1.hours # lot of time since last access
+        (Time.now - last_access_time) > 1.hours # lot of time since last access
     )
       self.viewing_by = User.current_user.id
       self.last_access_time = Time.now
