@@ -15,7 +15,7 @@
       %span.account= lead.account
       %span.right= status_label lead
       - unless lead.user.nil?
-        %strong Assigned to:
+        %i.icon-arrow-right
         %span.label.label-info= lead.user.name
       - if lead.being_viewed_by_anyone_else
         .label.label-important
