@@ -14,6 +14,7 @@
       %ul.dropdown-menu{:role => "menu",'aria-labelledby' => "dLabel"}
         %li= link_to 'Facebook', "https://www.facebook.com/search/results.php?q=#{u @lead.email}", target: '_blank'
         %li= link_to 'Google', "http://www.google.com/?q=#{u @lead.email}|#{u @lead.name}", target: '_blank'
+        %li= link_to 'Gmail', "https://mail.google.com/mail/?shva=1#search/#{u @lead.email}/", target: '_blank'
 
 - if @lead.being_viewed_by_anyone_else
   .alert.alert-block
@@ -25,15 +26,13 @@
   .span6
     %p
       %strong #{t 'Campaign'}:
-      = @lead.campaign.name
-    %p
-      %strong #{t 'Account'}:
-      = @lead.account
+      = campaign_label @lead.campaign, @lead.account.email
     %p
       %strong #{t 'Email'}:
       = @lead.email
-      = link_to t('Open in Gmail'), "https://mail.google.com/mail/?shva=1#search/#{@lead.email.sub('@', '%40')}/",
-      target: '_blank'
+      %p
+        %strong #{t 'Source'}:
+        = @lead.source
     %p
       %strong #{t 'Messages Received'}:
       = @lead.messages_received_count
@@ -41,30 +40,30 @@
       %strong #{t 'Messages Sent'}:
       = @lead.messages_sent_count
     %p
-      %strong #{t 'Raiting'}:
-      = @lead.raiting
-    %p
-      %strong #{t 'Phone'}:
-      = @lead.phone
-  .span5
-    %p
-      %strong #{t 'Location'}:
-      = [@lead.country, @lead.city].join
-    %p
-      %strong #{t 'Address'}:
-      = @lead.address
-    %p
-      %strong #{t 'Source'}:
-      = @lead.source
-    %p
       %strong #{t 'Automatic'}:
       = @lead.automatic
     %p
       %strong #{t 'Bounce'}:
       = @lead.bounce
+  .span5
+    %p
+      %strong #{t 'Phone'}:
+      = @lead.phone
+    %p
+      %strong #{t 'Country'}:
+      = @lead.country
+    %p
+      %strong #{t 'City'}:
+      = @lead.city
+    %p
+      %strong #{t 'Address'}:
+      = @lead.address
     %p
       %strong #{t 'Stage'}:
       = @lead.stage
+    %p
+      %strong #{t 'Raiting'}:
+      = @lead.raiting
 
   %div{style: 'clear: both'}
   %strong Resume:

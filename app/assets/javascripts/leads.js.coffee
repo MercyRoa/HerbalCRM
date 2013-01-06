@@ -53,6 +53,8 @@ $ ->
     return false;
 
   # Auto save draft
-  window._autoSaveTC = window.setTimeout ( ->
-     $('#savedraft').click()
-  ), 60000
+  ###
+    window._autoSaveTC = window.setTimeout ( ->
+       $('#savedraft').click()
+    ), 60000
+  ###
