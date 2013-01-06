@@ -7,6 +7,13 @@
     %span.badge= @lead.step
     = status_label @lead
     = time_ago @lead.last_contacted
+    .btn-group
+      %a.dropdown-toggle.btn.btn-mini{'data-toggle' => "dropdown", :href =>"#"}
+        Search
+        %span.caret
+      %ul.dropdown-menu{:role => "menu",'aria-labelledby' => "dLabel"}
+        %li= link_to 'Facebook', "https://www.facebook.com/search/results.php?q=#{u @lead.email}", target: '_blank'
+        %li= link_to 'Google', "http://www.google.com/?q=#{u @lead.email}|#{u @lead.name}", target: '_blank'
 
 - if @lead.being_viewed_by_anyone_else
   .alert.alert-block
