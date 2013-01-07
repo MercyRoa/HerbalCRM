@@ -16,6 +16,14 @@ module Filters
     end
 
     def condition_options
+      {
+          'Email'   => :email,  'Name'  => :first_name,
+          'Status'  => :status,  'Stage' => :stage,
+          'Country' => :country, 'Step' => :step,
+          'Campaign'=> :campaign_id, 'Account' => :account_id
+      }
+    end
+    def condition_optionsXXX
       %w{email first_name status stage country step campaign_id account_id}
     end
 

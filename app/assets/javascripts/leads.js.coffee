@@ -7,7 +7,7 @@ $ ->
     source: ['arnold', 'animal', 'abeja', 'antilope']
 
   # Edit Resume
-  $('#btn-edit-resume, #leadResume').click (event) ->
+  $('#btn-edit-resume').click (event) ->
     $btn = $('#btn-edit-resume')
     if ( $btn.text() == 'Edit' )
       event.preventDefault()

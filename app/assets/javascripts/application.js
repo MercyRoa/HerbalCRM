@@ -21,6 +21,19 @@
 $(function(){
     $(".chzn-select").chosen();
 
+    // main search form
+    //http://herbalcrm.dev/leads?utf8=%E2%9C%93&wf_match=any&wf_c0=email&wf_o0=contains&wf_v0_0=arnold&wf_c1=first_name&wf_o1=contains&wf_v1_0=arnold
+    $('#mainSearch').submit(function(ev){
+        ev.preventDefault();
+        value = encodeURIComponent($('#global-search').val());
+        if(!!!value){
+            alert("Please insert a search term");
+            return false;
+        }
+        window.location = '/leads?utf8=%E2%9C%93&wf_match=any&wf_c0=email&wf_o0=contains&wf_v0_0='+value+'&wf_c1=first_name&wf_o1=contains&wf_v1_0='+value
+        //document.location.href='/newpage/';
+    })
+
     var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
     $("#global-search").autocomplete({
         source: availableTags
