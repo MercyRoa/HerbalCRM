@@ -71,20 +71,21 @@ $ ->
       $(this).hide() # hide input
       $editable.find('a.edit').hide() # hide edit pencil
       $('form.edit_lead [type="submit"]').click() # Send form
+      $editable.removeClass('editing')
   .hover ((event) ->
-    if $(this).find('.static').is(':visible')
+    if !$(this).hasClass('editing')
       $(this).find('a.edit').fadeIn()
   ), (event) ->
-    if $(this).find('.static').is(':visible')
+    if !$(this).hasClass('editing')
       $(this).find('a.edit').fadeOut()
 
   $('.editable .edit, .editable .static').click ->
     $editable = $(this).parents('.editable')
 
-    $static = $editable.find('.static')
-    if ( !$static.is(':visible') )
+    if ( $editable.hasClass('editing') )
       return false;
 
-    $static.hide()
+    $editable.addClass('editing')
+    $editable.find('.static').hide()
     $editable.find('a.edit').show()
     $editable.find('input, select').show().focus()
