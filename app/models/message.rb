@@ -73,10 +73,7 @@ class Message < ActiveRecord::Base
 
           m.lead.save
         else
-
-
           if m.from_account?
-            m.countable = false
             sm = ScheduledMessage.where(message_id: m.message_id).select(:user_id).first
             m.user_id = sm.user_id unless sm.blank?
           end
