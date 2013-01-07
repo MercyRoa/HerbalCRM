@@ -92,6 +92,7 @@ defaults: &defaults
     tinyint:              [nil, boolean]
 
   operators:              # operators precedence
+    contains:             1
     is:                   100
     is_not:               200
     is_on:                300
@@ -101,7 +102,6 @@ defaults: &defaults
     is_after:             700
     is_before:            800
     is_in_the_range:      900
-    contains:             1000
     does_not_contain:     1100
     starts_with:          1200
     ends_with:            1300

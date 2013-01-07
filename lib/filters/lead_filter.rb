@@ -8,17 +8,25 @@ module Filters
       defs = super
       defs[:status][:is] = :list
       defs[:status][:is_not] = :list
+      defs[:stage][:is] = :list
+      defs[:stage][:is_not] = :list
       defs[:account_id][:is] = :list
       defs[:account_id][:is_not] = :list
       defs
     end
 
+    def condition_options
+      %w{email first_name status stage country step campaign_id account_id}
+    end
+
     def value_options_for(condition_key)
       case condition_key
         when :status
-          %W{new attention_needed waiting_reply posponed discarted}
+          Lead::STATUTES
+        when :stage
+          Lead::STAGES
         when :account_id
-          {1 => "Mercedes", 2 => "Patico"}
+          {1 => "Mercedes", 2 => "Patico", 3 => "Fiore"}
         else
           []
       end
@@ -39,6 +47,8 @@ module Filters
           ["Attention Needed", "attention_needed"],
           ["Waiting Reply with +2 mails", "waiting_reply_gt2"],
           ["URGENTLY", "urgently"],
+          ["Customers", 'customers'],
+          ["Hot Leads", 'hot_leads'],
           ["Not Automatic", "not_automatic"],
           ["Last 7 days", "last_7_days"],
       ]
@@ -54,6 +64,10 @@ module Filters
           [ [:automatic, :is, 0], [:bounce, :is, 0] ]
         when 'urgently'
           [ [:status, :is, "attention_needed"],[:step, :is_greater_than, 1] ]
+        when 'customers'
+          [ [:stage, :is, :customer] ]
+        when 'hot_leads'
+          [ [:stage, :is, :hot_lead] ]
         when 'last_7_days'
           [[:created, :is_in_the_range, [7.days.ago, Time.now()] ] ]
       end

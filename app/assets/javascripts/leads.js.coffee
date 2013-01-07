@@ -65,18 +65,26 @@ $ ->
   #editable options
   $('form .editable').each ->
     $(this).append '<a class="btn btn-mini edit" style="display: none;"><i class="icon-pencil"></i></a>'
+    $editable = $(this)
+    $(this).find('input, select').focusout ->
+      $editable.find('.static').text( $(this).val() ).show() # show static label
+      $(this).hide() # hide input
+      $editable.find('a.edit').hide() # hide edit pencil
+      $('form.edit_lead [type="submit"]').click() # Send form
   .hover ((event) ->
-    $(this).find('a.edit').fadeIn()
+    if $(this).find('.static').is(':visible')
+      $(this).find('a.edit').fadeIn()
   ), (event) ->
-    $(this).find('a.edit').fadeOut()
+    if $(this).find('.static').is(':visible')
+      $(this).find('a.edit').fadeOut()
 
   $('.editable .edit, .editable .static').click ->
     $editable = $(this).parents('.editable')
+
     $static = $editable.find('.static')
-    $input = $editable.find('input')
+    if ( !$static.is(':visible') )
+      return false;
 
     $static.hide()
-    $input.focus().show().focusout ->
-      $static.text( $input.val() ).show()
-      $input.hide()
-      $('form.edit_lead [type="submit"]').click()
+    $editable.find('a.edit').show()
+    $editable.find('input, select').show().focus()

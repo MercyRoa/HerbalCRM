@@ -65,7 +65,7 @@
     .editable
       %strong #{t 'Stage'}:
       %span.static= @lead.stage
-      = f.text_field :stage
+      = f.select :stage, Lead::STAGES, {:include_blank => true}
 
     .editable
       %strong #{t 'Raiting'}:
@@ -86,7 +86,7 @@
     %div{style: 'float: right;'}
       = f.hidden_field :draft
       %b Assign to:
-      = f.collection_select(:assigned_to, User.all, :id, :name, { :prompt => 'Please assign to a user'})
+      = f.collection_select(:assigned_to, User.all, :id, :name, { :prompt => 'Please assign to a user', :include_blank => true})
       %button{ type: "submit", class: "btn"} Assign
 
 #reply
