@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
     t.string   "name"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.datetime "last_fetch_date"
     t.text     "signature"
   end
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.text     "description"
     t.string   "search_query",    :default => "is:unread"
     t.datetime "last_fetch_date"
@@ -49,16 +49,16 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
     t.text     "body"
     t.integer  "user_id"
     t.integer  "timer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "lead_details", :force => true do |t|
     t.integer  "lead_id"
     t.string   "key"
     t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "note"
   end
 
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
     t.boolean  "automatic",               :default => true
     t.integer  "messages_received_count", :default => 0
     t.integer  "messages_sent_count",     :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.text     "resume"
     t.integer  "bounce",                  :default => 0
     t.string   "stage"
@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
     t.text     "body_html"
     t.string   "description"
     t.integer  "send_after"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.boolean  "automatic"
   end
 
@@ -113,8 +113,8 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
     t.text     "body"
     t.text     "body_raw"
     t.boolean  "readed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "message_id"
     t.datetime "date"
     t.string   "subject"
@@ -132,8 +132,8 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
     t.datetime "due_date"
     t.boolean  "done",        :default => false
     t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "scheduled_messages", :force => true do |t|
@@ -147,8 +147,8 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
     t.text     "body_html"
     t.datetime "scheduled"
     t.boolean  "sent",       :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "message_id"
     t.integer  "user_id"
   end
@@ -156,16 +156,16 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
   create_table "text_models", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "category"
   end
 
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -187,8 +187,8 @@ ActiveRecord::Schema.define(:version => 20130106210843) do
     t.text     "data"
     t.integer  "user_id"
     t.string   "model_class_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "will_filter_filters", ["user_id"], :name => "index_will_filter_filters_on_user_id"

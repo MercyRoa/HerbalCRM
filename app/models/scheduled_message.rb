@@ -8,7 +8,7 @@ class ScheduledMessage < ActiveRecord::Base
   before_create :set_default_data
   after_create :update_lead_details
 
-  before_save :set_html_and_plain
+  before_save :set_html_and_plain, :update_text_model
 
   scope :to_send, where(:sent => false).where("scheduled < ?", Time.now)
 
@@ -34,6 +34,10 @@ class ScheduledMessage < ActiveRecord::Base
         :last_contacted   => self.created_at, #Time.now,
         :viewing_by       => nil
     })
+  end
+
+  def update_text_model
+    self.body = self.body.gsub("{lead.name}", self.lead.name)
   end
 
   def self.send_all
