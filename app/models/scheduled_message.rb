@@ -38,6 +38,7 @@ class ScheduledMessage < ActiveRecord::Base
 
   def update_text_model
     self.body = self.body.gsub("{lead.name}", self.lead.name)
+    self.body_html = self.body_html.gsub("{lead.name}", self.lead.name)
   end
 
   def self.send_all
