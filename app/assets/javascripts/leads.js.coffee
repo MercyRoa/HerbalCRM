@@ -89,3 +89,19 @@ $ ->
     $editable.find('.static').hide()
     $editable.find('a.edit').show()
     $editable.find('input, select').show().focus()
+
+
+  $(".response_button").click ->
+    $response = $(this).next().next()
+    $fast_response = $(this).next().next().next()
+    $response.toggle "slow"
+    $fast_response.hide()
+
+  $(".fast_response_button").click ->
+    $response = $(this).next()
+    $fast_response = $(this).next().next()
+    $fast_response.toggle "slow"
+    $response.hide()
+
+
+
