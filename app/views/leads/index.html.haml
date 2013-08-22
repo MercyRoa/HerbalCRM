@@ -33,7 +33,10 @@
       - unless message.blank? || message.body.blank?
         .message[message]
           .subject= message.subject
-          = truncate(message.to_s, :length => 200)
+          - if lead == @leads.first
+            = message.to_s
+          - else
+            = truncate(message.to_s, :length => 200)
     %hr
 
 = link_to t('.new', :default => t("helpers.links.new")), new_lead_path, :class => 'btn btn-primary'
