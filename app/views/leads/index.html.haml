@@ -33,17 +33,15 @@
       - unless message.blank? || message.body.blank?
         .message[message]
           .subject= message.subject
-          - if lead == @leads.first
-            = message.to_s
-          - else
-            = truncate(message.to_s, :length => 200)
+          = message.to_s
           %br
           %br
           = button_tag 'Response' , :class => 'btn btn-mini btn-primary response_button'
           = button_tag 'Fast Response', :class => 'btn btn-mini btn-primary fast_response_button'
-          - @new_message = ScheduledMessage.new(lead_id: lead.id, account_id: lead.account_id)
           .response
             %h2 Send Email
+            - @new_message.lead_id = lead.id
+            - @new_message.account_id = lead.account_id
             = form_for @new_message do |f|
               = f.hidden_field :lead_id, value: lead.id
               = f.hidden_field :account_id, value: lead.account_id
@@ -67,7 +65,22 @@
             .navbar
               .navbar-inner
                 - TextModel.starred.each do |text_model|
-                  = button_tag text_model.title, class: "btn"
+                  - @new_message.lead_id = lead.id
+                  - @new_message.account_id = lead.account_id
+                  .spanFormat
+                    = form_for @new_message do |f|
+                      = f.hidden_field :lead_id, value: lead.id
+                      = f.hidden_field :account_id, value: lead.account_id
+                      = f.hidden_field :to, value: lead.email
+                      = f.hidden_field :account_id, value: lead.account_id
+                      = f.hidden_field :user_id, value: current_user.id
+                      = f.hidden_field :scheduled, value: Time.now
+                      = f.hidden_field :bcc
+                      = f.hidden_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?), class: 'span8'
+                      = f.hidden_field :body, value: text_model.body ,size: '150x3', placeholder: 'Reply here',
+                          class: 'span8 editable-long-text'
+                      = f.submit text_model.title, class: 'btn'
+
     %hr
 
 = link_to t('.new', :default => t("helpers.links.new")), new_lead_path, :class => 'btn btn-primary'

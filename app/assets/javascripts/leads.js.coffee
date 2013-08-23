@@ -103,5 +103,9 @@ $ ->
     $fast_response.toggle "slow"
     $response.hide()
 
+  $(".button_text_model").click ->
+      alert $(this).attr('name')
+
+
 
 

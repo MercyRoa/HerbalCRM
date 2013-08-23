@@ -10,6 +10,8 @@ class LeadsController < ApplicationController
     end
     @leads= Lead.filter(:params => params, :filter => Filters::LeadFilter)
     @campaigns = Campaign.all
+    @new_message = ScheduledMessage.new
+
 
     respond_to do |format|
       format.html # index.html.erb

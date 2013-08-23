@@ -15,3 +15,6 @@
 /tmp
 /.idea
 /nbproject/private/
+
+# Ignore other files
+/config/database.yml
