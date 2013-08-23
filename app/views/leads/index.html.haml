@@ -6,7 +6,7 @@
 %div= will_filter_tag(@leads)
 //%div= will_filter_table_tag(@leads, columns: [])
 
-%div
+%div{id: "leads_attention_needed"}
   - @leads.each do |lead|
     %div[lead, :lead_box]
       %span.badge= lead.step
@@ -68,7 +68,7 @@
                   - @new_message.lead_id = lead.id
                   - @new_message.account_id = lead.account_id
                   .spanFormat
-                    = form_for @new_message do |f|
+                    = form_for @new_message, remote: true do |f|
                       = f.hidden_field :lead_id, value: lead.id
                       = f.hidden_field :account_id, value: lead.account_id
                       = f.hidden_field :to, value: lead.email
