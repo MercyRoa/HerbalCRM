@@ -51,7 +51,6 @@ updated.' }
   def create
     @scheduled_message = ScheduledMessage.new(params[:scheduled_message])
     @scheduled_message = Time.now if @scheduled_message.nil?
-    @leads = Lead.all
     respond_to do |format|
       if @scheduled_message.save
         # If we manually create a scheduled message we change automated to false

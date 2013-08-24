@@ -79,7 +79,7 @@
                       = f.hidden_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?), class: 'span8'
                       = f.hidden_field :body, value: text_model.body ,size: '150x3', placeholder: 'Reply here',
                           class: 'span8 editable-long-text'
-                      = f.submit text_model.title, class: 'btn'
+                      = f.submit text_model.title, class: 'btn button_starred'
 
     %hr
 

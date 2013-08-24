@@ -103,9 +103,10 @@ $ ->
     $fast_response.toggle "slow"
     $response.hide()
 
-  $(".button_text_model").click ->
-      alert $(this).attr('name')
-
+  $(".button_starred").click ->
+    $fast_response = $(this).parent().parent().parent().parent().parent()
+    $fast_response.hide("slow")
+    $fast_response.parent().parent().css("background-color", "#04B45F");
 
 
 
