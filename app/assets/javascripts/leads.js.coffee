@@ -106,7 +106,23 @@ $ ->
   $(".button_starred").click ->
     $fast_response = $(this).parent().parent().parent().parent().parent()
     $fast_response.hide("slow")
-    $fast_response.parent().parent().css("background-color", "#04B45F");
+    $fast_response.parent().parent().css("background-color", "#E6E6E6");
+
+  $(".response_button_starred").click ->
+    alert $(this).next().val()
+
+  $(".button_send").click ->
+    $response = $(this).parent().parent().parent()
+    $response.hide("slow")
+    $response.parent().parent().css "background-color", "#E6E6E6"
+
+  $("#savedraft").click ->
+    $response = $(this).parent().parent().parent()
+    $response.hide("slow")
+    #$response.parent().parent().css "background-color", "#E6E6E6"
+
+
+
 
 
 
