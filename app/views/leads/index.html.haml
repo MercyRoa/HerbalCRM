@@ -36,9 +36,10 @@
           = message.to_s
           %br
           %br
-          = button_tag 'Response' , :class => 'btn btn-mini btn-primary response_button'
-          = button_tag 'Fast Response', :class => 'btn btn-mini btn-primary fast_response_button'
-          .response
+          = button_tag 'Response' , id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary response_button'
+          = button_tag 'Fast Response', id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary fast_response_button'
+          = link_to 'Detail', lead_path(lead), id: "detail#{lead.id}", :remote => true, class: "btn btn-mini btn-primary link_history"
+          %div{id: "response#{lead.id}", class: "response"}
             %h2 Send Email
             - @new_message.lead_id = lead.id
             - @new_message.account_id = lead.account_id
@@ -58,12 +59,13 @@
               = f.text_area :body, value: lead.draft ,size: '150x3', placeholder: 'Reply here',
                   class: 'span8 editable-long-text'
               %div
-                = f.submit 'Send', class: 'btn btn-success button_send'
-                = button_tag 'Save Draft', class: 'btn', id: 'savedraft'
-          .fast_response
+                = f.submit 'Send', id: "button_send#{lead.id}", class: 'btn btn-success button_send'
+                -#= button_tag 'Save Draft', class: 'btn savedraft', id: "savedraft#{lead.id}"
+          %div{id: "fast_response#{lead.id}", class: "fast_response"}
             %br
             .navbar
               .navbar-inner
+                - l = 'a'
                 - TextModel.starred.each do |text_model|
                   - @new_message.lead_id = lead.id
                   - @new_message.account_id = lead.account_id
@@ -79,6 +81,10 @@
                       = f.hidden_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?), class: 'span8'
                       = f.hidden_field :body, value: text_model.body ,size: '150x3', placeholder: 'Reply here',
                           class: 'span8 editable-long-text'
-                      = f.submit text_model.title, class: 'btn button_starred'
+                      = f.submit text_model.title, id: "#{(text_model.title+ lead.name + l).gsub(/[^a-zA-Z]/, '') + lead.id.to_s}",  class: 'btn button_starred'
+                      - l = l.next
+          %br
+          %br
+          %div{id: "history#{lead.id}", class: "history", style: "display: none;"}
     %hr
 = link_to t('.new', :default => t("helpers.links.new")), new_lead_path, :class => 'btn btn-primary'

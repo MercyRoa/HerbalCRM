@@ -1,0 +1,1 @@
+$('#history' + '<%= @lead.id %>').html("<%= escape_javascript(render :partial => "history", :locals => {:@history => @history}).html_safe %>");

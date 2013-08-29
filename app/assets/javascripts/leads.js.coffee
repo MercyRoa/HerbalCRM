@@ -90,36 +90,58 @@ $ ->
     $editable.find('a.edit').show()
     $editable.find('input, select').show().focus()
 
-
   $(".response_button").click ->
-    $response = $(this).next().next()
-    $fast_response = $(this).next().next().next()
-    $response.toggle "slow"
-    $fast_response.hide()
+    id = $(this).attr("id").replace(/[^\d.]/g, "")
+    $("#response"+id).toggle "slow"
+    $("#fast_response"+id).hide()
+    $("#history"+id).hide()
 
   $(".fast_response_button").click ->
-    $response = $(this).next()
-    $fast_response = $(this).next().next()
-    $fast_response.toggle "slow"
-    $response.hide()
+    id = $(this).attr("id").replace(/[^\d.]/g, "")
+    $("#response"+id).hide()
+    $("#fast_response"+id).toggle "slow"
+    $("#history"+id).hide()
+
+  $(".link_history").click ->
+    id = $(this).attr("id").replace(/[^\d.]/g, "")
+    $("#response"+id).hide()
+    $("#fast_response"+id).hide()
+    if $("#history"+id).is(":visible")
+      $("#history"+id).hide()
+    else
+      $("#history"+id).show()
+
 
   $(".button_starred").click ->
-    $fast_response = $(this).parent().parent().parent().parent().parent()
-    $fast_response.hide("slow")
-    $fast_response.parent().parent().css("background-color", "#E6E6E6");
-
-  $(".response_button_starred").click ->
-    alert $(this).next().val()
+    id = $(this).attr("id").replace(/[^\d.]/g, "")
+    $("#fast_response"+id).hide("slow")
+    $("#fast_response"+id).parent().parent().css("background-color", "#E6E6E6");
 
   $(".button_send").click ->
-    $response = $(this).parent().parent().parent()
-    $response.hide("slow")
-    $response.parent().parent().css "background-color", "#E6E6E6"
+    id = $(this).attr("id").replace(/[^\d.]/g, "")
+    $("#response"+id).hide("slow")
+    $("#response"+id).parent().parent().css "background-color", "#E6E6E6"
 
-  $("#savedraft").click ->
-    $response = $(this).parent().parent().parent()
-    $response.hide("slow")
-    #$response.parent().parent().css "background-color", "#E6E6E6"
+  $(".savedraft").click (event) ->
+    id = $(this).attr("id").replace(/[^\d.]/g, "")
+    $el = $(this)
+    $("#response"+id).hide("slow")
+
+#    event.preventDefault()
+#    $('#lead_draft').val($('#scheduled_message_body-aloha').html())
+#    $('form.edit_lead [type="submit"]').click();
+#    return false;
+#
+#    # Auto save draft
+#    ###
+#      window._autoSaveTC = window.setTimeout ( ->
+#         $('#savedraft').click()
+#      ), 60000
+#    ###
+
+
+
+
 
 
 
