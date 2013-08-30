@@ -18,3 +18,4 @@
 
 # Ignore other files
 /config/database.yml
+/.project

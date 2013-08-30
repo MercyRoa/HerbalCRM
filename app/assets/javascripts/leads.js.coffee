@@ -107,9 +107,10 @@ $ ->
     $("#response"+id).hide()
     $("#fast_response"+id).hide()
     if $("#history"+id).is(":visible")
-      $("#history"+id).hide()
+      $("#history"+id).hide("slow")
     else
-      $("#history"+id).show()
+      $(".history").hide()
+      $("#history"+id).show("slow")
 
 
   $(".button_starred").click ->

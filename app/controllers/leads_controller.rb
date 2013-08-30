@@ -3,7 +3,7 @@ class LeadsController < ApplicationController
   # GET /leads.json
   def index
     #@leads = Lead.all
-
+    #raise Filters::LeadFilter.inspect
     if params.empty? then
       params[:wf_order] = :created_at 
       params[:wf_per_page] = '100'
