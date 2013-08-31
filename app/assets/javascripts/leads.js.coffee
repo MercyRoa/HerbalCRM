@@ -93,14 +93,14 @@ $ ->
   $(".response_button").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
     $("#response"+id).toggle "slow"
-    $("#fast_response"+id).hide()
-    $("#history"+id).hide()
+    $(".fast_response").hide()
+    $(".history").hide()
 
   $(".fast_response_button").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
-    $("#response"+id).hide()
+    $(".response").hide()
     $("#fast_response"+id).toggle "slow"
-    $("#history"+id).hide()
+    $(".history").hide()
 
   $(".link_history").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
@@ -139,6 +139,11 @@ $ ->
 #      ), 60000
 #    ###
   $(".nav nav-tabs").tab()
+
+  $(document).on "click", ".close_box", ->
+    $(this).parent().hide("slow")
+
+
 
 
 
