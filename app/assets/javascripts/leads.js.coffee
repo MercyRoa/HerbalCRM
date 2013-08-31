@@ -104,15 +104,14 @@ $ ->
 
   $(".link_history").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
-    $("#response"+id).hide()
-    $("#fast_response"+id).hide()
+    $(".response").hide()
+    $(".fast_response").hide()
     if $("#history"+id).is(":visible")
       $("#history"+id).hide("slow")
     else
       $(".history").hide()
       $("#history"+id).show("slow")
-
-
+      
   $(".button_starred").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
     $("#fast_response"+id).hide("slow")
@@ -127,7 +126,7 @@ $ ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
     $el = $(this)
     $("#response"+id).hide("slow")
-
+  
 #    event.preventDefault()
 #    $('#lead_draft').val($('#scheduled_message_body-aloha').html())
 #    $('form.edit_lead [type="submit"]').click();
@@ -139,6 +138,7 @@ $ ->
 #         $('#savedraft').click()
 #      ), 60000
 #    ###
+  $(".nav nav-tabs").tab()
 
 
 

@@ -1,18 +1,34 @@
 .container-fluid.content_history
-  - @history.each do |item|
-    - if item.kind_of? Note
-      %div[item]{ :class => "alert alert-block" }
-        %i{:style => "float: right; display: block"}= "-- by #{item.creator.name}"
-        = item.text.html_safe
-
-    - if item.kind_of? Message
-      - message = item
-      %div[message]{ :class => ('from_account' if message.from_account?) }
-        %h3= message.subject
-        %em{ alt: message.date }= time_ago message.date
-        .from #{t 'From'}: #{message.from}
-        - unless message.user.blank?
-          .by #{t 'Written by'}: #{message.user}
-        %pre= message.to_s.html_safe unless message.body.blank? || message.nil?
-        = message.body_raw.html_safe if message.body.blank? && !message.body_raw.nil?
-    %hr
+  %div{id: "content#{@lead.id}"}
+    %ul{id: "tabs", class: "nav nav-tabs", "data-tabs" => "tabs"}
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#messages#{@lead.id}"} 
+          %b Messages
+      %li
+        %a{"data-toggle" => "tab", :href => "#profile#{@lead.id}"} 
+          %b Profile
+        
+    %div{id: "my-tab-content#{@lead.id}", class: "tab-content"}
+      %div{id: "messages#{@lead.id}", class: "tab-pane active"}
+        - @history.each do |item|
+          - if item.kind_of? Note
+            %div[item]{ :class => "alert alert-block" }
+              %i{:style => "float: right; display: block"}= "-- by #{item.creator.name}"
+              = item.text.html_safe
+      
+          - if item.kind_of? Message
+            - message = item
+            %div[message]{ :class => ('from_account' if message.from_account?) }
+              %h3= message.subject
+              %em{ alt: message.date }= time_ago message.date
+              .from #{t 'From'}: #{message.from}
+              - unless message.user.blank?
+                .by #{t 'Written by'}: #{message.user}
+              %pre= message.to_s.html_safe unless message.body.blank? || message.nil?
+              = message.body_raw.html_safe if message.body.blank? && !message.body_raw.nil?
+          %hr
+      %div{id: "profile#{@lead.id}", class: "tab-pane"}
+        = @lead.name
+        
+      
+  
