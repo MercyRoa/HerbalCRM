@@ -1,6 +1,6 @@
 .container-fluid.content_history
-  %div{id: "content#{@lead.id}"}
-    %ul{id: "tabs", class: "nav nav-tabs", "data-tabs" => "tabs"}
+  %div{id: "content#{@lead.id}", class: "my-content"}
+    %ul{id: "tabs", class: "nav nav-tabs my-tabs", "data-tabs" => "tabs"}
       %li.active
         %a{"data-toggle" => "tab", :href => "#messages#{@lead.id}"} 
           %b Messages
@@ -8,7 +8,7 @@
         %a{"data-toggle" => "tab", :href => "#profile#{@lead.id}"} 
           %b Profile
         
-    %div{id: "my-tab-content#{@lead.id}", class: "tab-content"}
+    %div{id: "my-tab-content#{@lead.id}", class: "tab-content my-tab-content"}
       %div{id: "messages#{@lead.id}", class: "tab-pane active"}
         - @history.each do |item|
           - if item.kind_of? Note
