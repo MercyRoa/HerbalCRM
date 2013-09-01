@@ -107,10 +107,14 @@ $ ->
     $(".response").hide()
     $(".fast_response").hide()
     if $("#history"+id).is(":visible")
-      $("#history"+id).hide("slow")
+      $("#history"+id).hide "slide",
+        direction: "right"
+      , 1000
     else
       $(".history").hide()
-      $("#history"+id).show("slow")
+      $("#history"+id).show "slide",
+        direction: "right"
+      , 1000
       
   $(".button_starred").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
@@ -141,7 +145,9 @@ $ ->
   $(".nav nav-tabs").tab()
 
   $(document).on "click", ".close_box", ->
-    $(this).parent().hide("slow")
+     $(this).parent().hide "slide",
+        direction: "right"
+      , 1000
 
 
 

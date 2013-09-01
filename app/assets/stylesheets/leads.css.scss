@@ -38,8 +38,7 @@
 .content_history {
     height: 100%;
     overflow: scroll;
-    border: 1px dashed #E6E6E6;
-    background:  #909090;
+    background:  #D0D0D0;
 }
 
 #leads_attention_needed{
@@ -48,16 +47,18 @@
 
 .history{
     height: 100%;
-    width: 40%;
+    width: 35%;
     position:absolute; 
     top: 0px; 
-    right: 0px;   
+    right: 0px;
+    border: 3px outset #D0D0D0;
+
 }
 
 .close_box{
    display:inline;
    position: absolute;
-   left: -17px;
+   right: -17px;
    top: -10px;
    border-radius:3px;
    cursor:pointer;
