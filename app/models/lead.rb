@@ -127,7 +127,7 @@ class Lead < ActiveRecord::Base
         lead = self.make_from(params.merge({email: email}), account, campaign)
       else
         lead.update_attributes(params) if lead.first_name.nil? && !name.nil?
-        puts " --> Lead Existente"
+        puts " --> Lead Existente (id: #{lead.id})"
       end
 
       lead

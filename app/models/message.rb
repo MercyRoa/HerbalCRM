@@ -84,6 +84,8 @@ class Message < ActiveRecord::Base
             m, email = ('MailProcessor::'+mp.to_s).classify.constantize.identify(m, email)
           end unless m.from_account?
 
+          # binding.pry
+
           lead_name = m.from_account? ? email.to.first.name : email.from.first.name
 
 
