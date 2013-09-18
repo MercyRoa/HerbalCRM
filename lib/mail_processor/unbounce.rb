@@ -1,5 +1,5 @@
 module MailProcessor
-  class ContactMe
+  class Unbounce
     ADDRESS = ['notifications@unbounce.com']
 
     def self.identify message, email
