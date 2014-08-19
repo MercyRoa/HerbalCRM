@@ -39,6 +39,7 @@
           = button_tag 'Response' , id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary response_button'
           = button_tag 'Fast Response', id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary fast_response_button'
           = link_to 'Detail', lead_path(lead), id: "detail#{lead.id}", :remote => true, class: "btn btn-mini btn-primary link_history"
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), lead_path(lead), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger'
           %div{id: "response#{lead.id}", class: "response"}
             %h2 Send Email
             - @new_message.lead_id = lead.id
