@@ -1,5 +1,5 @@
 
-#Net::IMAP.debug = true
+# Net::IMAP.debug = true
 
 # Fix encoding problem
 Net::IMAP::Address.class_eval do

@@ -39,7 +39,16 @@ class Campaign < ActiveRecord::Base
   class << self
     def fetch_all
       Campaign.active.each do |c|
-        c.fetch_emails
+        attemps = 0
+        begin
+          c.fetch_emails
+        rescue => e
+          puts "Error fetching email from #{c.name}"
+          puts e.message
+          sleep 5
+          attemps+=1
+          retry if attemps < 3
+        end
       end
     end
   end
