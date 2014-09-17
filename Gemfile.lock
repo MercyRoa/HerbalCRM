@@ -8,6 +8,15 @@ GIT
       rails (~> 3.1)
 
 GIT
+  remote: git://github.com/jhenderson22/will_filter.git
+  revision: 715c5f3cdf04695de5b8731f80c304b099b8d231
+  specs:
+    will_filter (3.1.11)
+      kaminari
+      rails (>= 3.2.3)
+      sass
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 40ffd567ee6bea9974710c58646d309d6a95faaf
   specs:
@@ -204,9 +213,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
-    will_filter (3.1.10)
-      kaminari (~> 0.13.0)
-      rails (~> 3.2.3)
+    will_paginate (3.0.7)
 
 PLATFORMS
   ruby
@@ -240,4 +247,5 @@ DEPENDENCIES
   turn (~> 0.8.3)
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
-  will_filter
+  will_filter!
+  will_paginate (~> 3.0.pre2)

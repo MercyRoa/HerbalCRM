@@ -32,7 +32,7 @@
       - unless message.blank? || message.body.blank?
         .message[message]
           .subject= message.subject
-          .msg= simple_format message.to_s.truncate(300)
+          .msg= simple_format message.to_s.truncate(650)
           %br
           %br
           = button_tag 'Response' , id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary response_button'
