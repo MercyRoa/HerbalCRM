@@ -28,12 +28,11 @@
       .received #{t 'Messages Received'}: #{lead.messages_received_count}
       .sent #{t 'Messages Sent'}: #{lead.messages_sent_count}
 
-
       - message = lead.messages.first
       - unless message.blank? || message.body.blank?
         .message[message]
           .subject= message.subject
-          = message.to_s
+          .msg= simple_format message.to_s.truncate(300)
           %br
           %br
           = button_tag 'Response' , id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary response_button'
