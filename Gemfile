@@ -13,7 +13,6 @@ gem 'rails', '3.2.9'
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'haml-rails'
 gem 'htmlentities'
-gem "will_paginate", "~> 3.0.pre2"
 gem 'will_filter', github: 'jhenderson22/will_filter'
 gem 'kaminari'
 
