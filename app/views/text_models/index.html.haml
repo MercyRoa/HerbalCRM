@@ -6,6 +6,7 @@
     %tr
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:category)
+      %th= model_class.human_attribute_name(:global)
       %th= model_class.human_attribute_name(:body)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
@@ -13,6 +14,7 @@
       %tr
         %td= link_to text_model.title, edit_text_model_path(text_model)
         %td= text_model.category
+        %td= 'SI' if text_model.global
         %td= truncate strip_tags(text_model.body), :length => 45
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_text_model_path(text_model), :class => 'btn btn-mini'

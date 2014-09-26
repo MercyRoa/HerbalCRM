@@ -120,8 +120,7 @@
         // %input.span3{ id: 'search-models', type: :text, placeholder: 'Search...' }
 
         // this is very ugly, makes many queries to db
-        = grouped_collection_select(:text_model, :title, TextModel.categories, :from_category, :category, :id,
-        :title,{}, {class: 'chzn-select'})
+        = grouped_collection_select(:text_model, :title, TextModel.categories, :from_category, :category, :id, :title,{}, {class: 'chzn-select'})\
         // = collection_select(:text_model, nil, @text_models, :id, :title)
         // = select_tag :select_text_model, options_from_collection_for_select(@text_models, :id, :title)
 

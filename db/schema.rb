@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822142705) do
+ActiveRecord::Schema.define(:version => 20140926153737) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "last_fetch_date"
     t.text     "signature"
+    t.string   "from"
   end
 
   create_table "accounts_campaigns", :id => false, :force => true do |t|
@@ -32,8 +33,8 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "description"
     t.string   "search_query",    :default => "is:unread"
     t.datetime "last_fetch_date"
@@ -42,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
     t.string   "color"
   end
 
+  create_table "campaigns_text_models", :id => false, :force => true do |t|
+    t.integer "campaign_id"
+    t.integer "text_model_id"
+  end
+
+  add_index "campaigns_text_models", ["campaign_id", "text_model_id"], :name => "index_campaigns_text_models_on_campaign_id_and_text_model_id"
+
   create_table "histories", :force => true do |t|
     t.integer  "lead_id"
     t.string   "type"
@@ -49,16 +57,16 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
     t.text     "body"
     t.integer  "user_id"
     t.integer  "timer"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "lead_details", :force => true do |t|
     t.integer  "lead_id"
     t.string   "key"
     t.string   "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "note"
   end
 
@@ -80,8 +88,8 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
     t.boolean  "automatic",               :default => true
     t.integer  "messages_received_count", :default => 0
     t.integer  "messages_sent_count",     :default => 0
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "resume"
     t.integer  "bounce",                  :default => 0
     t.string   "stage"
@@ -99,8 +107,8 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
     t.text     "body_html"
     t.string   "description"
     t.integer  "send_after"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "automatic"
   end
 
@@ -113,8 +121,8 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
     t.text     "body"
     t.text     "body_raw"
     t.boolean  "readed"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "message_id"
     t.datetime "date"
     t.string   "subject"
@@ -132,8 +140,8 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
     t.datetime "due_date"
     t.boolean  "done",        :default => false
     t.text     "text"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "scheduled_messages", :force => true do |t|
@@ -147,8 +155,8 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
     t.text     "body_html"
     t.datetime "scheduled"
     t.boolean  "sent",       :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "message_id"
     t.integer  "user_id"
   end
@@ -156,17 +164,18 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
   create_table "text_models", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "category"
     t.boolean  "starred"
+    t.boolean  "global"
   end
 
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -188,8 +197,8 @@ ActiveRecord::Schema.define(:version => 20130822142705) do
     t.text     "data"
     t.integer  "user_id"
     t.string   "model_class_name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "will_filter_filters", ["user_id"], :name => "index_will_filter_filters_on_user_id"

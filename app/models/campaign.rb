@@ -5,8 +5,12 @@ class Campaign < ActiveRecord::Base
 
   has_many :mail_sequences, order: 'step'
   has_and_belongs_to_many :accounts
+  has_and_belongs_to_many :text_models
   accepts_nested_attributes_for :accounts
 
+  def all_text_models
+    (text_models + TextModel.global).uniq
+  end
 
   CONTROL_LABEL = 'CRM'
 

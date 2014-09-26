@@ -65,24 +65,26 @@
             %br
             .navbar
               .navbar-inner
-                - l = 'a'
-                - TextModel.starred.each do |text_model|
-                  - @new_message.lead_id = lead.id
-                  - @new_message.account_id = lead.account_id
-                  .spanFormat
-                    = form_for @new_message, remote: true do |f|
-                      = f.hidden_field :lead_id, value: lead.id
-                      = f.hidden_field :account_id, value: lead.account_id
-                      = f.hidden_field :to, value: lead.email
-                      = f.hidden_field :account_id, value: lead.account_id
-                      = f.hidden_field :user_id, value: current_user.id
-                      = f.hidden_field :scheduled, value: Time.now
-                      = f.hidden_field :bcc
-                      = f.hidden_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?), class: 'span8'
-                      = f.hidden_field :body, value: text_model.body ,size: '150x3', placeholder: 'Reply here',
-                          class: 'span8 editable-long-text'
-                      = f.submit text_model.title, id: "#{(text_model.title+ lead.name + l).gsub(/[^a-zA-Z]/, '') + lead.id.to_s}",  class: 'btn button_starred'
-                      - l = l.next
+                - {'Campaign' => lead.campaign.text_models, 'Global' => TextModel.global}.each do |name, data|
+                  - l = 'a'
+                  %h6=name
+                  - data.each do |text_model|
+                    - @new_message.lead_id = lead.id
+                    - @new_message.account_id = lead.account_id
+                    .spanFormat
+                      = form_for @new_message, remote: true do |f|
+                        = f.hidden_field :lead_id, value: lead.id
+                        = f.hidden_field :account_id, value: lead.account_id
+                        = f.hidden_field :to, value: lead.email
+                        = f.hidden_field :account_id, value: lead.account_id
+                        = f.hidden_field :user_id, value: current_user.id
+                        = f.hidden_field :scheduled, value: Time.now
+                        = f.hidden_field :bcc
+                        = f.hidden_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?), class: 'span8'
+                        = f.hidden_field :body, value: text_model.body ,size: '150x3', placeholder: 'Reply here',
+                            class: 'span8 editable-long-text'
+                        = f.submit text_model.title, id: "#{(text_model.title+ lead.name + l).gsub(/[^a-zA-Z]/, '') + lead.id.to_s}",  class: 'btn button_starred'
+                        - l = l.next
           %br
           %br
           %div{id: "history#{lead.id}", class: "history", style: "display: none;"}

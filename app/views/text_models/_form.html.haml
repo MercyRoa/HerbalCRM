@@ -18,6 +18,19 @@
     = f.label :starred, :class => 'control-label'
     .controls
       = f.check_box :starred
+  .control-group
+    = f.label 'Global Text Model (All campaigns)', :class => 'control-label'
+    .controls
+      = f.check_box :global
+  .control-group
+    = f.label :campaigns, :class => 'control-label'
+    .controls
+      = hidden_field_tag "text_model[campaign_ids][]", nil
+      - Campaign.all.each do |campaign|
+        %label.checkbox
+          = check_box_tag "text_model[campaign_ids][]", campaign.id, @text_model.campaign_ids.include?(campaign.id),
+          id: dom_id(campaign)
+          = "#{campaign.name}"
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), text_models_path, :class => 'btn'

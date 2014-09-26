@@ -34,7 +34,8 @@ class LeadsController < ApplicationController
 
     @history = (@lead.messages + @lead.notes).sort_by(&:created_at).reverse
 
-    @text_models = TextModel.all
+    #@text_models = TextModel.all
+    @text_models = @lead.campaign.all_text_models
 
     respond_to do |format|
       format.html # show.html.erb
