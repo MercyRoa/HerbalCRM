@@ -12,6 +12,8 @@ module Filters
       defs[:stage][:is_not] = :list
       defs[:account_id][:is] = :list
       defs[:account_id][:is_not] = :list
+      defs[:campaign_id][:is] = :list
+      defs[:campaign_id][:is_not] = :list
       defs
     end
 
@@ -34,7 +36,9 @@ module Filters
         when :stage
           Lead::STAGES
         when :account_id
-          {1 => "Mercedes", 2 => "Patico", 3 => "Fiore"}
+          Hash[Account.all.map {|a| [a.name, a.id] }]
+        when :campaign_id
+          Hash[Campaign.all.map {|c| [c.name, c.id] }]
         else
           []
       end
@@ -42,6 +46,7 @@ module Filters
 
     def condition_title_for(key)
       return 'Account' if key == :account_id
+      return 'Campaign' if key == :campaign_id
       super
     end
 
@@ -52,6 +57,7 @@ module Filters
 
     def default_filters
       [
+          ["Waiting Reply by Campaign", "waiting_reply_by_campaign"],
           ["Attention Needed", "attention_needed"],
           ["Waiting Reply with +2 mails", "waiting_reply_gt2"],
           ["URGENTLY", "urgently"],
@@ -78,6 +84,8 @@ module Filters
           [ [:stage, :is, :hot_lead] ]
         when 'last_7_days'
           [[:created, :is_in_the_range, [7.days.ago, Time.now()] ] ]
+        when 'waiting_reply_by_campaign'
+          [ [:campaign_id, :is, Campaign.first.id], [:status, :is, "attention_needed"] ]
       end
     end
   end
