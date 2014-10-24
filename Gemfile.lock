@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/neohunter/aloha-rails.git
-  revision: cbdd4e3ede8a9b9f9ee45695b75e6b50039b834d
-  submodules: true
-  specs:
-    aloha-rails (0.0.2)
-      jquery-rails
-      rails (~> 3.1)
-
-GIT
   remote: git://github.com/jhenderson22/will_filter.git
   revision: 715c5f3cdf04695de5b8731f80c304b099b8d231
   specs:
@@ -15,6 +6,15 @@ GIT
       kaminari
       rails (>= 3.2.3)
       sass
+
+GIT
+  remote: git://github.com/neohunter/aloha-rails.git
+  revision: cbdd4e3ede8a9b9f9ee45695b75e6b50039b834d
+  submodules: true
+  specs:
+    aloha-rails (0.0.2)
+      jquery-rails
+      rails (~> 3.1)
 
 GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
@@ -191,7 +191,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.8)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -238,7 +237,6 @@ DEPENDENCIES
   pry-remote
   rails (= 3.2.9)
   sass-rails (~> 3.2.3)
-  sqlite3
   therubyracer
   thin
   turn (~> 0.8.3)

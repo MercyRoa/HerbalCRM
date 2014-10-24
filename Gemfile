@@ -36,13 +36,14 @@ group :development do
   gem 'pry-remote'
 end
 
+gem 'mysql2'
 group :development, :test do
-  gem 'sqlite3'
+#  gem 'sqlite3'
 #  gem 'mysql2'
 end
 group :production do
 #  gem 'pg'
-  gem 'mysql2'
+#  gem 'mysql2'
   gem 'thin' #for heroku, its a robust web server
 
   # gem 'therubyracer-heroku'
