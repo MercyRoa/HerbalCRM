@@ -27,11 +27,11 @@ gem 'ensure-encoding'
 # gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 
 gem 'gmail'
+gem 'pry'
 
 group :development do
   gem 'debugger', :require => 'debugger'
   # gem "therubyracer"
-  gem 'pry'
   gem 'pry-rails'
   gem 'pry-remote'
 end
