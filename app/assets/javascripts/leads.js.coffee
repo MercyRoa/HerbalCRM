@@ -3,6 +3,12 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  # delete lead on index
+  $('.delete_lead[data-remote=true]').on 'ajax:success', (event, data, status, xhr) ->
+    $divlead = $(this).parents('div.lead_box_lead')
+    $divlead.fadeOut();
+    $divlead.next('hr').remove()
+
   $('#search-models').autocomplete
     source: ['arnold', 'animal', 'abeja', 'antilope']
 

@@ -29,64 +29,64 @@
       .sent #{t 'Messages Sent'}: #{lead.messages_sent_count}
 
       - message = lead.messages.first
-      - unless message.blank? || message.body.blank?
-        .message[message]
-          .subject= message.subject
-          .msg= simple_format message.to_s.truncate(650)
-          %br
-          %br
-          = button_tag 'Response' , id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary response_button'
-          = button_tag 'Fast Response', id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary fast_response_button'
-          = link_to 'Detail', lead_path(lead), id: "detail#{lead.id}", :remote => true, class: "btn btn-mini btn-primary link_history"
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), lead_path(lead), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger'
-          %div{id: "response#{lead.id}", class: "response"}
-            %h2 Send Email
-            - @new_message.lead_id = lead.id
-            - @new_message.account_id = lead.account_id
-            = form_for @new_message, remote: true do |f|
-              = f.hidden_field :lead_id, value: lead.id
-              = f.hidden_field :account_id, value: lead.account_id
-              = f.hidden_field :to, value: lead.email
-              = f.hidden_field :account_id, value: lead.account_id
-              = f.hidden_field :user_id, value: current_user.id
-              %b Schedule:
-              = f.text_field :scheduled, value: Time.now
-              %b Bcc:
-              = f.text_field :bcc
+      //- unless message.blank? || message.body.blank?
+      .message[message]
+        .subject= message.subject unless message.blank? || message.body.blank?
+        .msg= simple_format message.to_s.truncate(650) unless message.blank? || message.body.blank?
+        %br
+        %br
+        = button_tag 'Response' , id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary response_button'
+        = button_tag 'Fast Response', id: "response_button#{lead.id}", :class => 'btn btn-mini btn-primary fast_response_button'
+        = link_to 'Detail', lead_path(lead), id: "detail#{lead.id}", :remote => true, class: "btn btn-mini btn-primary link_history"
+        = link_to t('.destroy', :default => t("helpers.links.destroy")), lead_path(lead), :remote => true, :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger delete_lead'
+        %div{id: "response#{lead.id}", class: "response"}
+          %h2 Send Email
+          - @new_message.lead_id = lead.id
+          - @new_message.account_id = lead.account_id
+          = form_for @new_message, remote: true do |f|
+            = f.hidden_field :lead_id, value: lead.id
+            = f.hidden_field :account_id, value: lead.account_id
+            = f.hidden_field :to, value: lead.email
+            = f.hidden_field :account_id, value: lead.account_id
+            = f.hidden_field :user_id, value: current_user.id
+            %b Schedule:
+            = f.text_field :scheduled, value: Time.now
+            %b Bcc:
+            = f.text_field :bcc
 
-              %div= f.text_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?),
-              class: 'span8'
-              = f.text_area :body, value: lead.draft ,size: '150x3', placeholder: 'Reply here',
-                  class: 'span8 editable-long-text'
-              %div
-                = f.submit 'Send', id: "button_send#{lead.id}", class: 'btn btn-success button_send'
-                -#= button_tag 'Save Draft', class: 'btn savedraft', id: "savedraft#{lead.id}"
-          %div{id: "fast_response#{lead.id}", class: "fast_response"}
-            %br
-            .navbar
-              .navbar-inner
-                - {'Campaign' => lead.campaign.text_models, 'Global' => TextModel.global}.each do |name, data|
-                  - l = 'a'
-                  %h6=name
-                  - data.each do |text_model|
-                    - @new_message.lead_id = lead.id
-                    - @new_message.account_id = lead.account_id
-                    .spanFormat
-                      = form_for @new_message, remote: true do |f|
-                        = f.hidden_field :lead_id, value: lead.id
-                        = f.hidden_field :account_id, value: lead.account_id
-                        = f.hidden_field :to, value: lead.email
-                        = f.hidden_field :account_id, value: lead.account_id
-                        = f.hidden_field :user_id, value: current_user.id
-                        = f.hidden_field :scheduled, value: Time.now
-                        = f.hidden_field :bcc
-                        = f.hidden_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?), class: 'span8'
-                        = f.hidden_field :body, value: text_model.body ,size: '150x3', placeholder: 'Reply here',
-                            class: 'span8 editable-long-text'
-                        = f.submit text_model.title, id: "#{(text_model.title+ lead.name + l).gsub(/[^a-zA-Z]/, '') + lead.id.to_s}",  class: 'btn button_starred'
-                        - l = l.next
+            %div= f.text_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?),
+            class: 'span8'
+            = f.text_area :body, value: lead.draft ,size: '150x3', placeholder: 'Reply here',
+                class: 'span8 editable-long-text'
+            %div
+              = f.submit 'Send', id: "button_send#{lead.id}", class: 'btn btn-success button_send'
+              -#= button_tag 'Save Draft', class: 'btn savedraft', id: "savedraft#{lead.id}"
+        %div{id: "fast_response#{lead.id}", class: "fast_response"}
           %br
-          %br
-          %div{id: "history#{lead.id}", class: "history", style: "display: none;"}
+          .navbar
+            .navbar-inner
+              - {'Campaign' => lead.campaign.text_models, 'Global' => TextModel.global}.each do |name, data|
+                - l = 'a'
+                %h6=name
+                - data.each do |text_model|
+                  - @new_message.lead_id = lead.id
+                  - @new_message.account_id = lead.account_id
+                  .spanFormat
+                    = form_for @new_message, remote: true do |f|
+                      = f.hidden_field :lead_id, value: lead.id
+                      = f.hidden_field :account_id, value: lead.account_id
+                      = f.hidden_field :to, value: lead.email
+                      = f.hidden_field :account_id, value: lead.account_id
+                      = f.hidden_field :user_id, value: current_user.id
+                      = f.hidden_field :scheduled, value: Time.now
+                      = f.hidden_field :bcc
+                      = f.hidden_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?), class: 'span8'
+                      = f.hidden_field :body, value: text_model.body ,size: '150x3', placeholder: 'Reply here',
+                          class: 'span8 editable-long-text'
+                      = f.submit text_model.title, id: "#{(text_model.title+ lead.name + l).gsub(/[^a-zA-Z]/, '') + lead.id.to_s}",  class: 'btn button_starred'
+                      - l = l.next
+        %br
+        %br
+        %div{id: "history#{lead.id}", class: "history", style: "display: none;"}
     %hr
 = link_to t('.new', :default => t("helpers.links.new")), new_lead_path, :class => 'btn btn-primary'
