@@ -1,7 +1,7 @@
 - model_class = Lead.new.class
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize
-  %em #{t 'We have found'} #{pluralize @leads.count, 'record'}
+  %em=raw(page_entries_info @leads)
 
 %div= will_filter_tag(@leads)
 //%div= will_filter_table_tag(@leads, columns: [])
@@ -29,7 +29,6 @@
       .sent #{t 'Messages Sent'}: #{lead.messages_sent_count}
 
       - message = lead.messages.first
-      //- unless message.blank? || message.body.blank?
       .message[message]
         .subject= message.subject unless message.blank? || message.body.blank?
         .msg= simple_format message.to_s.truncate(650) unless message.blank? || message.body.blank?
@@ -81,8 +80,7 @@
                       = f.hidden_field :scheduled, value: Time.now
                       = f.hidden_field :bcc
                       = f.hidden_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?), class: 'span8'
-                      = f.hidden_field :body, value: text_model.body ,size: '150x3', placeholder: 'Reply here',
-                          class: 'span8 editable-long-text'
+                      = f.hidden_field :text_model_id, value: text_model.id
                       = f.submit text_model.title, id: "#{(text_model.title+ lead.name + l).gsub(/[^a-zA-Z]/, '') + lead.id.to_s}",  class: 'btn button_starred'
                       - l = l.next
         %br
@@ -90,3 +88,5 @@
         %div{id: "history#{lead.id}", class: "history", style: "display: none;"}
     %hr
 = link_to t('.new', :default => t("helpers.links.new")), new_lead_path, :class => 'btn btn-primary'
+
+= paginate @leads

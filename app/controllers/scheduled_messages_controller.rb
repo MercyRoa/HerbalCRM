@@ -49,8 +49,12 @@ updated.' }
   end
 
   def create
+    if params[:scheduled_message][:text_model_id]
+      params[:scheduled_message][:body] = TextModel.find(params[:scheduled_message][:text_model_id]).body
+      params[:scheduled_message].except! :text_model_id
+    end
     @scheduled_message = ScheduledMessage.new(params[:scheduled_message])
-    @scheduled_message = Time.now if @scheduled_message.nil?
+
     respond_to do |format|
       if @scheduled_message.save
         # If we manually create a scheduled message we change automated to false

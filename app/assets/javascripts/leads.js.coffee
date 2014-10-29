@@ -121,7 +121,8 @@ $ ->
       $("#history"+id).show "slide",
         direction: "right"
       , 1000
-      
+
+  # Index Fast response button      
   $(".button_starred").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
     $("#fast_response"+id).hide("slow")
