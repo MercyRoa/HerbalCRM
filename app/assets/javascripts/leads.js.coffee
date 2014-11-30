@@ -99,8 +99,36 @@ $ ->
   $(".response_button").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")
     $("#response"+id).toggle "slow"
+    $("#response"+id).find(".chzn").chosen();
     $(".fast_response").hide()
     $(".history").hide()
+
+  # this is for index.haml
+  $('.insert_text_model').click (event) ->
+    event.preventDefault()
+    $('body').modalmanager('loading')
+    rel = $(this).attr('rel')
+    $textarea = $(this).parents('form').find('textarea')
+
+    tm = $(".text_model_title[rel="+rel+"]").val()
+    if (text_models[tm])
+      $textarea.text( text_models[tm] )
+      $('body').modalmanager('loading');
+    else
+      $.ajax
+        url: '/text_models/' + tm
+        dataType: 'json'
+        success: (json) ->
+          text_models[tm] = json.body
+          $textarea.text( text_models[tm] )
+          $('body').modalmanager('loading');
+        error: ->
+          console.log 'error'
+          $('body').modalmanager('loading');
+    
+
+    return false
+
 
   $(".fast_response_button").click ->
     id = $(this).attr("id").replace(/[^\d.]/g, "")

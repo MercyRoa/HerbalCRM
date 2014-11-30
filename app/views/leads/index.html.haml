@@ -7,6 +7,9 @@
 //%div= will_filter_table_tag(@leads, columns: [])
 
 %div{id: "leads_attention_needed"}
+  %form.navbar-form
+    // %input.span3{ id: 'search-models', type: :text, placeholder: 'Search...' }
+
   - @leads.each do |lead|
     %div[lead, :lead_box]
       %span.badge= lead.step
@@ -58,13 +61,21 @@
             = f.text_area :body, value: lead.draft ,size: '150x3', placeholder: 'Reply here',
                 class: 'span8 editable-long-text'
             %div
+              %select{class: "chzn text_model_title", rel: lead.id, name: "text_model[title]"}
+                - @text_models_per_campaign[lead.campaign_id].each do |category, tms|
+                  %optgroup{label:category}
+                    - tms.each do |tm|
+                      %option{value: tm.id}=tm.title
+              %button{ class: "btn insert_text_model", rel: lead.id} Insert
+
+            %div
               = f.submit 'Send', id: "button_send#{lead.id}", class: 'btn btn-success button_send'
               -#= button_tag 'Save Draft', class: 'btn savedraft', id: "savedraft#{lead.id}"
         %div{id: "fast_response#{lead.id}", class: "fast_response"}
           %br
           .navbar
             .navbar-inner
-              - lead.campaign.text_models.group_by(&:category).merge({'Global' => TextModel.global}).each do |name, data|
+              - @text_models_per_campaign[lead.campaign.id].each do |name, data|
                 - l = 'a'
                 %h5=name
                 - data.each do |text_model|

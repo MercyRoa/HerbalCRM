@@ -9,8 +9,13 @@ class LeadsController < ApplicationController
       params[:wf_per_page] = '100'
     end
     @leads= Lead.filter(:params => params, :filter => Filters::LeadFilter)
-    @campaigns = Campaign.all
     @new_message = ScheduledMessage.new
+    @campaigns = Campaign.all
+
+    @text_models_per_campaign = {}
+    @campaigns.each do |c|
+      @text_models_per_campaign[c.id] = c.text_models.group_by(&:category).merge({'Global' => TextModel.global})
+    end
 
     respond_to do |format|
       format.html # index.html.erb

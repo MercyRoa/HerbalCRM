@@ -118,18 +118,12 @@
     .navbar-inner
       %form.navbar-form
         // %input.span3{ id: 'search-models', type: :text, placeholder: 'Search...' }
-
         
         %select{class: 'chzn-select', id: 'text_model_title', name: 'text_model[title]'}
           - @text_models_select.each do |category, tms|
             %optgroup{label:category}
               - tms.each do |tm|
                 %option{value: tm.id}=tm.title
-        // this is very ugly, makes many queries to db
-        //= grouped_collection_select(:text_model, :title, TextModel.categories, :from_category, :category, :id, :title,{}, {class: 'chzn-select'})
-        //= grouped_collection_select(:text_model, :title, @text_models, :category, :category, :id, :title,{}, {class: 'chzn-select'})
-        // = collection_select(:text_model, nil, @text_models, :id, :title)
-        // = select_tag :select_text_model, options_from_collection_for_select(@text_models, :id, :title)
 
         %button{ id: :insert_text_model, type: "submit", class: "btn"} Insert
 
