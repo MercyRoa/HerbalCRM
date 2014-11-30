@@ -28,11 +28,20 @@
 
 .fast_response{
     display: none;
+
+    h5{
+      clear: both;
+    }
 }
 
 .spanFormat{
   text-align: left;
   display: table-cell;
+  margin-left: 7px;
+
+  form{
+    margin-bottom: 4px;
+  }
 }
 
 .content_history{

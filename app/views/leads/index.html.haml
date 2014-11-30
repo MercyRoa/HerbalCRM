@@ -64,9 +64,9 @@
           %br
           .navbar
             .navbar-inner
-              - {'Campaign' => lead.campaign.text_models, 'Global' => TextModel.global}.each do |name, data|
+              - lead.campaign.text_models.group_by(&:category).merge({'Global' => TextModel.global}).each do |name, data|
                 - l = 'a'
-                %h6=name
+                %h5=name
                 - data.each do |text_model|
                   - @new_message.lead_id = lead.id
                   - @new_message.account_id = lead.account_id

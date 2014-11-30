@@ -12,7 +12,6 @@ class LeadsController < ApplicationController
     @campaigns = Campaign.all
     @new_message = ScheduledMessage.new
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @leads }
