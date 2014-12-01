@@ -34,24 +34,24 @@ $ ->
   text_models = []
   $('#insert_text_model').click (event) ->
     event.preventDefault()
-    $('body').modalmanager('loading');
-
+    
     tm = $("#text_model_title").val()
     if (text_models[tm])
       console.log 'already on cache'
       insertHtmlAtCursor text_models[tm], $('#scheduled_message_body-aloha')
       $('body').modalmanager('loading');
     else
+      $('body').modalmanager('loading');
       $.ajax
         url: '/text_models/' + $("#text_model_title").val()
         dataType: 'json'
         success: (json) ->
           text_models[tm] = json.body
           insertHtmlAtCursor json.body, $('#scheduled_message_body-aloha')
-          $('body').modalmanager('loading');
+          setTimeout ( -> $('body').modalmanager('loading') ), 1000
         error: ->
           console.log 'error'
-          $('body').modalmanager('loading');
+          setTimeout ( -> $('body').modalmanager('loading') ), 1000
     return false
 
   # Save draft
@@ -106,25 +106,30 @@ $ ->
   # this is for index.haml
   $('.insert_text_model').click (event) ->
     event.preventDefault()
-    $('body').modalmanager('loading')
-    rel = $(this).attr('rel')
+    
+    lead_id = $(this).attr('rel')
     $textarea = $(this).parents('form').find('textarea')
 
-    tm = $(".text_model_title[rel="+rel+"]").val()
+    tm = $(".text_model_title[rel="+lead_id+"]").val()
+
+    Aloha.jQuery('#textarea_body'+lead_id).mahalo()
     if (text_models[tm])
-      $textarea.text( text_models[tm] )
-      $('body').modalmanager('loading');
+      $textarea.val( text_models[tm] )
     else
+      $('body').modalmanager('loading')
       $.ajax
         url: '/text_models/' + tm
         dataType: 'json'
         success: (json) ->
           text_models[tm] = json.body
-          $textarea.text( text_models[tm] )
-          $('body').modalmanager('loading');
+          $textarea.val( text_models[tm] )
+          Aloha.jQuery('#textarea_body'+lead_id).aloha()
+
+          setTimeout ( -> $('body').modalmanager('loading') ), 1000
+          
         error: ->
           console.log 'error'
-          $('body').modalmanager('loading');
+          setTimeout ( -> $('body').modalmanager('loading') ), 1000
     
 
     return false

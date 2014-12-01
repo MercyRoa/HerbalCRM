@@ -1,3 +1,6 @@
+- content_for :head do
+  - aloha!
+
 - model_class = Lead.new.class
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize
@@ -58,8 +61,7 @@
 
             %div= f.text_field :subject, value: ("Re: #{lead.messages.first.subject}" unless lead.messages.empty?),
             class: 'span8'
-            = f.text_area :body, value: lead.draft ,size: '150x3', placeholder: 'Reply here',
-                class: 'span8 editable-long-text'
+            = f.text_area :body, value: lead.draft ,size: '150x3', placeholder: 'Reply here', class: 'span8 e-short-text', id: "textarea_body#{lead.id}"
             %div
               %select{class: "chzn text_model_title", rel: lead.id, name: "text_model[title]"}
                 - @text_models_per_campaign[lead.campaign_id].each do |category, tms|
